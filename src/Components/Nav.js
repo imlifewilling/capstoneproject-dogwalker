@@ -1,4 +1,6 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { logout } from "../store";
 import { Link } from "react-router-dom";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -15,10 +17,12 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 
 // const pages = ['Products', 'Pricing', 'Blog'];
-const pages = [{name: 'page 1', link: '/link1'}]
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages = [{name: 'Find a Walker', link: '/link1'}, {name: 'Become a Walker', link: '/link2'}]
+const settings = ['Profile', 'Account', 'Dashboard'];
 
 const Nav = () => {
+    const dispatch = useDispatch();
+
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
   
@@ -158,6 +162,9 @@ const Nav = () => {
                     <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
                 ))}
+                  <MenuItem key={'logout'} onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center" onClick={()=>dispatch(logout())}>Logout</Typography>
+                  </MenuItem>
               </Menu>
             </Box>
           </Toolbar>
