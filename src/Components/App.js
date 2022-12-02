@@ -5,6 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { loginWithToken } from '../store';
 import { Link, Routes, Route } from 'react-router-dom';
 
+import ServiceDetails from './ServiceDetails'
+
 
 const App = ()=> {
   const { auth } = useSelector(state => state);
@@ -24,7 +26,11 @@ const App = ()=> {
           <div>
             <nav>
               <Link to='/'>Home</Link>
+              {/* <Link to='/walker/id'>Service Detail</Link> */}
             </nav>
+            <Routes>
+              {/* <Route path="/walker/:id" element={<ServiceDetails/>}/> */}
+            </Routes>
           </div>
         )
       }
