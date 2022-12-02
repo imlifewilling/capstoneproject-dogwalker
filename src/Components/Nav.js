@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../store";
 import { Link } from "react-router-dom";
 import AppBar from '@mui/material/AppBar';
@@ -17,11 +17,12 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 
 // const pages = ['Products', 'Pricing', 'Blog'];
-const pages = [{name: 'Find a Walker', link: '/link1'}, {name: 'Become a Walker', link: '/link2'}]
+const pages = [{name: 'Find a Walker', link: '/services'}, {name: 'Become a Walker', link: '/link2'}]
 const settings = ['Profile', 'Account', 'Dashboard'];
 
 const Nav = () => {
     const dispatch = useDispatch();
+    const { auth } = useSelector(state=>state);
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -135,38 +136,45 @@ const Nav = () => {
               ))}
             </Box>
   
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: '45px' }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))}
-                  <MenuItem key={'logout'} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center" onClick={()=>dispatch(logout())}>Logout</Typography>
-                  </MenuItem>
-              </Menu>
-            </Box>
+            {!!auth.id ? 
+              <Box sx={{ flexGrow: 0 }}>
+                <Tooltip title="Open settings">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: '45px' }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  {settings.map((setting) => (
+                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                      <Typography textAlign="center">{setting}</Typography>
+                    </MenuItem>
+                  ))}
+                    <MenuItem key={'logout'} onClick={handleCloseUserMenu}>
+                      <Typography textAlign="center" onClick={()=>dispatch(logout())}>Logout</Typography>
+                    </MenuItem>
+                </Menu>
+              </Box>
+            : 
+              <Typography textAlign="center" component={Link} to='/login'
+              sx={{color:'white', textDecoration:'none'}}>
+                Login
+              </Typography>
+          }
           </Toolbar>
         </Container>
       </AppBar>
