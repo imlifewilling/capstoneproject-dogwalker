@@ -1,0 +1,3 @@
+- npm i
+- npm run start:dev
+- Please make a new branch and work on your own branch. DO NOT PUSH TO MAIN BRANCH!
