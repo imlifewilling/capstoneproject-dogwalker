@@ -4,6 +4,7 @@ import Login from './Login';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginWithToken } from '../store';
 import { Link, Routes, Route } from 'react-router-dom';
+import Nav from './Nav';
 
 
 const App = ()=> {
@@ -15,19 +16,13 @@ const App = ()=> {
 
   return (
     <div>
-      <h1>FS App Template</h1>
+      <Nav />
       {
-        auth.id ? <Home /> : <Login />
+        auth.id ? <h1>welcome {auth.firstName}</h1> : <h1>Not Logged in</h1>
       }
-      {
-        !!auth.id  && (
-          <div>
-            <nav>
-              <Link to='/'>Home</Link>
-            </nav>
-          </div>
-        )
-      }
+      <Routes>
+        <Route path='/' element={<Home />} />
+      </Routes>
     </div>
   );
 };

@@ -8,10 +8,10 @@ const Home = ()=> {
   return (
     <div>
       <h1>Home</h1>
-      <div>
+      {/* <div>
         Welcome { auth.username }!!
         <button onClick={()=> dispatch(logout())}>Logout</button>
-      </div>
+      </div> */}
     </div>
   );
 };
