@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Home from './Home';
-import Login from './Login';
+import LoginAll from './LoginAll';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginWithToken } from '../store';
 import { Routes, Route } from 'react-router-dom';
@@ -16,7 +16,7 @@ const App = ()=> {
 
   return (
       <Routes>
-        <Route path="/"  element={ auth.id ? <Home /> : <Login /> }></Route>   
+        <Route path="/"  element={ auth.id ? <Home /> : <LoginAll /> }></Route>   
       </Routes>
 
   );
