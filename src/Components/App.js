@@ -3,7 +3,7 @@ import Home from './Home';
 import Login from './Login';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginWithToken } from '../store';
-import { Link, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 
 const App = ()=> {
@@ -15,21 +15,10 @@ const App = ()=> {
   }, []);
 
   return (
-    <div>
-      <h1>FS App Template</h1>
-      {
-        auth.id ? <Home /> : <Login />
-      }
-      {
-        !!auth.id  && (
-          <div>
-            <nav>
-              <Link to='/'>Home</Link>
-            </nav>
-          </div>
-        )
-      }
-    </div>
+      <Routes>
+        <Route path="/"  element={ auth.id ? <Home /> : <Login /> }></Route>   
+      </Routes>
+
   );
 };
 
