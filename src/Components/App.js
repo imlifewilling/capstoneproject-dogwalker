@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Home from './Home';
 import Login from './Login';
 import { useSelector, useDispatch } from 'react-redux';
-import { loginWithToken } from '../store';
+import { fetchUsers, loginWithToken } from '../store';
 import axios from 'axios';
 
 import { Link, Routes, Route, Navigate } from 'react-router-dom';
@@ -29,6 +29,7 @@ const App = ()=> {
   useEffect(()=> {
     dispatch(loginWithToken());
     dispatch(fetchServices());
+    dispatch(fetchUsers());
   }, []);
 
   return (
