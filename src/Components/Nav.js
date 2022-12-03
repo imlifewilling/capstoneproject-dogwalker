@@ -17,12 +17,15 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 
 // const pages = ['Products', 'Pricing', 'Blog'];
-const pages = [{name: 'Find a Walker', link: '/services'}, {name: 'Become a Walker', link: '/link2'}]
-const settings = ['Profile', 'Account', 'Dashboard'];
+// const settings = ['Profile', 'Account', 'Dashboard'];
+
 
 const Nav = () => {
     const dispatch = useDispatch();
     const { auth } = useSelector(state=>state);
+
+    const pages = [{name: 'Find a Walker', link: '/services'}, {name: 'Become a Walker', link: '/link2'}];
+    const settings = [{name: 'Profile', link: `/users/${auth.id}`}];
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -160,8 +163,9 @@ const Nav = () => {
                   onClose={handleCloseUserMenu}
                 >
                   {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center">{setting}</Typography>
+                    <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
+                      <Typography textAlign="center" component={Link} to={setting.link}
+                      >{setting.name}</Typography>
                     </MenuItem>
                   ))}
                     <MenuItem key={'logout'} onClick={handleCloseUserMenu}>
