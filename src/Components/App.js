@@ -10,6 +10,7 @@ import Nav from './Nav';
 import Service from './Service';
 import User from './User/User';
 import ServiceDetails from './ServiceDetails'
+import { fetchServices } from '../store/service';
 
 
 const App = ()=> {
@@ -29,6 +30,7 @@ const App = ()=> {
   
   useEffect(()=> {
     dispatch(loginWithToken());
+    dispatch(fetchServices());
   }, []);
 
   return (
