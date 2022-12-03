@@ -30,8 +30,6 @@ const App = ()=> {
             <Routes>
               <Route path='/users/:id' element={<User />} />
               {/* <Link to='/walker/id'>Service Detail</Link> */}
-            </nav>
-            <Routes>
               {/* <Route path="/walker/:id" element={<ServiceDetails/>}/> */}
             </Routes>
           </div>
