@@ -23,6 +23,15 @@ app.get('/:id', isLoggedIn, async (req, res, next) => {
   }
 });
 
+app.put('/:id', async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.id);
+    res.send(await user.update(req.body));
+  } catch (err) {
+    next(err);
+  }
+});
+
 // app.post('/', async (req, res, next) => {
 //   try {
 //     res.send(await User.create(req.body));
@@ -38,16 +47,6 @@ app.get('/:id', isLoggedIn, async (req, res, next) => {
 //     next(err);
 //   }
 // });
-
-// app.put('/:id', async (req, res, next) => {
-//   try {
-//     const user = await User.findByPk(req.params.id);
-//     res.send(await user.update(req.body));
-//   } catch (err) {
-//     next(err);
-//   }
-// });
-
 
 // app.delete('/:id', async (req, res, next) => {
 //   try {

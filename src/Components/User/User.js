@@ -35,9 +35,9 @@ const User = () => {
         <p>
             <strong>Address:</strong> {auth.address}
         </p>
-      {/* <h3><Link to={`/users/${auth.id}/edit`}>Edit Account Info</Link></h3>
+        <h3><Link to={`/users/${auth.id}/edit`}>Edit Account Information</Link></h3>
       <br></br>
-      <button onClick={() => deleteAccount()}>Delete Account</button> */}
+      {/* <button onClick={() => deleteAccount()}>Delete Account</button> */}
     </div>
   );
 };
