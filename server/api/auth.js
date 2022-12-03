@@ -15,15 +15,21 @@ app.get('/login/failed', (req, res) => {
   })
 })
 
-app.get('/login/success', (req, res) => {
-  if(req.user){
-    res.status(200).json({
-      success: true,
-      message: 'Login success',
-      user: req.user,
-      // cookies: req.cookies,
-      // jwt
-    })
+app.get('/login/success', async(req, res, next) => {
+  try{
+    if(req.user){
+      const user = await User.findByToken({where: {email: req.user._json.email}})
+      console.log(user)
+      res.status(200).json({
+        success: true,
+        message: 'Login success',
+        user: req.user,
+        // cookies: req.cookies,
+        // jwt
+      })
+    }
+  }catch(ex){
+    next(ex);
   }
 })
 
@@ -33,7 +39,8 @@ app.get('/logout', (req, res) => {
 })
 
 //authenticate through google with passport
-app.get('/google', passport.authenticate('google', {scope: ['profile']}));
+app.get('/google', passport.authenticate('google', {scope: ['profile', 'email']}));
+
 app.get('/google/callback', passport.authenticate(
   'google',
   {

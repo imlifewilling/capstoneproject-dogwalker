@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import Google from "../../static/images/icons8-google-48.png";
 import Facebook from "../../static/images/facebook.png";
 import Github from "../../static/images/github.png";
-import { attemptLogin } from "../store";
+import { attemptLogin, setAuthgoogle } from "../store";
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -22,8 +22,9 @@ const Login = () => {
         dispatch(attemptLogin(credentials));
     };
 
-    const google = () => {
+    const google = async() => {
         window.open('http://localhost:3000/api/auth/google')
+        dispatch(setAuthgoogle())
     }
 
     return (

@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 const auth = (state = { }, action)=> {
   if(action.type === 'SET_AUTH'){
     return action.auth;
@@ -55,11 +56,12 @@ export const register = (credentials)=> {
   };
 };
 
-export const login_google = ()=> {
-  return async(dispatch)=> {
-    const response = await axios.get('/api/auth/login/google');
-    console.log(response.data);
-  };
+export const setAuthgoogle = () => {
+  return async(dispatch) => {
+    const response = await axios.get('/api/auth/login/success');
+    console.log(response.data.user)
+    // dispatch({ type: 'SET_AUTH', auth: response.data });
+  }
 }
 
 export default auth;

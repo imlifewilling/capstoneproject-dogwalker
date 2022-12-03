@@ -106,5 +106,6 @@ User.findByToken = async function(token){
   }
 }
 
+
 module.exports = User;
 
