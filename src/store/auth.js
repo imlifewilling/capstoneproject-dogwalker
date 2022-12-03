@@ -55,4 +55,11 @@ export const register = (credentials)=> {
   };
 };
 
+export const login_google = ()=> {
+  return async(dispatch)=> {
+    const response = await axios.get('/api/auth/login/google');
+    console.log(response.data);
+  };
+}
+
 export default auth;

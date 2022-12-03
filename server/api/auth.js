@@ -17,7 +17,7 @@ app.get('/login/failed', (req, res) => {
 
 app.get('/login/success', (req, res) => {
   if(req.user){
-    res.status(401).json({
+    res.status(200).json({
       success: true,
       message: 'Login success',
       user: req.user,

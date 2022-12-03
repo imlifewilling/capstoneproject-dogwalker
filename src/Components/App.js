@@ -10,6 +10,17 @@ import axios from 'axios';
 const App = ()=> {
   const { auth } = useSelector(state => state);
   const dispatch = useDispatch();
+
+
+  // useEffect(() => {
+  //   const googleUser = async() => {
+  //     const response = await axios.get('/api/auth/login/success')
+  //     return response.data
+  //   } 
+  //   const data = googleUser();
+  //   console.log(data);
+
+  // }, [])
   
   useEffect(()=> {
     dispatch(loginWithToken());

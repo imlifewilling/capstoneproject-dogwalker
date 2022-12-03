@@ -12,18 +12,10 @@ const User = conn.define('user', {
     defaultValue: UUIDV4
   },
   firstname: {
-    type: STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
+    type: STRING
   },
   lastname: {
-    type: STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
+    type: STRING
   },
   password: {
     type: STRING,
@@ -41,18 +33,10 @@ const User = conn.define('user', {
     unique: true
   },
   address: {
-    type: STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
+    type: STRING
   },
   phone: {
-    type: STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
+    type: STRING
   },
   userDescription: {
     type: TEXT
@@ -121,9 +105,6 @@ User.findByToken = async function(token){
     throw error;
   }
 }
-
-
-
 
 module.exports = User;
 
