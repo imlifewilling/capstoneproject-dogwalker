@@ -12,16 +12,16 @@ export const logout = ()=> {
 };
 
 
-export const loginWithToken = ()=> {
+export const loginWithToken = ()=> { //use toke to login
   return async(dispatch)=> {
-    const token = window.localStorage.getItem('token');
-    if(token){
-      const response = await axios.get('/api/auth', {
+    const token = window.localStorage.getItem('token'); //first get the token from localStorage
+    if(token){                                          //if ther is token
+      const response = await axios.get('/api/auth', {   //get the user from server with token
         headers: {
           authorization: token
         }
       });
-      dispatch({ type: 'SET_AUTH', auth: response.data });
+      dispatch({ type: 'SET_AUTH', auth: response.data }); //set the user to the store with name 'auth'
     }
   };
 };
@@ -41,9 +41,9 @@ export const updateAuth = (auth)=> {
 
 export const attemptLogin = (credentials)=> {
   return async(dispatch)=> {
-    const response = await axios.post('/api/auth', credentials);
-    window.localStorage.setItem('token', response.data);
-    dispatch(loginWithToken());
+    const response = await axios.post('/api/auth', credentials); //try to get the data (token) from ther server
+    window.localStorage.setItem('token', response.data); //after get the token, store it in localStorage
+    dispatch(loginWithToken()); //then use this token to login 
   };
 };
 
@@ -54,5 +54,12 @@ export const register = (credentials)=> {
     dispatch(loginWithToken());
   };
 };
+
+export const login_google = ()=> {
+  return async(dispatch)=> {
+    const response = await axios.get('/api/auth/login/google');
+    console.log(response.data);
+  };
+}
 
 export default auth;
