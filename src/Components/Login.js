@@ -22,12 +22,16 @@ const Login = () => {
         dispatch(attemptLogin(credentials));
     };
 
+    const google = () => {
+        window.open('http://localhost:3000/api/auth/google')
+    }
+
     return (
         <div className = "login">
             <h1 className = "loginTitle">Choose a Login Method</h1>
             <div className = "wrapper">
                 <div className = "left">
-                    <div className = "loginButton google">
+                    <div className = "loginButton google" onClick = {google}>
                         <img src = {Google} className = "icon" />
                         Google
                     </div>
