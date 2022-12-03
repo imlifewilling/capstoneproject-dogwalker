@@ -4,6 +4,8 @@ import Login from './Login';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginWithToken } from '../store';
 import { Link, Routes, Route } from 'react-router-dom';
+import Nav from './Nav';
+import Service from './Service';
 import User from './User/User';
 import ServiceDetails from './ServiceDetails'
 
@@ -16,25 +18,15 @@ const App = ()=> {
 
   return (
     <div>
-      <h1>FS App Template</h1>
-      {
-        auth.id ? <Home /> : <Login />
-      }
-      {
-        !!auth.id  && (
-          <div>
-            <nav>
-              <Link to='/'>Home</Link>
-              <Link to={`/users/${auth.id}`}>Your Profile</Link>
-            </nav>
-            <Routes>
-              <Route path='/users/:id' element={<User />} />
-              {/* <Link to='/walker/id'>Service Detail</Link> */}
-              {/* <Route path="/walker/:id" element={<ServiceDetails/>}/> */}
-            </Routes>
-          </div>
-        )
-      }
+      <Nav />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/services' element={<Service />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/users/:id' element={<User />} />
+        {/* <Link to='/walker/id'>Service Detail</Link> */}
+        {/* <Route path="/walker/:id" element={<ServiceDetails/>}/> */}
+      </Routes>
     </div>
   );
 };
