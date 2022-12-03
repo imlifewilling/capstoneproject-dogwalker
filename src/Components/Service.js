@@ -16,8 +16,12 @@ const Service = () => {
                 </Box>
                 <Box key={'service list'} sx={{border: 'black solid 1px'}}>
                     <h1>Service List</h1>
-                    <ServiceCard service={services[0]}/>
-                    <pre>{JSON.stringify(services,null,2)}</pre>
+
+                    {
+                        services.map(service => {
+                            return <ServiceCard key={service.id} service={service}/>
+                        })
+                    }
                 </Box>
                 <Box key={'map'} sx={{border: 'black solid 1px'}}>
                     <h1>Map</h1>

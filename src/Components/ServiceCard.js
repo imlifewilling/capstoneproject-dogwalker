@@ -13,8 +13,7 @@ const ServiceCard = (props) => {
 
     return (
         <>
-            <h1>CARD</h1>
-            <Card sx={{ width: 'auto', height: '200' }}>
+            <Card sx={{ width: 'auto', height: '200', margin: '10px' }}>
                 <CardActionArea component={Link} to={`/services/${service?.id}`}>
                     <Box sx={{display: 'flex', flexDirection: 'row'}}>
                         <CardMedia
