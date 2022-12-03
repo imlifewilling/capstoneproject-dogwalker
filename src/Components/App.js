@@ -6,7 +6,8 @@ import { loginWithToken } from '../store';
 import { Link, Routes, Route } from 'react-router-dom';
 import Nav from './Nav';
 import Service from './Service';
-
+import User from './User/User';
+import ServiceDetails from './ServiceDetails'
 
 const App = ()=> {
   const { auth } = useSelector(state => state);
@@ -22,6 +23,9 @@ const App = ()=> {
         <Route path='/' element={<Home />} />
         <Route path='/services' element={<Service />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/users/:id' element={<User />} />
+        {/* <Link to='/walker/id'>Service Detail</Link> */}
+        {/* <Route path="/walker/:id" element={<ServiceDetails/>}/> */}
       </Routes>
     </div>
   );
