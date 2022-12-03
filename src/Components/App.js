@@ -3,8 +3,13 @@ import Home from './Home';
 import Login from './Login';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginWithToken } from '../store';
-import { Routes, Route, Navigate } from 'react-router-dom';
 import axios from 'axios';
+
+import { Link, Routes, Route, Navigate } from 'react-router-dom';
+import Nav from './Nav';
+import Service from './Service';
+import User from './User/User';
+import ServiceDetails from './ServiceDetails'
 
 
 const App = ()=> {
@@ -27,10 +32,17 @@ const App = ()=> {
   }, []);
 
   return (
+    <div>
+      <Nav />
       <Routes>
-        <Route path = '/' element = {auth.id? <Home />: <Navigate to = '/login'/> }></Route>
-        <Route path="/login"  element = { auth.id ? <Navigate to = '/' /> : <Login /> }></Route>   
+        <Route path='/' element={<Home />} />
+        <Route path='/services' element={<Service />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/users/:id' element={<User />} />
+        {/* <Link to='/walker/id'>Service Detail</Link> */}
+        {/* <Route path="/walker/:id" element={<ServiceDetails/>}/> */}
       </Routes>
+    </div>
   );
 };
 
