@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 const Home = ()=> {
   const { auth } = useSelector(state => state);
   const dispatch = useDispatch();
+
   return (
     <div>
       <h1>Home</h1>

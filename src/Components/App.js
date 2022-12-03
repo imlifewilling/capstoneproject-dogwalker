@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import Home from './Home';
-import LoginAll from './LoginAll';
+import Login from './Login';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginWithToken } from '../store';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 
 const App = ()=> {
@@ -16,7 +16,8 @@ const App = ()=> {
 
   return (
       <Routes>
-        <Route path="/"  element={ auth.id ? <Home /> : <LoginAll /> }></Route>   
+        <Route path = '/' element = {auth.id? <Home />: <Navigate to = '/login'/> }></Route>
+        <Route path="/login"  element = { auth.id ? <Navigate to = '/' /> : <Login /> }></Route>   
       </Routes>
 
   );
