@@ -31,7 +31,6 @@ const App = ()=> {
         <Route path = '/' element = {auth.id? <Home />: <Navigate to = '/login'/> }></Route>
         <Route path="/login"  element = { auth.id ? <Navigate to = '/' /> : <Login /> }></Route>   
       </Routes>
-
   );
 };
 
