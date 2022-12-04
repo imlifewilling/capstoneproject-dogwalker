@@ -1,5 +1,5 @@
 import React from "react";
-import { Box } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { useSelector } from "react-redux";
 import ServiceCard from "./ServiceCard";
 
@@ -10,11 +10,12 @@ const Service = () => {
     return (
         <>
             <h1>Service Page</h1>
-            <Box sx={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', height:'100vh'}}>
-                <Box key={'filter'} sx={{border: 'black solid 1px'}}>
+            {/* <Grid sx={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', height:'100vh'}}> */}
+            <Grid container>
+                <Grid item md={2} key={'filter'} sx={{border: 'black solid 1px'}}>
                     <h1>Filter</h1>
-                </Box>
-                <Box key={'service list'} sx={{border: 'black solid 1px'}}>
+                </Grid>
+                <Grid item md={7} key={'service list'} sx={{border: 'black solid 1px'}}>
                     <h1>Service List</h1>
 
                     {
@@ -22,11 +23,11 @@ const Service = () => {
                             return <ServiceCard key={service.id} service={service}/>
                         })
                     }
-                </Box>
-                <Box key={'map'} sx={{border: 'black solid 1px'}}>
+                </Grid>
+                <Grid item md={3} key={'map'} sx={{border: 'black solid 1px'}}>
                     <h1>Map</h1>
-                </Box>
-            </Box>
+                </Grid>
+            </Grid>
         </>
     );
 };

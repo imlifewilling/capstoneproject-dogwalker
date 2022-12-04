@@ -21,6 +21,7 @@ const ServiceCard = (props) => {
                         height="200"
                         image="https://picsum.photos/200/200"
                         alt={service?.id}
+                        sx={{objectFit:'contain', width:'200'}}
                         />
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="div">
