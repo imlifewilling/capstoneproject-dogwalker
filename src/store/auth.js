@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 const auth = (state = { }, action)=> {
   if(action.type === 'SET_AUTH'){
     return action.auth;
@@ -55,11 +56,14 @@ export const register = (credentials)=> {
   };
 };
 
-export const login_google = ()=> {
-  return async(dispatch)=> {
-    const response = await axios.get('/api/auth/login/google');
-    console.log(response.data);
-  };
+export const logwith3rdParty = (userinfo, navigate) => {
+  return async(dispatch) => {
+    const response = await axios.post('/api/auth/login/success', userinfo);
+    console.log(response.data)
+    window.localStorage.setItem('token', response.data);
+    dispatch(loginWithToken());
+    navigate('/');
+  }
 }
 
 export default auth;

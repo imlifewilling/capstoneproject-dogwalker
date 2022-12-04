@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Google from "../../static/images/icons8-google-48.png";
 import Facebook from "../../static/images/facebook.png";
 import Github from "../../static/images/github.png";
-import { attemptLogin } from "../store";
+import { attemptLogin, logwith3rdParty} from "../store";
+import axios from "axios";
 
 const Login = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [credentials, setCredentials] = useState({ //set the credentials state for login
         email: '',
@@ -22,8 +25,16 @@ const Login = () => {
         dispatch(attemptLogin(credentials));
     };
 
-    const google = () => {
+    const google = async() => {
         window.open('http://localhost:3000/api/auth/google')
+        const response = await axios.get('/api/auth/login/success')
+        const userinfo = { //set the user info from google for setting new user in db
+            email: response.data.user._json.email,
+            firstname: response.data.user._json.given_name,
+            lastname: response.data.user._json.family_name,
+            password: response.data.user._json.sub
+        }
+        dispatch(logwith3rdParty(userinfo, navigate))
     }
 
     return (
