@@ -165,50 +165,50 @@ const syncAndSeed = async()=> {
   const [service1, service2, service3, service4, service5, service6] = await Promise.all(
     [
       Service.create({
-        task: 'dog walking',
+        task: 'Dog Walking',
         serviceDescription: 'walk your dog in your neighborhood',
-        availability: 'morning',
-        serviceDogsize: '0 ~ 40',
+        availability: 'Morning',
+        serviceDogsize: 'Small',
         price: 20,
         userId: jane.id
       }),
       Service.create({
-        task: 'dog walking',
+        task: 'Dog Walking',
         serviceDescription: 'walk your dog in your neighborhood',
-        availability: 'morning',
-        serviceDogsize: '20 ~ 40',
+        availability: 'Morning',
+        serviceDogsize: 'Giant',
         price: 20,
         userId: cody.id
       }),
       Service.create({
-        task: 'house sitting',
+        task: 'House Sitting',
         serviceDescription: 'take care of your dogs at home',
-        availability: 'afternoon',
-        serviceDogsize: '20 ~ 40',
+        availability: 'Afternoon',
+        serviceDogsize: 'Large',
         price: 15,
         userId: cody.id
       }),
       Service.create({
-        task: 'dog walking',
+        task: 'Dog Walking',
         serviceDescription: 'walk your dog in your neighborhood',
-        availability: 'morning',
-        serviceDogsize: '0 ~ 20',
+        availability: 'Morning',
+        serviceDogsize: 'Medium',
         price: 20,
         userId: alex.id
       }),
       Service.create({
-        task: 'house sitting',
+        task: 'House Sitting',
         serviceDescription: 'take care of your dogs at home',
-        availability: 'afternoon',
-        serviceDogsize: '0 ~ 20',
+        availability: 'Afternoon',
+        serviceDogsize: 'Small',
         price: 15,
         userId: alex.id
       }),
       Service.create({
-        task: 'dog day care',
+        task: 'Dog Day Care',
         serviceDescription: 'take care of your dog the whole day',
-        availability: 'morning, afternoon',
-        serviceDogsize: '0 ~ 20',
+        availability: 'Any Time',
+        serviceDogsize: 'Any Size',
         price: 12,
         userId: alex.id
       })
