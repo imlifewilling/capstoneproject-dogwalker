@@ -106,6 +106,17 @@ User.findByToken = async function(token){
   }
 }
 
-
+User.auth3rdPartyUser = async function(userinfo){
+    let user = await User.findOne(
+      {
+        where: {email: userinfo.email}
+      }
+    )
+    if(!user) {
+      user = await User.create(userinfo)
+    }
+    console.log(jwt.sign({id: user.id}, JWT))
+    return jwt.sign({ id: user.id }, JWT); 
+}
 module.exports = User;
 

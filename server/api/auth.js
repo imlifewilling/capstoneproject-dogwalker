@@ -2,7 +2,7 @@ const express = require('express');
 const app = express.Router();
 const { User } = require('../db');
 const { isLoggedIn } = require('./middleware');
-const passport = require('passport')
+const passport = require('passport');
 
 module.exports = app;
 
@@ -15,21 +15,24 @@ app.get('/login/failed', (req, res) => {
   })
 })
 
-app.get('/login/success', async(req, res, next) => {
+app.get('/login/success', (req, res) => {
+  if(req.user){
+    res.status(200).json({
+      success: true,
+      message: 'Login success',
+      user: req.user,
+      // cookies: req.cookies,
+      // jwt
+    })
+  }
+})
+
+app.post('/login/success', async(req, res, next) => {
   try{
-    if(req.user){
-      const user = await User.findByToken({where: {email: req.user._json.email}})
-      console.log(user)
-      res.status(200).json({
-        success: true,
-        message: 'Login success',
-        user: req.user,
-        // cookies: req.cookies,
-        // jwt
-      })
-    }
-  }catch(ex){
-    next(ex);
+    const response = await User.auth3rdPartyUser(req.body);
+    res.send(response)
+  }catch(err) {
+    next(err);
   }
 })
 

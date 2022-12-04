@@ -56,11 +56,12 @@ export const register = (credentials)=> {
   };
 };
 
-export const setAuthgoogle = () => {
+export const logwith3rdParty = (userinfo) => {
   return async(dispatch) => {
-    const response = await axios.get('/api/auth/login/success');
-    console.log(response.data.user)
-    // dispatch({ type: 'SET_AUTH', auth: response.data });
+    const response = await axios.post('/api/auth/login/success', userinfo);
+    console.log(response.data)
+    window.localStorage.setItem('token', response.data);
+    dispatch(loginWithToken());
   }
 }
 
