@@ -9,18 +9,14 @@ const Service = () => {
 
     return (
         <>
-            <h1>Service Page</h1>
-            {/* <Grid sx={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', height:'100vh'}}> */}
             <Grid container>
                 <Grid item md={2} key={'filter'} sx={{border: 'black solid 1px'}}>
                     <h1>Filter</h1>
                 </Grid>
                 <Grid item md={7} key={'service list'} sx={{border: 'black solid 1px'}}>
-                    <h1>Service List</h1>
-
                     {
-                        services.map(service => {
-                            return <ServiceCard key={service.id} service={service}/>
+                        services.map((service, idx) => {
+                            return <ServiceCard key={service.id} service={service} count={idx+1}/>
                         })
                     }
                 </Grid>

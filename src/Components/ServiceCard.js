@@ -9,11 +9,11 @@ import { Link } from 'react-router-dom';
 
 const ServiceCard = (props) => {
     const { users } = useSelector(state=>state);
-    const { service } = props;
+    const { service, count } = props;
 
     return (
         <>
-            <Card sx={{ width: 'auto', height: '200', margin: '10px' }}>
+            <Card variant='outlined' sx={{ width: 'auto', height: '200', margin: '10px' }}>
                 <CardActionArea component={Link} to={`/services/${service?.id}`}>
                     <Box sx={{display: 'flex', flexDirection: 'row'}}>
                         <CardMedia
@@ -25,27 +25,26 @@ const ServiceCard = (props) => {
                         />
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="div">
-                                {(users?.filter(ele => ele.id === service?.userId))[0]?.firstname}
+                                {count}. {(users?.filter(ele => ele.id === service?.userId))[0]?.firstname}
                             </Typography>
                             <Typography gutterBottom variant="h6" component="div">
                                 Service: {service?.task}
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
-                                {service?.serviceDescription}
+                            <span style={{color:'black'}}>Description:</span> {service?.serviceDescription}
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
-                                Dog Size: {service?.serviceDogsize}
+                            <span style={{color:'black'}}>Dog Size:</span> {service?.serviceDogsize}
                             </Typography>
                         </CardContent>
-                        <CardContent>
+                        <CardContent sx={{width: '20%'}}>
                             <Typography variant="body2" color="text.secondary">
-                                $ {service?.price}
+                            <span style={{color:'black'}}>Price:</span> $ {service?.price}
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
-                                Availability: {service?.availability}
+                            <span style={{color:'black'}}>Availability:</span> {service?.availability}
                             </Typography>
                         </CardContent>
-
                     </Box>
                 </CardActionArea>
             </Card>
