@@ -122,3 +122,13 @@ input {
   top:150px;
   color:lightgray
 }
+
+.signupLink {
+  position: absolute;
+  bottom:100px;
+  color:lightgray
+}
+
+a {
+  text-decoration: none
+}

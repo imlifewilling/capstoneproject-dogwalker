@@ -77,6 +77,7 @@ const Login = () => {
                     <button className = "submit" onClick = {onsubmit} >Login</button>
                 </div>
             </div>
+            <h5 className = "signupLink">Already have an account? Sign in <a href = "#/signup">here</a></h5>
         </div>
     )
 }
