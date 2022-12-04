@@ -23,6 +23,7 @@ const User = () => {
   return (
     <div id='account_page'>
         <h1>Account Information</h1>
+        <img src={auth.avatar}></img>
         <p>
             <strong>Name:</strong> {auth.firstname} {auth.lastname}
         </p>
