@@ -34,6 +34,7 @@ const Login = () => {
             lastname: response.data.user._json.family_name,
             password: response.data.user.nodeId
         }
+        console.log(userinfo)
         dispatch(logwith3rdParty(userinfo, navigate))
     }
 

@@ -12,6 +12,9 @@ import ServiceDetails from './ServiceDetails'
 import Signup from './Signup';
 import { fetchServices } from '../store/service';
 
+import { ThemeProvider } from '@mui/material/styles';
+import Theme from './Theme';
+
 const App = ()=> {
   const { auth } = useSelector(state => state);
   const dispatch = useDispatch();
@@ -22,7 +25,8 @@ const App = ()=> {
   }, []);
 
   return (
-    <div>
+
+    <ThemeProvider theme={Theme}>
       <Nav />
       <Routes>
         <Route path='/' element={<Home />} />
@@ -34,7 +38,7 @@ const App = ()=> {
         {/* <Link to='/walker/id'>Service Detail</Link> */}
         <Route path="/walker/:id" element={<ServiceDetails/>}/>
       </Routes>
-    </div>
+    </ThemeProvider>
   );
 };
 

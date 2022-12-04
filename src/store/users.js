@@ -25,5 +25,13 @@ export const editUser = (user) => {
       dispatch({ type: 'UPDATE_USER', user: response.data });
     };
   };
+
+  export const signupUser = (userinput, navigate) => {
+    return async (dispatch) => {
+      const response = await axios.post('/api/users', userinput);
+      dispatch({ type: 'UPDATE_USER', user: response.data });
+      navigate('/signin')
+    }
+  }
   
 export default users;
