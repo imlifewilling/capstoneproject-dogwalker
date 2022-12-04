@@ -51,6 +51,17 @@ app.get('/google/callback', passport.authenticate(
   }
 ))
 
+//authenticate through github with passport
+app.get('/github', passport.authenticate('github', {scope: ['user:email']}));
+
+app.get('/github/callback', passport.authenticate(
+  'github',
+  {
+    successRedirect: CLIENT_URL,
+    failureRedirect: '/login/failed'
+  }
+))
+
 //login with email and password
 app.post('/', async(req, res, next)=> {//post the credentials to the db to find out the user, if exists, return the token
   try {

@@ -59,7 +59,6 @@ export const register = (credentials)=> {
 export const logwith3rdParty = (userinfo, navigate) => {
   return async(dispatch) => {
     const response = await axios.post('/api/auth/login/success', userinfo);
-    console.log(response.data)
     window.localStorage.setItem('token', response.data);
     dispatch(loginWithToken());
     navigate('/');
