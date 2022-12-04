@@ -14,7 +14,7 @@ const auth = (state = { }, action)=> {
 export const logout = ()=> {
   window.localStorage.removeItem('token');
   return { type: 'SET_AUTH', auth: {} };
-};
+};x
 
 
 export const loginWithToken = ()=> { //use toke to login
@@ -76,5 +76,15 @@ export const editUser = (user, navigate) => {
     navigate(`/users/${response.data.id}`);
   };
 };
+
+export const logwith3rdParty = (userinfo, navigate) => {
+  return async(dispatch) => {
+    const response = await axios.post('/api/auth/login/success', userinfo);
+    console.log(response.data)
+    window.localStorage.setItem('token', response.data);
+    dispatch(loginWithToken());
+    navigate('/');
+  }
+}
 
 export default auth;

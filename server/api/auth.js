@@ -2,7 +2,8 @@ const express = require('express');
 const app = express.Router();
 const { User } = require('../db');
 const { isLoggedIn } = require('./middleware');
-const passport = require('passport')
+const passport = require('passport');
+const { redirect } = require('react-router-dom');
 
 module.exports = app;
 
@@ -20,10 +21,17 @@ app.get('/login/success', (req, res) => {
     res.status(200).json({
       success: true,
       message: 'Login success',
-      user: req.user,
-      // cookies: req.cookies,
-      // jwt
+      user: req.user
     })
+  }
+})
+
+app.post('/login/success', async(req, res, next) => {
+  try{
+    const response = await User.auth3rdPartyUser(req.body);
+    res.send(response)
+  }catch(err) {
+    next(err);
   }
 })
 
@@ -33,7 +41,8 @@ app.get('/logout', (req, res) => {
 })
 
 //authenticate through google with passport
-app.get('/google', passport.authenticate('google', {scope: ['profile']}));
+app.get('/google', passport.authenticate('google', {scope: ['profile', 'email']}));
+
 app.get('/google/callback', passport.authenticate(
   'google',
   {
@@ -41,7 +50,6 @@ app.get('/google/callback', passport.authenticate(
     failureRedirect: '/login/failed'
   }
 ))
-
 
 //login with email and password
 app.post('/', async(req, res, next)=> {//post the credentials to the db to find out the user, if exists, return the token
