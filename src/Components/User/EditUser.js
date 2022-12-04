@@ -12,6 +12,7 @@ const EditUser = () => {
     firstname: auth.firstname,
     lastname: auth.lastname,
     email: auth.email,
+    phone: auth.phone
   });
 
   const onChange = (ev) => {
@@ -52,6 +53,7 @@ const EditUser = () => {
         </div>
         <div>
             <label><strong>Phone: </strong></label>
+            <input name="phone" value={inputs.phone} onChange={onChange} />
         </div>
         <br></br>
         <button>Save</button>

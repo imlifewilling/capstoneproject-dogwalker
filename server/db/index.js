@@ -4,82 +4,8 @@ const Dog = require('./Dog');
 const Service = require('./Service');
 const ServiceEvent = require('./ServiceEvent');
 const Review = require('./Review');
-
-const userslist = [
-  {
-    firstname: 'Max',
-    lastname: 'Li',
-    password: '123',
-    email: 'lmx4wo@gmail.com',
-    address: '724 Central Ave SE, Albuquerque, NY, US, 87102',
-    phone: '505-243-4688',
-    avatar: '',
-    isWalker: false
-  },
-  {
-    firstname: 'Luca',
-    lastname: 'Liu',
-    password: '123',
-    email: 'luca@gmail.com',
-    address: '9001 Central Ave NE, Albuquerque, NY, US, 87123',
-    phone: '505-293-3953',
-    avatar: '',
-    isWalker: false
-  },
-  {
-    firstname: 'Han',
-    lastname: 'Lu',
-    password: '123',
-    email: 'han@gmail.com',
-    address: '3401 Ladera Dr NW, Albuquerque, NY, US, 87120',
-    phone: '505-836-4449',
-    avatar: '',
-    isWalker: false
-  },
-  {
-    firstname: 'Kendal',
-    lastname: 'Enz',
-    password: '123',
-    email: 'kendal@gmail.com',
-    address: '5200 Eubank Blvd NE, Albuquerque, NY, US, 87111',
-    phone: '505-296-8195',
-    avatar: '',
-    isWalker: false
-  },
-  {
-    firstname: 'Jane',
-    lastname: 'Zheng',
-    password: '123',
-    email: 'jane@gmail.com',
-    address: '1100 2nd St SW, Albuquerque, NY, US, 87102',
-    phone: '505-296-8295',
-    userDescription: 'I have 10 years of experience',
-    avatar: '',
-    isWalker: true
-  },
-  {
-    firstname: 'Cody',
-    lastname: 'Cotlet',
-    password: '123',
-    email: 'cody@gmail.com',
-    address: '4709 Plume Rd NW, Albuquerque, NY, US, 87102',
-    phone: '505-296-8295',
-    userDescription: 'I have 5 years of experience',
-    avatar: '',
-    isWalker: true
-  },
-  {
-    firstname: 'Alex',
-    lastname: 'Cohen',
-    password: '123',
-    email: 'alex@gmail.com',
-    address: '6703 Academy Rd NE, Albuquerque, NY, US, 87102',
-    phone: '505-750-3305',
-    userDescription: 'I have only 1 year of experience, but I am very patient',
-    avatar: '',
-    isWalker: true
-  }
-]
+const fs = require('fs');
+const path = require('path');
 
 //set the relatioship between models
 Dog.belongsTo(User);
@@ -95,13 +21,105 @@ User.hasMany(Review);
 Review.belongsTo(ServiceEvent);
 ServiceEvent.hasMany(Review);
 
+const getImage = (path)=> {
+  return new Promise((resolve, reject)=> {
+    fs.readFile(path, 'base64', (err, data)=> {
+      if(err) {
+        reject(err);
+      } 
+      else {
+        resolve(data);
+      }
+    });
+  });
+};
+
 const syncAndSeed = async()=> {
   await conn.sync({ force: true });
+  const avatar = await getImage(path.join(__dirname, '../../static/images/kendal.jpg'));
+  
+  const userslist = [
+    {
+      firstname: 'Max',
+      lastname: 'Li',
+      password: '123',
+      email: 'lmx4wo@gmail.com',
+      address: '724 Central Ave SE, Albuquerque, NY, US, 87102',
+      phone: '505-243-4688',
+      avatar: '',
+      isWalker: false
+    },
+    {
+      firstname: 'Luca',
+      lastname: 'Liu',
+      password: '123',
+      email: 'luca@gmail.com',
+      address: '9001 Central Ave NE, Albuquerque, NY, US, 87123',
+      phone: '505-293-3953',
+      avatar: '',
+      isWalker: false
+    },
+    {
+      firstname: 'Han',
+      lastname: 'Lu',
+      password: '123',
+      email: 'han@gmail.com',
+      address: '3401 Ladera Dr NW, Albuquerque, NY, US, 87120',
+      phone: '505-836-4449',
+      avatar: '',
+      isWalker: false
+    },
+    {
+      firstname: 'Kendal',
+      lastname: 'Enz',
+      password: '123',
+      email: 'kendal@gmail.com',
+      address: '5200 Eubank Blvd NE, Albuquerque, NY, US, 87111',
+      phone: '505-296-8195',
+      avatar,
+      isWalker: false
+    },
+    {
+      firstname: 'Jane',
+      lastname: 'Zheng',
+      password: '123',
+      email: 'jane@gmail.com',
+      address: '1100 2nd St SW, Albuquerque, NY, US, 87102',
+      phone: '505-296-8295',
+      userDescription: 'I have 10 years of experience',
+      avatar: '',
+      isWalker: true
+    },
+    {
+      firstname: 'Cody',
+      lastname: 'Cotlet',
+      password: '123',
+      email: 'cody@gmail.com',
+      address: '4709 Plume Rd NW, Albuquerque, NY, US, 87102',
+      phone: '505-296-8295',
+      userDescription: 'I have 5 years of experience',
+      avatar: '',
+      isWalker: true
+    },
+    {
+      firstname: 'Alex',
+      lastname: 'Cohen',
+      password: '123',
+      email: 'alex@gmail.com',
+      address: '6703 Academy Rd NE, Albuquerque, NY, US, 87102',
+      phone: '505-750-3305',
+      userDescription: 'I have only 1 year of experience, but I am very patient',
+      avatar: '',
+      isWalker: true
+    }
+  ];
+
   const [max, luca, han, kendal, jane, cody, alex] = await Promise.all(
     userslist.map(
       user => User.create(user)
     )
   );
+
   const [benben, chunk, mocha, barkley, coco] = await Promise.all(
     [
       Dog.create({
