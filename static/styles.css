@@ -24,7 +24,7 @@ nav {
 }
 
 .wrapper {
-  width: 60%;
+  width: 70%;
   height: 75%;
   -webkit-box-shadow: 0px 5px 33px -21px rgba(66, 68, 90, 1);
   -moz-box-shadow: 0px 5px 33px -21px rgba(66, 68, 90, 1);
@@ -131,4 +131,17 @@ input {
 
 a {
   text-decoration: none
+}
+
+.signup {
+  height: calc(100vh - 68px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signupTitle {
+  position: absolute;
+  top:180px;
+  color:lightgray
 }

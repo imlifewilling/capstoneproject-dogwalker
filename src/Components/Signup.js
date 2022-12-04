@@ -7,10 +7,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import InputAdornment from '@mui/material/InputAdornment';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Input from '@mui/material/Input';
-
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
@@ -51,121 +48,96 @@ const Signup = () => {
     }
   };
   return (
-    <Box
-      sx={{
-        width: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <Typography variant="h2" mb={3}>
+    <Box className='signup'>
+      <Typography 
+        className='signupTitle'
+        variant="h2" mb={3}
+      >
         New User Sign up
       </Typography>
-      <Stack
-        direction={{ xs: 'column', sm: 'row' }}
-        divider={<Divider orientation="vertical" flexItem />}
-        spacing={{ xs: 1, sm: 2, md: 4 }}
-        sx={{
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <Box
-          sx={{
-            // width: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <Typography variant="h5">Create an Account</Typography>
-          <form
-            onSubmit={onsubmit}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-          >
-            <div
-              style={{
-                margin: '20px',
-                display: 'flex',
-                flexDirection: 'column',
-              }}
-            >
-              <Input
-                value={inputs.email}
-                placeholder="Email"
-                name="email"
-                onChange={onChange}
-              />
-              <Input
-                type={showPassword ? 'text' : 'password'}
-                value={inputs.password}
-                placeholder="Password"
-                name="password"
-                onChange={onChange}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
+      <div className = 'wrapper'>
+            <div className = 'left'>
+                <Typography variant="h5">Create an Account</Typography>
+                <form
+                    onSubmit={onsubmit}
+                    style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    }}
+                >
+                    <div
+                        style={{
+                            margin: '20px',
+                            display: 'flex',
+                            flexDirection: 'column',
+                        }}
                     >
-                      {showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-              />
-              <Input
-                type={showPassword ? 'text' : 'password'}
-                value={inputs.password_confirm}
-                placeholder="Confirm Password"
-                name="password_confirm"
-                onChange={onChange}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
+                        <Input
+                            value={inputs.email}
+                            placeholder="Email"
+                            name="email"
+                            onChange={onChange}
+                        />
+                        <Input
+                            type={showPassword ? 'text' : 'password'}
+                            value={inputs.password}
+                            placeholder="Password"
+                            name="password"
+                            onChange={onChange}
+                            endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton
+                                onClick={handleClickShowPassword}
+                                onMouseDown={handleMouseDownPassword}
+                                >
+                                {showPassword ? <Visibility /> : <VisibilityOff />}
+                                </IconButton>
+                            </InputAdornment>
+                            }
+                        />
+                        <Input
+                            type={showPassword ? 'text' : 'password'}
+                            value={inputs.password_confirm}
+                            placeholder="Confirm Password"
+                            name="password_confirm"
+                            onChange={onChange}
+                            endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton
+                                onClick={handleClickShowPassword}
+                                onMouseDown={handleMouseDownPassword}
+                                >
+                                {showPassword ? <Visibility /> : <VisibilityOff />}
+                                </IconButton>
+                            </InputAdornment>
+                            }
+                        />
+                    </div>
+                    <Button
+                        variant="contained"
+                        sx={{ width: '75%' }}
+                        onClick={onsubmit}
                     >
-                      {showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-              />
+                        Signup
+                    </Button>
+                </form>
             </div>
-            <Button
-              variant="contained"
-              sx={{ width: '75%' }}
-              onClick={onsubmit}
-            >
-              Signup
-            </Button>
-          </form>
-        </Box>
 
-        <div
-          style={{
-            margin: '20px',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Typography variant="h5" mb={3}>
-            Already have an Account?
-          </Typography>
-          <Link to="/users" style={{ textDecoration: 'none' }}>
-            <Button variant="contained"> Sign in</Button>
-          </Link>
-        </div>
-      </Stack>
+            <div className = "center">
+                <div className = "line" />
+                <div className = "or">OR</div>
+            </div>
+
+            <div className = "right">
+                <Typography variant="h5" mb={3}>
+                    Already have an Account?
+                </Typography>
+                <Link to="/users" style={{ textDecoration: 'none' }}>
+                    <Button variant="contained"> Sign in</Button>
+                </Link>
+            </div>
+      </div>
     </Box>
   );
 };

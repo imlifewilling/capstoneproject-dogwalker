@@ -26,12 +26,12 @@ export const editUser = (user) => {
     };
   };
 
-  export const signupUser = (userinput, navigate) => {
-    return async (dispatch) => {
-      const response = await axios.post('/api/users', userinput);
-      dispatch({ type: 'UPDATE_USER', user: response.data });
-      navigate('/signin')
-    }
+export const signupUser = (userinput, navigate) => {
+  return async (dispatch) => {
+    const response = await axios.post('/api/users', userinput);
+    dispatch({ type: 'UPDATE_USER', user: response.data });
+    navigate(-1)
   }
+}
   
 export default users;
