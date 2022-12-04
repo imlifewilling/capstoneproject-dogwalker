@@ -9,7 +9,7 @@ import axios from "axios";
 
 const Login = () => {
     const dispatch = useDispatch();
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const [credentials, setCredentials] = useState({ //set the credentials state for login
         email: '',
@@ -34,7 +34,7 @@ const Login = () => {
             lastname: response.data.user._json.family_name,
             password: response.data.user._json.sub
         }
-        dispatch(logwith3rdParty(userinfo))
+        dispatch(logwith3rdParty(userinfo, navigate))
     }
 
     return (
