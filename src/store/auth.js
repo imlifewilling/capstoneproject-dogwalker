@@ -1,8 +1,12 @@
 import axios from 'axios';
+import { getToken, setToken } from '.';
 
 const auth = (state = { }, action)=> {
   if(action.type === 'SET_AUTH'){
     return action.auth;
+  }
+  if(action.type === 'UPDATE_AUTH') {
+    state = {...state, auth: action.auth};
   }
   return state;
 };
@@ -10,12 +14,12 @@ const auth = (state = { }, action)=> {
 export const logout = ()=> {
   window.localStorage.removeItem('token');
   return { type: 'SET_AUTH', auth: {} };
-};
+};x
 
 
 export const loginWithToken = ()=> { //use toke to login
   return async(dispatch)=> {
-    const token = window.localStorage.getItem('token'); //first get the token from localStorage
+    const token = getToken(); //first get the token from localStorage
     if(token){                                          //if ther is token
       const response = await axios.get('/api/auth', {   //get the user from server with token
         headers: {
@@ -39,7 +43,6 @@ export const updateAuth = (auth)=> {
   };
 };
 
-
 export const attemptLogin = (credentials)=> {
   return async(dispatch)=> {
     const response = await axios.post('/api/auth', credentials); //try to get the data (token) from ther server
@@ -53,6 +56,24 @@ export const register = (credentials)=> {
     const response = await axios.post('/api/auth/register', credentials);
     window.localStorage.setItem('token', response.data);
     dispatch(loginWithToken());
+  };
+};
+
+export const login_google = ()=> {
+  return async(dispatch)=> {
+    const response = await axios.get('/api/auth/login/google');
+    console.log(response.data);
+  };
+};
+
+export const editUser = (user, navigate) => {
+  return async (dispatch) => {
+    const token = getToken();
+    const response = await axios.put('/api/users', user, {
+      headers: { authorization: token },
+    });
+    dispatch({ type: 'UPDATE_AUTH', auth: response.data });
+    navigate(`/users/${response.data.id}`);
   };
 };
 

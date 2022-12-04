@@ -5,6 +5,14 @@ import auth from "./auth";
 import users from './users';
 import services from "./service";
 
+export const getToken = () => {
+  return window.localStorage.getItem('token');
+};
+
+export const setToken = (data) => {
+  return window.localStorage.setItem('token', data);
+};
+
 const reducer = combineReducers({
   auth,
   users,
