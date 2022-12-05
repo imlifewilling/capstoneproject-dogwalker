@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react';
-import Home from './Home';
-import Login from './Login';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginWithToken } from '../store';
 import { Link, Routes, Route, Navigate } from 'react-router-dom';
+import { fetchServices } from '../store/service';
+import { ThemeProvider } from '@mui/material/styles';
+import Theme from './Theme';
+import Home from './Home';
+import Login from './Login';
 import Nav from './Nav';
 import Service from './Service';
 import User from './User/User';
 import EditUser from './User/EditUser';
-import ServiceDetails from './ServiceDetails'
 import Signup from './Signup';
-import { fetchServices } from '../store/service';
-
-import { ThemeProvider } from '@mui/material/styles';
-import Theme from './Theme';
+import ServiceDetails from './ServiceDetails'
+import Footer from './Footer';
 
 const App = ()=> {
   const { auth } = useSelector(state => state);
@@ -38,6 +38,7 @@ const App = ()=> {
         {/* <Link to='/walker/id'>Service Detail</Link> */}
         <Route path="/walker/:id" element={<ServiceDetails/>}/>
       </Routes>
+      <Footer />
     </ThemeProvider>
   );
 };

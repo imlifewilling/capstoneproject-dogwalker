@@ -29,12 +29,12 @@ const Banner = () => {
     <StyledBanner>
       <StyleContent>
         <Typography variant='h1' sx={{ my: 4 }} color = "#2E86C1">
-          Walk with Our Best Friends
+          Walk with Our Friends
         </Typography>
         <Button
           variant='contained'
           color='secondary'
-        //   onClick={() => navigate('/products')}
+          onClick={() => navigate('/services')}
         >
           Book a Walk
         </Button>

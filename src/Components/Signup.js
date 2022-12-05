@@ -133,7 +133,7 @@ const Signup = () => {
                 <Typography variant="h5" mb={3}>
                     Already have an Account?
                 </Typography>
-                <Link to="/users" style={{ textDecoration: 'none' }}>
+                <Link to="/login" style={{ textDecoration: 'none' }}>
                     <Button variant="contained"> Sign in</Button>
                 </Link>
             </div>
