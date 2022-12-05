@@ -38,6 +38,7 @@ const App = ()=> {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/services' element={<Service />} />
+        <Route path='/services/filter/:id' element={<Service />} />
         <Route path='/login' element={<Login />} />
         <Route path='/users/:id' element={<User />} />
         <Route path='/users/:id/edit' element={<EditUser />} />
