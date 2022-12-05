@@ -16,14 +16,27 @@ const Service = () => {
     const serviceName = [
         'Dog Walking', 
         'House Sitting', 
-        'Dog Day Care'
+        'Dog Day Care',
+    ];
+
+    const availabilityName = [
+        'Any Time',
+        'Before Dark',
+        'Morning',
+        'Afternoon',
+        'Evening',
     ];
 
     const [checked, setChecked] = useState(id || {
         dogWalking: false,
         houseSitting: false,
-        dogDaycare: false
-    })
+        dogDaycare: false,
+        anyTime: false,
+        beforeDark: false,
+        morning: false,
+        afternoon: false,
+        evening: false,
+    });
 
     const handleChange = (event) => {
         setChecked({...checked, [event.target.name]: event.target.checked})
@@ -46,6 +59,21 @@ const Service = () => {
                 else if (key === 'dogDaycare'){
                     result.push('Dog Day Care');
                 }
+                else if (key === 'anyTime'){
+                    result.push('Any Time');
+                }
+                else if (key === 'beforeDark'){
+                    result.push('Before Dark');
+                }
+                else if (key === 'morning'){
+                    result.push('Morning');
+                }
+                else if (key === 'afternoon'){
+                    result.push('Afternoon');
+                }
+                else if (key === 'evening'){
+                    result.push('Evening');
+                }
             };
         };
         return result;
@@ -57,13 +85,13 @@ const Service = () => {
         if(filterInPlace.length === 0){
             return ele;
         }
-        else if(filterInPlace.includes(ele.task)){
+        else if(filterInPlace.includes(ele.task) || filterInPlace.includes(ele.availability)){
             return ele ;
         };
     });
 
-    // console.log(filterInPlace)
-    console.log(filteredServices)
+    console.log(filterInPlace)
+    // console.log(filteredServices)
 
     return (
         <>
@@ -72,7 +100,7 @@ const Service = () => {
                     <h1>Filter</h1>
                     <FormControl>
                         <h2>Service Type:</h2>
-                        {Object.keys(checked).map((taskName, idx) => {
+                        {Object.keys(checked).slice(0,3).map((taskName, idx) => {
                             return (
                                 <FormControlLabel
                                 key={idx}
@@ -88,6 +116,24 @@ const Service = () => {
                             />
                             )
                         })}
+
+                        <h2>Availability:</h2>
+                        {Object.keys(checked).slice(3,8).map((timeName, idx) => {
+                            return (
+                                <FormControlLabel
+                                key={idx}
+                                label={availabilityName[idx]}
+                                control={
+                                    <Checkbox
+                                        checked={services[timeName]}
+                                        onChange={handleChange}
+                                        inputProps={{ 'aria-label': 'controlled' }}
+                                        name={timeName}
+                                    />
+                                }
+                            />
+                            )
+                        })}                        
                     </FormControl>
                 </Grid>
                 <Grid item md={7} key={'service list'} sx={{border: 'black solid 1px'}}>
