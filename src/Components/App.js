@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Home from './Home';
 import Login from './Login';
 import { useSelector, useDispatch } from 'react-redux';
-import { loginWithToken } from '../store';
+import { fetchUsers, loginWithToken } from '../store';
 import axios from 'axios';
 import { Link, Routes, Route, Navigate } from 'react-router-dom';
 import Nav from './Nav';
@@ -19,6 +19,7 @@ const App = ()=> {
   useEffect(()=> {
     dispatch(loginWithToken());
     dispatch(fetchServices());
+    dispatch(fetchUsers());
   }, []);
 
   return (
@@ -27,6 +28,7 @@ const App = ()=> {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/services' element={<Service />} />
+        <Route path='/services/filter/:id' element={<Service />} />
         <Route path='/login' element={<Login />} />
         <Route path='/users/:id' element={<User />} />
         <Route path='/users/:id/edit' element={<EditUser />} />

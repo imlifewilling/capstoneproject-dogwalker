@@ -1,8 +1,54 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { CardActionArea, Box } from '@mui/material';
+import { Link } from 'react-router-dom';
 
-const ServiceCard = () => {
+const ServiceCard = (props) => {
+    const { users } = useSelector(state=>state);
+    const { service, count } = props;
+
     return (
-        <h1>CARD</h1>
+        <>
+            <Card variant='outlined' sx={{ width: 'auto', height: '200', margin: '10px' }}>
+                <CardActionArea component={Link} to={`/services/${service?.id}`}>
+                    <Box sx={{display: 'flex', flexDirection: 'row'}}>
+                        <CardMedia
+                        component="img"
+                        height="200"
+                        image="https://picsum.photos/200/200"
+                        alt={service?.id}
+                        sx={{objectFit:'contain', width:'200'}}
+                        />
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="div">
+                                {count}. {(users?.filter(ele => ele.id === service?.userId))[0]?.firstname}
+                            </Typography>
+                            <Typography gutterBottom variant="h6" component="div">
+                                Service: {service?.task}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                            <span style={{color:'black'}}>Description:</span> {service?.serviceDescription}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                            <span style={{color:'black'}}>Dog Size:</span> {service?.serviceDogsize}
+                            </Typography>
+                        </CardContent>
+                        <CardContent sx={{width: '20%'}}>
+                            <Typography variant="body2" color="text.secondary">
+                            <span style={{color:'black'}}>Price:</span> $ {service?.price}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                            <span style={{color:'black'}}>Availability:</span> {service?.availability}
+                            </Typography>
+                        </CardContent>
+                    </Box>
+                </CardActionArea>
+            </Card>
+        </>
     );
 };
 
