@@ -49,7 +49,10 @@ const Nav = () => {
       <AppBar position="static">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+            {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
+            <Box sx={{display: { xs: 'none', md: 'flex' }, mr: 1}}>
+              <img src="/static/images/dog-icon.jpg" style={{width: '50', height: '50', borderRadius:'50%'}}/>
+            </Box>
             <Typography
               variant="h6"
               noWrap
@@ -107,7 +110,10 @@ const Nav = () => {
             </Box>
 
             {/* MOBILE */}
-            <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+            {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
+            <Box sx={{display: { xs: 'flex', md: 'none' }, mr: 1}}>
+              <img src="/static/images/dog-icon.jpg" style={{width: '50', height: '50', borderRadius:'50%'}}/>
+            </Box>
             <Typography
               variant="h5"
               noWrap
@@ -176,7 +182,7 @@ const Nav = () => {
             : 
               <Typography textAlign="center" component={Link} to='/login'
               sx={{color:'white', textDecoration:'none'}}>
-                Login
+                Login | Sign Up
               </Typography>
           }
           </Toolbar>

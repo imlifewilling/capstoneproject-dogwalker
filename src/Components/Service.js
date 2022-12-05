@@ -13,15 +13,11 @@ const Service = () => {
     const navigate = useNavigate();
     const { services } = useSelector(state=>state);
 
-
-    const serviceName = services.map(service => service.task)
-                                .reduce((acc,value)=>{
-                                    if(!acc.includes(value)){
-                                        acc.push(value);
-                                    }
-                                    return acc;
-                                }, []
-    );
+    const serviceName = [
+        'Dog Walking', 
+        'House Sitting', 
+        'Dog Day Care'
+    ];
 
     const [checked, setChecked] = useState(id || {
         dogWalking: false,
@@ -37,8 +33,37 @@ const Service = () => {
         navigate(`/services/filter/${JSON.stringify(checked)}`);
     }, [checked])
 
-    console.log(checked)
+    const filterExtractor = (obj) => {
+        const result=[];
+        for (let key in obj){
+            if(obj[key]){
+                if(key === 'dogWalking'){
+                    result.push('Dog Walking');
+                }
+                else if (key==='houseSitting'){
+                    result.push('House Sitting');
+                }
+                else if (key === 'dogDaycare'){
+                    result.push('Dog Day Care');
+                }
+            };
+        };
+        return result;
+    };
 
+    const filterInPlace = filterExtractor(JSON.parse(id || '{}'));
+
+    const filteredServices = services.filter(ele => {
+        if(filterInPlace.length === 0){
+            return ele;
+        }
+        else if(filterInPlace.includes(ele.task)){
+            return ele ;
+        };
+    });
+
+    // console.log(filterInPlace)
+    console.log(filteredServices)
 
     return (
         <>
@@ -50,6 +75,7 @@ const Service = () => {
                         {Object.keys(checked).map((taskName, idx) => {
                             return (
                                 <FormControlLabel
+                                key={idx}
                                 label={serviceName[idx]}
                                 control={
                                     <Checkbox
@@ -66,7 +92,7 @@ const Service = () => {
                 </Grid>
                 <Grid item md={7} key={'service list'} sx={{border: 'black solid 1px'}}>
                     {
-                        services.map((service, idx) => {
+                        filteredServices.map((service, idx) => {
                             return <ServiceCard key={service.id} service={service} count={idx+1}/>
                         })
                     }
