@@ -1,19 +1,21 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../store';
-import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import HomeBanner from './HomeBanner';
+import { useNavigate, Link } from 'react-router-dom';
+import { Typography, Container, Box, Grid } from '@mui/material';
 
-import Login from './Login';
 
-
-const Home = ()=> {
-  const { auth } = useSelector(state => state);
-  const dispatch = useDispatch();
-
+const Home = () => {
+ 
   return (
-    <div>
-      <h1>Home</h1>
-    </div>
+    <>
+      <HomeBanner />
+      <Container>
+        <Typography variant="h6" mt={4} mb={6} align="center">
+          some nice description here.
+        </Typography>
+      </Container>
+    </>
   );
 };
 
