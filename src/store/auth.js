@@ -42,11 +42,13 @@ export const updateAuth = (auth)=> {
   };
 };
 
-export const attemptLogin = (credentials)=> {
+
+export const attemptLogin = (credentials, navigate)=> {
   return async(dispatch)=> {
     const response = await axios.post('/api/auth', credentials); //try to get the data (token) from ther server
     window.localStorage.setItem('token', response.data); //after get the token, store it in localStorage
     dispatch(loginWithToken()); //then use this token to login 
+    navigate('/')
   };
 };
 
@@ -58,12 +60,14 @@ export const register = (credentials)=> {
   };
 };
 
-export const login_google = ()=> {
-  return async(dispatch)=> {
-    const response = await axios.get('/api/auth/login/google');
-    console.log(response.data);
-  };
-};
+export const logwith3rdParty = (userinfo, navigate) => {
+  return async(dispatch) => {
+    const response = await axios.post('/api/auth/login/success', userinfo);
+    window.localStorage.setItem('token', response.data);
+    dispatch(loginWithToken());
+    navigate('/');
+  }
+}
 
 export const editUser = (user, navigate) => {
   return async (dispatch) => {
