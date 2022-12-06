@@ -1,6 +1,6 @@
 import React from 'react';
 import HomeBanner from './HomeBanner';
-import { Typography, Container, Box, Divider } from '@mui/material';
+import { Typography, Container, Box } from '@mui/material';
 
 
 const Home = () => {
@@ -31,8 +31,8 @@ const Home = () => {
           }}
         >
         You must be worry about your dog when you have a super busy day at work. 
-        Instead of worrying you dog all the tie, book a dog walker to give your dog a happy walk. 
-        We can stop by as many times as you need—on whatever days you need them.
+        Instead of worrying you dog all the time, book a dog walker to give your dog a happy walk. 
+        We are always ready here for our friends.
         </Typography>
       </Container>
       <Container
@@ -59,9 +59,80 @@ const Home = () => {
                 <div className = "stepnum"><div className='num'>3</div></div>
               </div>
           </div>
-          <Box>
-            image
-          </Box>
+          <Container
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-around'
+            }}
+          >
+            <Box
+              sx={{
+                width: '30%',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              <img src = '../static/images/findicon.png' width="90" height="90"/>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                <Typography variant="h6" align="center" sx={{fontWeight: 'bold', margin: '20 0 5 0'}}>Search walkers</Typography>
+                <Typography variant="h6" align="center">Search to find dog walkers around you</Typography>
+              </Box>
+            </Box>
+            <Box
+              sx={{
+                width: '30%',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              <img src = '../static/images/messageicon.webp' width="90" height="90"/>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                <Typography variant="h6" align="center" sx={{fontWeight: 'bold', margin: '20 0 5 0'}}>Interview walkers</Typography>
+                <Typography variant="h6" align="center">Interview walkers to find the best one</Typography>
+              </Box>
+            </Box>
+            <Box
+              sx={{
+                width: '30%',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              <img src = '../static/images/payment.jpg' width="90" height="90"/>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                <Typography variant="h6" align="center" sx={{fontWeight: 'bold', margin: '20 0 5 0'}}>Book and pay</Typography>
+                <Typography variant="h6" align="center">Book the walking time and pay for the service</Typography>
+              </Box>
+            </Box>
+          </Container>
       </Container>
     </>
   );
