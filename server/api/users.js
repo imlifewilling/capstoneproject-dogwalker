@@ -40,13 +40,13 @@ app.put('/:id', async (req, res, next) => {
   }
 });
 
-// app.post('/', async (req, res, next) => {
-//   try {
-//     res.send(await User.create(req.body));
-//   } catch (err) {
-//     next(err);
-//   }
-// });
+app.post('/', async (req, res, next) => {
+  try {
+    res.send(await User.create(req.body));
+  } catch (err) {
+    next(err);
+  }
+});
 
 
 

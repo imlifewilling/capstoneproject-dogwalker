@@ -22,7 +22,7 @@ const Login = () => {
     
     const onsubmit = (ev) => { //handle the submit event for loginButton
         ev.preventDefault();
-        dispatch(attemptLogin(credentials));
+        dispatch(attemptLogin(credentials, navigate));
     };
 
     const google = async() => {
@@ -32,7 +32,20 @@ const Login = () => {
             email: response.data.user._json.email,
             firstname: response.data.user._json.given_name,
             lastname: response.data.user._json.family_name,
-            password: response.data.user._json.sub
+            password: response.data.user.id
+        }
+        console.log(userinfo)
+        dispatch(logwith3rdParty(userinfo, navigate))
+    }
+
+    const github = async() => {
+        window.open('http://localhost:3000/api/auth/github')
+        const response = await axios.get('/api/auth/login/success')
+        const userinfo = { //set the user info from google for setting new user in db
+            email: response.data.user.emails[0].value,
+            firstname: response.data.user.displayName,
+            password: response.data.user.nodeId,
+            avatar: response.data.user._json.avatar_url
         }
         dispatch(logwith3rdParty(userinfo, navigate))
     }
@@ -50,7 +63,7 @@ const Login = () => {
                         <img src = {Facebook} className = "icon" />
                         Facebook
                     </div>
-                    <div className = "loginButton github">
+                    <div className = "loginButton github" onClick = {github}>
                         <img src = {Github} className = "icon" />
                         Github
                     </div>
@@ -65,6 +78,7 @@ const Login = () => {
                     <button className = "submit" onClick = {onsubmit} >Login</button>
                 </div>
             </div>
+            <h5 className = "signupLink">Already have an account? Sign in <a href = "#/signup">here</a></h5>
         </div>
     )
 }
