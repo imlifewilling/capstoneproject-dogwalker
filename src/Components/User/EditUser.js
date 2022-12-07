@@ -64,6 +64,13 @@ const EditUser = () => {
                             <input name="phone" value={inputs.phone} onChange={onChange} />
                         </div>
                     </div>
+                    <div>
+                        {/* <div className='inputPair'> */}
+                            <input type='file' />
+                            <button>Upload Profile Photo</button>
+                        {/* </div> */}
+                    </div>
+
                     <br></br>
                     <button id='edit-button'>Save</button>
                 </form>

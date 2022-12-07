@@ -38,6 +38,8 @@ const syncAndSeed = async()=> {
   await conn.sync({ force: true });
   const kendalAvatar = await getImage(path.join(__dirname, '../../static/images/kendal.jpg'));
   const lucaAvatar = await getImage(path.join(__dirname, '../../static/images/luca.jpg'));
+  const hanAvatar = await getImage(path.join(__dirname, '../../static/images/han.jpg'));
+  const maxAvatar = await getImage(path.join(__dirname, '../../static/images/max.jpg'));
 
   const userslist = [
     {
@@ -47,7 +49,7 @@ const syncAndSeed = async()=> {
       email: 'lmx4wo@gmail.com',
       address: '724 Central Ave SE, Albuquerque, NY, US, 87102',
       phone: '505-243-4688',
-      avatar: '',
+      avatar: maxAvatar,
       isWalker: false
     },
     {
@@ -67,7 +69,7 @@ const syncAndSeed = async()=> {
       email: 'han@gmail.com',
       address: '3401 Ladera Dr NW, Albuquerque, NY, US, 87120',
       phone: '505-836-4449',
-      avatar: '',
+      avatar: hanAvatar,
       isWalker: false
     },
     {
