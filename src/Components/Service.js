@@ -27,6 +27,14 @@ const Service = () => {
         'Evening',
     ];
 
+    const sizeName = [
+        'Any Size',
+        'Small',
+        'Medium',
+        'Large',
+        'Giant'
+    ];
+
     const [checked, setChecked] = useState(id || {
         dogWalking: false,
         houseSitting: false,
@@ -36,6 +44,11 @@ const Service = () => {
         morning: false,
         afternoon: false,
         evening: false,
+        anySize: false,
+        small: false,
+        medium: false,
+        large: false,
+        giant: false,
     });
 
     const handleChange = (event) => {
@@ -61,9 +74,14 @@ const Service = () => {
                 }
                 else if (key === 'anyTime'){
                     result.push('Any Time');
+                    result.push('Morning');
+                    result.push('Afternoon');
+                    result.push('Evening');
                 }
                 else if (key === 'beforeDark'){
                     result.push('Before Dark');
+                    result.push('Morning');
+                    result.push('Afternoon');
                 }
                 else if (key === 'morning'){
                     result.push('Morning');
@@ -73,6 +91,25 @@ const Service = () => {
                 }
                 else if (key === 'evening'){
                     result.push('Evening');
+                }
+                else if (key === 'anySize'){
+                    result.push('Any Size');
+                    result.push('Small');
+                    result.push('Medium');
+                    result.push('Large');
+                    result.push('Giant');
+                }
+                else if (key === 'small'){
+                    result.push('Small');
+                }
+                else if (key === 'medium'){
+                    result.push('Medium');
+                }
+                else if (key === 'large'){
+                    result.push('Large');
+                }
+                else if (key === 'giant'){
+                    result.push('Giant');
                 }
             };
         };
@@ -85,7 +122,9 @@ const Service = () => {
         if(filterInPlace.length === 0){
             return ele;
         }
-        else if(filterInPlace.includes(ele.task) || filterInPlace.includes(ele.availability)){
+        else if(filterInPlace.includes(ele.task) 
+                || filterInPlace.includes(ele.availability) 
+                || filterInPlace.includes(ele.serviceDogsize)){
             return ele ;
         };
     });
@@ -100,17 +139,17 @@ const Service = () => {
                     <h1>Filter</h1>
                     <FormControl>
                         <h2>Service Type:</h2>
-                        {Object.keys(checked).slice(0,3).map((taskName, idx) => {
+                        {Object.keys(checked).slice(0,3).map((taskCheck, idx) => {
                             return (
                                 <FormControlLabel
                                 key={idx}
                                 label={serviceName[idx]}
                                 control={
                                     <Checkbox
-                                        checked={services[taskName]}
+                                        checked={services[taskCheck]}
                                         onChange={handleChange}
                                         inputProps={{ 'aria-label': 'controlled' }}
-                                        name={taskName}
+                                        name={taskCheck}
                                     />
                                 }
                             />
@@ -118,17 +157,35 @@ const Service = () => {
                         })}
 
                         <h2>Availability:</h2>
-                        {Object.keys(checked).slice(3,8).map((timeName, idx) => {
+                        {Object.keys(checked).slice(3,8).map((timeCheck, idx) => {
                             return (
                                 <FormControlLabel
                                 key={idx}
                                 label={availabilityName[idx]}
                                 control={
                                     <Checkbox
-                                        checked={services[timeName]}
+                                        checked={services[timeCheck]}
                                         onChange={handleChange}
                                         inputProps={{ 'aria-label': 'controlled' }}
-                                        name={timeName}
+                                        name={timeCheck}
+                                    />
+                                }
+                            />
+                            )
+                        })}  
+
+                        <h2>Dog Size:</h2>
+                        {Object.keys(checked).slice(8,13).map((sizeCheck, idx) => {
+                            return (
+                                <FormControlLabel
+                                key={idx}
+                                label={sizeName[idx]}
+                                control={
+                                    <Checkbox
+                                        checked={services[sizeCheck]}
+                                        onChange={handleChange}
+                                        inputProps={{ 'aria-label': 'controlled' }}
+                                        name={sizeCheck}
                                     />
                                 }
                             />
