@@ -123,6 +123,23 @@ input {
   color:lightgray
 }
 
+.profile-img {
+  height: 10rem;
+  width: 10rem;
+  border-radius: 3px;
+}
+
+#profile-card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#profile-card {
+ height: 30rem;
+  width: 30rem;
+}
+
 .signupLink {
   position: absolute;
   bottom:140px;
@@ -145,7 +162,6 @@ a {
   top:150px;
   color:lightgray
 }
-
 
 .steps{
   width: 100%;
