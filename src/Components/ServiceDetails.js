@@ -3,6 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import services from "../store/service";
 import axios from "axios";
+import Card from "@mui/material/Card";
+import { styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
+
+import {
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Typography,
+} from "@mui/material";
 
 let walker;
 
@@ -36,6 +49,121 @@ const ServiceDetails = (ServiceDetailsProps) => {
 
   return (
     <div>
+      <div></div>
+
+      <Card
+        sx={{ width: "auto", height: "450", margin: "10px", boxShadow: false }}
+        // raised="true"
+      >
+        <Box
+          sx={{ display: "flex", flexDirection: "row", textAlign: "center" }}
+        >
+          <CardMedia
+            component="img"
+            height="350"
+            image="https://picsum.photos/350"
+            alt="random"
+            sx={{
+              textAlign: "center",
+              width: "auto",
+              borderRadius: "75px",
+              margin: "50px",
+            }}
+          />
+          <CardContent>
+            <Typography sx={{}} gutterBottom variant="h2" component="div">
+              <h2>
+                {walker.firstname} {walker.lastname}
+              </h2>
+            </Typography>
+            <Typography variant="h3">
+              <div>
+                <span>Bio: {walker.userDescription}</span>
+              </div>
+              <br />
+            </Typography>
+            <div>
+              <Button
+                sx={{ borderRadius: "25px" }}
+                variant="contained"
+                color="success"
+                size="large"
+                onClick={() => {
+                  alert(`
+                  ${walker.firstname}'s phone #: ${walker.phone}
+
+                  ${walker.firstname}'s address: ${walker.address}
+                  `);
+                }}
+              >
+                Contact {walker.firstname}
+              </Button>
+            </div>
+          </CardContent>
+        </Box>
+      </Card>
+
+      <Card sx={{ width: "auto", height: "auto", margin: "16px" }}>
+        <Box sx={{ display: "flex", flexDirection: "row" }}>
+          <CardContent sx={{ width: "50%" }}>
+            <Typography gutterBottom variant="h3" component="div">
+              <h3>{walker.firstname}'s Reviews:</h3>
+            </Typography>
+            <Typography variant="h4">
+              <ul>
+                {reviews.map((review) => {
+                  if (!!review) {
+                    return (
+                      <li key={review.id}>
+                        <Box sx={{ margin: "5px" }}>
+                          Owner {review.userId}
+                          <br />
+                        </Box>
+                        <em> '{review.comment}' </em> <br />
+                        Rating: {review.star * 1}/5
+                      </li>
+                    );
+                  }
+                })}
+              </ul>
+            </Typography>
+          </CardContent>
+          <CardContent sx={{ width: "50%" }}>
+            <Typography gutterBottom variant="h3" component="div">
+              <h3>Services</h3>
+            </Typography>
+
+            <Typography gutterBottom variant="h4" component="div">
+              {walker.services.map((service) => {
+                if (!!service) {
+                  return (
+                    <>
+                      <Typography gutterBottom variant="h4">
+                        {service.task}
+                      </Typography>
+                      <Typography variant="h5">
+                        Info: {service.serviceDescription}
+                      </Typography>
+                      <Typography variant="h5">
+                        For sizes: {service.serviceDogsize}
+                      </Typography>
+                      <Typography variant="h5">
+                        {" "}
+                        ${service.price} <span>per night</span>
+                      </Typography>
+                      <Typography variant="h5">
+                        Availability: {service.availability}
+                      </Typography>
+                    </>
+                  );
+                }
+              })}
+            </Typography>
+          </CardContent>
+        </Box>
+      </Card>
+
+      {/*
       <div>
         <h3>
           Name: {walker.firstname} {walker.lastname}
@@ -80,16 +208,18 @@ const ServiceDetails = (ServiceDetailsProps) => {
           <ul>
             {reviews.map((review) => {
               if (!!review) {
-                return <li key={review.id}>
-                  Owner {review.id} says: <br/>
-                  <em> '{review.comment}' </em> <br/>
-                  Rating: {review.star*1}/5
-                  </li>;
+                return (
+                  <li key={review.id}>
+                    Owner {review.id} says: <br />
+                    <em> '{review.comment}' </em> <br />
+                    Rating: {review.star * 1}/5
+                  </li>
+                );
               }
             })}
           </ul>
-        </div>
-      </div>
+          </div>
+       </div> */}
     </div>
   );
 };
