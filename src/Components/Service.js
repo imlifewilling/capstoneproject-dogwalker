@@ -119,14 +119,23 @@ const Service = () => {
     const filterInPlace = filterExtractor(JSON.parse(id || '{}'));
 
     const filteredServices = services.filter(ele => {
+        const taskPresent = ele.task.reduce((acc,val) => {
+                            if(filterInPlace.includes(val)){
+                                acc=true;
+                            }
+                            return acc
+                            },false
+        );
+                        
+
         if(filterInPlace.length === 0){
             return ele;
         }
-        else if(filterInPlace.includes(ele.task) 
+        else if(taskPresent
                 || filterInPlace.includes(ele.availability) 
                 || filterInPlace.includes(ele.serviceDogsize)){
             return ele ;
-        };
+        }
     });
 
     console.log(filterInPlace)

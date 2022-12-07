@@ -183,7 +183,7 @@ const syncAndSeed = async()=> {
   const [service1, service2, service3, service4, service5, service6] = await Promise.all(
     [
       Service.create({
-        task: 'Dog Walking',
+        task: ['Dog Walking'],
         serviceDescription: 'walk your dog in your neighborhood',
         availability: 'Morning',
         serviceDogsize: 'Small',
@@ -191,7 +191,7 @@ const syncAndSeed = async()=> {
         userId: jane.id
       }),
       Service.create({
-        task: 'Dog Walking',
+        task: ['Dog Walking','House Sitting'],
         serviceDescription: 'walk your dog in your neighborhood',
         availability: 'Morning',
         serviceDogsize: 'Giant',
@@ -199,7 +199,7 @@ const syncAndSeed = async()=> {
         userId: cody.id
       }),
       Service.create({
-        task: 'House Sitting',
+        task: ['House Sitting'],
         serviceDescription: 'take care of your dogs at home',
         availability: 'Afternoon',
         serviceDogsize: 'Large',
@@ -207,7 +207,7 @@ const syncAndSeed = async()=> {
         userId: cody.id
       }),
       Service.create({
-        task: 'Dog Walking',
+        task: ['Dog Walking'],
         serviceDescription: 'walk your dog in your neighborhood',
         availability: 'Morning',
         serviceDogsize: 'Medium',
@@ -215,7 +215,7 @@ const syncAndSeed = async()=> {
         userId: alex.id
       }),
       Service.create({
-        task: 'House Sitting',
+        task: ['House Sitting'],
         serviceDescription: 'take care of your dogs at home',
         availability: 'Afternoon',
         serviceDogsize: 'Small',
@@ -223,7 +223,7 @@ const syncAndSeed = async()=> {
         userId: alex.id
       }),
       Service.create({
-        task: 'Dog Day Care',
+        task: ['Dog Day Care'],
         serviceDescription: 'take care of your dog the whole day',
         availability: 'Any Time',
         serviceDogsize: 'Any Size',
