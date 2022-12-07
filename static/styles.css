@@ -119,13 +119,13 @@ input {
 
 .loginTitle {
   position: absolute;
-  top:150px;
+  top:160px;
   color:lightgray
 }
 
 .signupLink {
   position: absolute;
-  bottom:140px;
+  bottom:150px;
   color:lightgray
 }
 
@@ -142,7 +142,7 @@ a {
 
 .signupTitle {
   position: absolute;
-  top:150px;
+  top:180px;
   color:lightgray
 }
 
