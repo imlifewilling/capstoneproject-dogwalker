@@ -36,8 +36,9 @@ const getImage = (path)=> {
 
 const syncAndSeed = async()=> {
   await conn.sync({ force: true });
-  const avatar = await getImage(path.join(__dirname, '../../static/images/kendal.jpg'));
-  
+  const kendalAvatar = await getImage(path.join(__dirname, '../../static/images/kendal.jpg'));
+  const lucaAvatar = await getImage(path.join(__dirname, '../../static/images/luca.jpg'));
+
   const userslist = [
     {
       firstname: 'Max',
@@ -56,7 +57,7 @@ const syncAndSeed = async()=> {
       email: 'luca@gmail.com',
       address: '9001 Central Ave NE, Albuquerque, NY, US, 87123',
       phone: '505-293-3953',
-      avatar: '',
+      avatar: lucaAvatar,
       isWalker: false
     },
     {
@@ -76,7 +77,7 @@ const syncAndSeed = async()=> {
       email: 'kendal@gmail.com',
       address: '5200 Eubank Blvd NE, Albuquerque, NY, US, 87111',
       phone: '505-296-8195',
-      avatar,
+      avatar: kendalAvatar,
       isWalker: false
     },
     {
