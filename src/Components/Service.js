@@ -16,14 +16,40 @@ const Service = () => {
     const serviceName = [
         'Dog Walking', 
         'House Sitting', 
-        'Dog Day Care'
+        'Dog Day Care',
+    ];
+
+    const availabilityName = [
+        'Any Time',
+        'Before Dark',
+        'Morning',
+        'Afternoon',
+        'Evening',
+    ];
+
+    const sizeName = [
+        'Any Size',
+        'Small',
+        'Medium',
+        'Large',
+        'Giant'
     ];
 
     const [checked, setChecked] = useState(id || {
         dogWalking: false,
         houseSitting: false,
-        dogDaycare: false
-    })
+        dogDaycare: false,
+        anyTime: false,
+        beforeDark: false,
+        morning: false,
+        afternoon: false,
+        evening: false,
+        anySize: false,
+        small: false,
+        medium: false,
+        large: false,
+        giant: false,
+    });
 
     const handleChange = (event) => {
         setChecked({...checked, [event.target.name]: event.target.checked})
@@ -46,6 +72,45 @@ const Service = () => {
                 else if (key === 'dogDaycare'){
                     result.push('Dog Day Care');
                 }
+                else if (key === 'anyTime'){
+                    result.push('Any Time');
+                    result.push('Morning');
+                    result.push('Afternoon');
+                    result.push('Evening');
+                }
+                else if (key === 'beforeDark'){
+                    result.push('Before Dark');
+                    result.push('Morning');
+                    result.push('Afternoon');
+                }
+                else if (key === 'morning'){
+                    result.push('Morning');
+                }
+                else if (key === 'afternoon'){
+                    result.push('Afternoon');
+                }
+                else if (key === 'evening'){
+                    result.push('Evening');
+                }
+                else if (key === 'anySize'){
+                    result.push('Any Size');
+                    result.push('Small');
+                    result.push('Medium');
+                    result.push('Large');
+                    result.push('Giant');
+                }
+                else if (key === 'small'){
+                    result.push('Small');
+                }
+                else if (key === 'medium'){
+                    result.push('Medium');
+                }
+                else if (key === 'large'){
+                    result.push('Large');
+                }
+                else if (key === 'giant'){
+                    result.push('Giant');
+                }
             };
         };
         return result;
@@ -57,13 +122,15 @@ const Service = () => {
         if(filterInPlace.length === 0){
             return ele;
         }
-        else if(filterInPlace.includes(ele.task)){
+        else if(filterInPlace.includes(ele.task) 
+                || filterInPlace.includes(ele.availability) 
+                || filterInPlace.includes(ele.serviceDogsize)){
             return ele ;
         };
     });
 
-    // console.log(filterInPlace)
-    console.log(filteredServices)
+    console.log(filterInPlace)
+    // console.log(filteredServices)
 
     return (
         <>
@@ -72,22 +139,58 @@ const Service = () => {
                     <h1>Filter</h1>
                     <FormControl>
                         <h2>Service Type:</h2>
-                        {Object.keys(checked).map((taskName, idx) => {
+                        {Object.keys(checked).slice(0,3).map((taskCheck, idx) => {
                             return (
                                 <FormControlLabel
                                 key={idx}
                                 label={serviceName[idx]}
                                 control={
                                     <Checkbox
-                                        checked={services[taskName]}
+                                        checked={services[taskCheck]}
                                         onChange={handleChange}
                                         inputProps={{ 'aria-label': 'controlled' }}
-                                        name={taskName}
+                                        name={taskCheck}
                                     />
                                 }
                             />
                             )
                         })}
+
+                        <h2>Availability:</h2>
+                        {Object.keys(checked).slice(3,8).map((timeCheck, idx) => {
+                            return (
+                                <FormControlLabel
+                                key={idx}
+                                label={availabilityName[idx]}
+                                control={
+                                    <Checkbox
+                                        checked={services[timeCheck]}
+                                        onChange={handleChange}
+                                        inputProps={{ 'aria-label': 'controlled' }}
+                                        name={timeCheck}
+                                    />
+                                }
+                            />
+                            )
+                        })}  
+
+                        <h2>Dog Size:</h2>
+                        {Object.keys(checked).slice(8,13).map((sizeCheck, idx) => {
+                            return (
+                                <FormControlLabel
+                                key={idx}
+                                label={sizeName[idx]}
+                                control={
+                                    <Checkbox
+                                        checked={services[sizeCheck]}
+                                        onChange={handleChange}
+                                        inputProps={{ 'aria-label': 'controlled' }}
+                                        name={sizeCheck}
+                                    />
+                                }
+                            />
+                            )
+                        })}                        
                     </FormControl>
                 </Grid>
                 <Grid item md={7} key={'service list'} sx={{border: 'black solid 1px'}}>
