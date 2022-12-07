@@ -133,6 +133,7 @@ app.post('/google', async(req, res, next)=> {
 app.get('/github/callback', async(req, res, next)=> {
   try {
     const {token, id }= await User.authgithub(req.query.code);
+    
     // res.send(token)
     res.send(`
         <html>

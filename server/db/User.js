@@ -3,6 +3,7 @@ const { STRING, UUID, UUIDV4, TEXT, BOOLEAN } = conn.Sequelize;
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const JWT = process.env.JWT;
+const axios = require('axios');
 
 
 const User = conn.define('user', {
@@ -126,7 +127,9 @@ User.authgoogle = async function (credentials) {
 
 const GITHUB_TOKEN_URL = 'https://github.com/login/oauth/access_token';
 const GITHUB_USER_URL = 'https://api.github.com/user';
+console.log(process.env.GITHUB_CLIENT_ID)
 User.authgithub = async function (code) {
+  
   let response = await axios.post(
     GITHUB_TOKEN_URL,
     {
@@ -140,6 +143,7 @@ User.authgithub = async function (code) {
       },
     }
   );
+
   const { access_token } = response.data;
   if (!access_token) {
     return response.data;
@@ -149,18 +153,24 @@ User.authgithub = async function (code) {
       authorization: `Bearer ${access_token}`,
     },
   });
-  console.log(response.data)
-  const { login, node_id } = response.data;
-  // return response.data
+ 
+  const userinfo = {
+    email: response.data.email,
+    password: response.data.node_id,
+    avatar: response.data.avatar_url,
+    firstname: response.data.name
+  }
+
+ 
   let user = await User.findOne({
     where: {
-      username: login,
+      email: userinfo.email
     },
   });
   if (!user) {
     user = await User.create({
-      password: node_id,
-      email: 'fake@email.com',
+      password: userinfo.password,
+      email: userinfo.email,
     });
   }
   return { token: jwt.sign({ id: user.id }, JWT), id: user.id };

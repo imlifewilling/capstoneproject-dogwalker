@@ -7,13 +7,13 @@ app.use(express.json({limit: '50mb'}));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 app.use(cors());
-const session = require('express-session');
-app.use(session({ secret: 'thisissecretkey' }));
+// const session = require('express-session');
+// app.use(session({ secret: 'thisissecretkey' }));
 
 
 app.use('/dist', express.static(path.join(__dirname, '../dist')));
 app.use('/static', express.static(path.join(__dirname, '../static')));
-console.log(process.env.GITHUB_CLIENT_ID)
+
 app.get('/', (req, res) =>
   res.render(path.join(__dirname, '../static/index.html'), {
     GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
