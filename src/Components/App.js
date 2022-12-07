@@ -7,7 +7,7 @@ import { fetchServices } from '../store/service';
 import { ThemeProvider } from '@mui/material/styles';
 import Theme from './Theme';
 import Home from './Home';
-import Login from './Login';
+import Login from './Login/Login';
 import Nav from './Nav';
 import Service from './Service';
 import User from './User/User';

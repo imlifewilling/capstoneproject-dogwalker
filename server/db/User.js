@@ -106,17 +106,66 @@ User.findByToken = async function(token){
   }
 }
 
-User.auth3rdPartyUser = async function(userinfo){
-    let user = await User.findOne(
-      {
-        where: {email: userinfo.email}
-      }
-    )
-    if(!user) {
-      user = await User.create(userinfo)
+User.authgoogle = async function (credentials) {
+  // console.log(credentials)
+  let user = await User.findOne({
+    where: {
+      email: credentials.email,
+    },
+  });
+  if (!user) {
+    user = await User.create({
+      password: credentials.password,
+      email: credentials.email,
+    });
+  }
+  // console.log(jwt.sign({id: user.id}, JWT))
+  return jwt.sign({ id: user.id }, JWT);
+};
+
+
+const GITHUB_TOKEN_URL = 'https://github.com/login/oauth/access_token';
+const GITHUB_USER_URL = 'https://api.github.com/user';
+User.authgithub = async function (code) {
+  let response = await axios.post(
+    GITHUB_TOKEN_URL,
+    {
+      code,
+      client_id: process.env.GITHUB_CLIENT_ID,
+      client_secret: process.env.GITHUB_CLIENT_SECRET,
+    },
+    {
+      headers: {
+        accept: 'application/json',
+      },
     }
-    console.log(jwt.sign({id: user.id}, JWT))
-    return jwt.sign({ id: user.id }, JWT); 
-}
+  );
+  const { access_token } = response.data;
+  if (!access_token) {
+    return response.data;
+  }
+  response = await axios.get(GITHUB_USER_URL, {
+    headers: {
+      authorization: `Bearer ${access_token}`,
+    },
+  });
+  console.log(response.data)
+  const { login, node_id } = response.data;
+  // return response.data
+  let user = await User.findOne({
+    where: {
+      username: login,
+    },
+  });
+  if (!user) {
+    user = await User.create({
+      password: node_id,
+      email: 'fake@email.com',
+    });
+  }
+  return { token: jwt.sign({ id: user.id }, JWT), id: user.id };
+};
+
+
 module.exports = User;
 
