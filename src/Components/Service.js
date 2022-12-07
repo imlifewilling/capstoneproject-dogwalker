@@ -126,13 +126,21 @@ const Service = () => {
                             return acc
                             },false
         );
+
+        const availabilityPresent = ele.availability.reduce((acc,val) => {
+            if(filterInPlace.includes(val)){
+                acc=true;
+            }
+            return acc
+            },false
+        );
                         
 
         if(filterInPlace.length === 0){
             return ele;
         }
         else if(taskPresent
-                || filterInPlace.includes(ele.availability) 
+                || availabilityPresent
                 || filterInPlace.includes(ele.serviceDogsize)){
             return ele ;
         }

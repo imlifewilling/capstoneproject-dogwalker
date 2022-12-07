@@ -44,7 +44,11 @@ const ServiceCard = (props) => {
                             <span style={{color:'black'}}>Price:</span> $ {service?.price}
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
-                            <span style={{color:'black'}}>Availability:</span> {service?.availability}
+                            <span style={{color:'black'}}>Availability:</span> 
+                                {service?.availability.length > 1 ? service?.availability.join(', ')
+                                :
+                                service?.availability
+                                }
                             </Typography>
                         </CardContent>
                     </Box>

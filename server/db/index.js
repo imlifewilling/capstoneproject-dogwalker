@@ -185,7 +185,7 @@ const syncAndSeed = async()=> {
       Service.create({
         task: ['Dog Walking'],
         serviceDescription: 'walk your dog in your neighborhood',
-        availability: 'Morning',
+        availability: ['Morning'],
         serviceDogsize: 'Small',
         price: 20,
         userId: jane.id
@@ -193,7 +193,7 @@ const syncAndSeed = async()=> {
       Service.create({
         task: ['Dog Walking','House Sitting'],
         serviceDescription: 'walk your dog in your neighborhood',
-        availability: 'Morning',
+        availability: ['Morning'],
         serviceDogsize: 'Giant',
         price: 20,
         userId: cody.id
@@ -201,7 +201,7 @@ const syncAndSeed = async()=> {
       Service.create({
         task: ['House Sitting'],
         serviceDescription: 'take care of your dogs at home',
-        availability: 'Afternoon',
+        availability: ['Afternoon'],
         serviceDogsize: 'Large',
         price: 15,
         userId: cody.id
@@ -209,7 +209,7 @@ const syncAndSeed = async()=> {
       Service.create({
         task: ['Dog Walking'],
         serviceDescription: 'walk your dog in your neighborhood',
-        availability: 'Morning',
+        availability: ['Morning', 'Afternoon'],
         serviceDogsize: 'Medium',
         price: 20,
         userId: alex.id
@@ -217,7 +217,7 @@ const syncAndSeed = async()=> {
       Service.create({
         task: ['House Sitting'],
         serviceDescription: 'take care of your dogs at home',
-        availability: 'Afternoon',
+        availability: ['Afternoon'],
         serviceDogsize: 'Small',
         price: 15,
         userId: alex.id
@@ -225,7 +225,7 @@ const syncAndSeed = async()=> {
       Service.create({
         task: ['Dog Day Care'],
         serviceDescription: 'take care of your dog the whole day',
-        availability: 'Any Time',
+        availability: ['Any Time'],
         serviceDogsize: 'Any Size',
         price: 12,
         userId: alex.id
