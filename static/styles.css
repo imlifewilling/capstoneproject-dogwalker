@@ -34,7 +34,6 @@ nav {
   border-radius: 20px;
 }
 
-
 .left,.right{
   flex: 1;
   display: flex;
@@ -104,6 +103,7 @@ input {
   width: 200px;
   padding: 15px 20px;
   margin-bottom: 20px;
+  margin-right: 1rem;
 }
 
 .submit {
@@ -136,8 +136,40 @@ input {
 }
 
 #profile-card {
- height: 30rem;
+  height: 30rem;
   width: 30rem;
+}
+
+#edit-account-conatiner {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#edit-button {
+  height: 3rem;
+  width: 11rem;
+  border-radius: 20px;
+  background-color: blue;
+  color: white;
+  border: none;
+  font-size: 15;
+}
+
+#first-last {
+  display: flex;
+  flex-direction: row;
+}
+
+.inputPair {
+  display: flex;
+  flex-direction: column;
+}
+
+#email-phone {
+  display: flex;
+  flex-direction: row;
 }
 
 .signupLink {
@@ -215,4 +247,8 @@ a {
   right: 0;
   margin: auto;
   z-index: -1;
+}
+
+label {
+  margin-bottom: 1rem;
 }

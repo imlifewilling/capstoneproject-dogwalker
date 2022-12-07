@@ -30,15 +30,15 @@ const User = () => {
             <strong>Name:</strong> {auth.firstname} {auth.lastname}
         </p>
         <p>
+        <p>
+            <strong>Address:</strong> {auth.address}
+        </p>
             <strong>Email:</strong> {auth.email}
         </p>
         <p>
             <strong>Phone:</strong> {auth.phone}
         </p>
-        <p>
-            <strong>Address:</strong> {auth.address}
-        </p>
-        <h3><Link to={`/users/${auth.id}/edit`}>Edit Account Information</Link></h3>
+        <h3><Link to={`/users/${auth.id}/edit`}>Update</Link></h3>
       <br></br>
       {/* <button onClick={() => deleteAccount()}>Delete Account</button> */}
         </div>
