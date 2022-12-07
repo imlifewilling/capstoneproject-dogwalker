@@ -28,7 +28,9 @@ const ServiceCard = (props) => {
                                 {count}. {(users?.filter(ele => ele.id === service?.userId))[0]?.firstname}
                             </Typography>
                             <Typography gutterBottom variant="h6" component="div">
-                                Service: {service?.task}
+                                Service: {service?.task.length > 1 ? service?.task.join(', ') 
+                                            : 
+                                          service?.task}
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
                             <span style={{color:'black'}}>Description:</span> {service?.serviceDescription}
