@@ -8,6 +8,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import Checkbox from '@mui/material/Checkbox';
+import {Typography} from "@mui/material";
 import { useNavigate, Link, useParams } from "react-router-dom";
 
 const Service = () => {
@@ -161,7 +162,7 @@ const Service = () => {
         const scrollBottom = ev.currentTarget.scrollTop + window.innerHeight;
         if(scrollBottom === ev.currentTarget.scrollHeight){
             console.log('At the Bottom of the List')
-            setIdx(idx+4)
+            setIdx(idx+4);
         };
     };
 
@@ -240,6 +241,11 @@ const Service = () => {
                             return <ServiceCard key={service.id} service={service} count={idx+1}/>
                         })
                     }
+                    {idx>filteredServices.length ? 
+                        <Typography gutterBottom variant="h6" component="div" sx={{textAlign:'center', fontWeight: 'bold'}}>
+                            You Reach The End
+                        </Typography>
+                    :''}
                 </Grid>
                 <Grid item md={3} key={'map'} sx={{border: 'black solid 1px'}}>
                     <h1>Map</h1>
