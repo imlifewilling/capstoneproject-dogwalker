@@ -30,7 +30,7 @@ export const loginWithToken = ()=> { //use toke to login
   };
 };
 
-export const updateAuth = (auth)=> {
+export const updateAuth = (auth, navigate)=> {
   return async(dispatch)=> {
     const token = window.localStorage.getItem('token');
     const response = await axios.put('/api/auth', auth, {
@@ -39,6 +39,7 @@ export const updateAuth = (auth)=> {
       }
     });
     dispatch({ type: 'SET_AUTH', auth: response.data });
+    navigate(`/users/${auth.id}`);
   };
 };
 
