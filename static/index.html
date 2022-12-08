@@ -1,9 +1,21 @@
 <html>
   <head>
     <title>FriendsWalker</title>
+    <script>
+      window.GITHUB_CLIENT_ID = '<%= GITHUB_CLIENT_ID %>';
+    </script>
     <script src='/dist/main.js' defer></script>
     <link rel='stylesheet' href='/static/styles.css' />
-    <link rel='icon' href='/static/images/dog-icon.jpg' />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900&display=swap"
+    />
+    <script
+      src="https://accounts.google.com/gsi/client"
+      id="gsi-client"
+      async
+      defer
+    ></script>
   </head>
   <body>
     <div id='root'></div>
