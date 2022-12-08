@@ -24,23 +24,27 @@ const User = () => {
     <div id='account_page'>
       <div id='profile-card-container'>
         <div id='profile-card'>
-        <h1>Account Information</h1>
-        <img className='profile-img'src={auth.avatar}></img>
-        <p>
-            <strong>Name:</strong> {auth.firstname} {auth.lastname}
-        </p>
-        <p>
-        <p>
-            <strong>Address:</strong> {auth.address}
-        </p>
-            <strong>Email:</strong> {auth.email}
-        </p>
-        <p>
-            <strong>Phone:</strong> {auth.phone}
-        </p>
-        <h3><Link to={`/users/${auth.id}/edit`}>Update</Link></h3>
-      <br></br>
-      {/* <button onClick={() => deleteAccount()}>Delete Account</button> */}
+          <h1>Account Information</h1>
+          <div id='profile-info'>
+            <img className='profile-img'src={auth.avatar}></img>
+            <div id='user-info-div'>
+              <strong>Name:</strong> {auth.firstname} {auth.lastname}
+              <p>
+              <p>
+              <strong>Address:</strong> {auth.address}
+              </p>
+              <strong>Email:</strong> {auth.email}
+              </p>
+              <p>
+              <strong>Phone:</strong> {auth.phone}
+              </p>
+            </div>
+          </div>
+        <div id='update-button-div'>
+          <h3><Link to={`/users/${auth.id}/edit`}>Update</Link></h3>
+        </div>
+        <br></br>
+        {/* <button onClick={() => deleteAccount()}>Delete Account</button> */}
         </div>
       </div>
     </div>
