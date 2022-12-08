@@ -6,10 +6,13 @@ import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import InputAdornment from '@mui/material/InputAdornment';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import Input from '@mui/material/Input';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import OutlinedInput from '@mui/material/OutlinedInput';
+
 
 const Signup = () => {
   const dispatch = useDispatch();
@@ -59,68 +62,82 @@ const Signup = () => {
             <div className = 'left'>
                 <Typography variant="h5">Create an Account</Typography>
                 <form
-                    onSubmit={onsubmit}
-                    style={{
+                  onSubmit={onsubmit}
+                  style={{
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    }}
+                  }}
                 >
-                    <div
-                        style={{
-                            margin: '20px',
-                            display: 'flex',
-                            flexDirection: 'column',
-                        }}
-                    >
-                        <Input
-                            value={inputs.email}
-                            placeholder="Email"
-                            name="email"
-                            onChange={onChange}
-                        />
-                        <Input
-                            type={showPassword ? 'text' : 'password'}
-                            value={inputs.password}
-                            placeholder="Password"
-                            name="password"
-                            onChange={onChange}
-                            endAdornment={
-                            <InputAdornment position="end">
-                                <IconButton
-                                onClick={handleClickShowPassword}
-                                onMouseDown={handleMouseDownPassword}
-                                >
-                                {showPassword ? <Visibility /> : <VisibilityOff />}
-                                </IconButton>
-                            </InputAdornment>
-                            }
-                        />
-                        <Input
-                            type={showPassword ? 'text' : 'password'}
-                            value={inputs.password_confirm}
-                            placeholder="Confirm Password"
-                            name="password_confirm"
-                            onChange={onChange}
-                            endAdornment={
-                            <InputAdornment position="end">
-                                <IconButton
-                                onClick={handleClickShowPassword}
-                                onMouseDown={handleMouseDownPassword}
-                                >
-                                {showPassword ? <Visibility /> : <VisibilityOff />}
-                                </IconButton>
-                            </InputAdornment>
-                            }
-                        />
-                    </div>
-                    <Button
-                        variant="contained"
-                        sx={{ width: '75%' }}
-                        onClick={onsubmit}
-                    >
-                        Signup
-                    </Button>
+                  <div
+                    style={{
+                        margin: '20px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                    }}
+                  >
+                    <FormControl sx={{ m: 1, width: '25ch'}} variant="outlined">
+                      <InputLabel htmlFor="outlined-adornment-password" >Email</InputLabel>
+                      <OutlinedInput
+                        id="outlined-adornment-password"
+                        value={inputs.email}
+                        onChange={onChange}
+                        name="email"
+                        label="Email"
+                      />
+                    </FormControl>
+
+                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined" >
+                      <InputLabel htmlFor="outlined-adornment-password">
+                        Password
+                      </InputLabel>
+                      <OutlinedInput
+                        id="outlined-adornment-password"
+                        type={showPassword ? 'text' : 'password'}
+                        value={inputs.password}
+                        onChange={onChange}
+                        name="password"
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <IconButton
+                              onClick={handleClickShowPassword}
+                              onMouseDown={handleMouseDownPassword}
+                            >
+                              {showPassword ? <Visibility /> : <VisibilityOff />}
+                            </IconButton>
+                          </InputAdornment>
+                        }
+                        label="Password"
+                      />
+                    </FormControl>
+                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined" >
+                      <InputLabel htmlFor="outlined-adornment-password">
+                        Password
+                      </InputLabel>
+                      <OutlinedInput
+                        id="outlined-adornment-password"
+                        type={showPassword ? 'text' : 'password'}
+                        value={inputs.password_confirm}
+                        onChange={onChange}
+                        name="password_confirm"
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <IconButton
+                              onClick={handleClickShowPassword}
+                              onMouseDown={handleMouseDownPassword}
+                            >
+                              {showPassword ? <Visibility /> : <VisibilityOff />}
+                            </IconButton>
+                          </InputAdornment>
+                        }
+                        label="Confirm Password"
+                      />
+                    </FormControl>
+                  </div>
+                  
+                  <Button variant="contained" onClick={onsubmit} >
+                    Sign up
+                  </Button>
                 </form>
             </div>
 

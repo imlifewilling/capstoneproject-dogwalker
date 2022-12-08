@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchUsers, loginWithToken } from '../store';
-import axios from 'axios';
-import { Link, Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { fetchServices } from '../store/service';
 import { ThemeProvider } from '@mui/material/styles';
 import Theme from './Theme';
 import Home from './Home';
-import Login from './Login';
+import Login from './Login/Login';
 import Nav from './Nav';
 import Service from './Service';
 import User from './User/User';
