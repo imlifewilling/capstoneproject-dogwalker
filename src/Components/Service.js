@@ -153,7 +153,6 @@ const Service = () => {
         <>
             <Grid container>
                 <Grid item md={2} key={'filter'} sx={{border: 'black solid 1px'}}>
-                    <h1>Filter</h1>
                     <FormControl>
                         <h2>Service Type:</h2>
                         {Object.keys(checked).slice(0,3).map((taskCheck, idx) => {
@@ -210,7 +209,7 @@ const Service = () => {
                         })}                        
                     </FormControl>
                 </Grid>
-                <Grid item md={7} key={'service list'} sx={{border: 'black solid 1px'}}>
+                <Grid item md={7} key={'service list'} sx={{border: 'black solid 1px', maxHeight: '100vh', overflow: 'auto'}}>
                     {
                         filteredServices.map((service, idx) => {
                             return <ServiceCard key={service.id} service={service} count={idx+1}/>

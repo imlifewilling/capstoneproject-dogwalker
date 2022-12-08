@@ -18,7 +18,6 @@ const Service = conn.define('service', {
     type: TEXT
   },
   availability: {
-    // Change with Array??
     type: ARRAY(ENUM(['Morning', 'Afternoon', 'Evening', 'Before Dark', 'Any Time']))
   },
   serviceDogsize: {
