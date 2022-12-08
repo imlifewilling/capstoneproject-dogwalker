@@ -82,10 +82,21 @@ app.get('/', isLoggedIn, (req, res, next)=> {
   }
 });
 
+// app.put('/', isLoggedIn, async(req, res, next)=> {
+//   try {
+//     const user = req.user;
+//     //define the properties a user can change
+//     await user.update(req.body);
+//     res.send(user);
+//   }
+//   catch(ex){
+//     next(ex);
+//   }
+// });
+
 app.put('/', isLoggedIn, async(req, res, next)=> {
   try {
-    const user = req.user;
-    //define the properties a user can change
+    const user = await User.findByToken(req.headers.authorization)
     await user.update(req.body);
     res.send(user);
   }
@@ -93,7 +104,6 @@ app.put('/', isLoggedIn, async(req, res, next)=> {
     next(ex);
   }
 });
-
 
 app.post('/register', async(req, res, next)=> {
   try {
