@@ -1,5 +1,5 @@
 const conn = require('./conn');
-const { STRING, UUID, UUIDV4, TEXT, INTEGER, ENUM, DECIMAL } = conn.Sequelize;
+const { STRING, UUID, UUIDV4, TEXT, INTEGER, ENUM, DECIMAL, ARRAY } = conn.Sequelize;
 
 const Service = conn.define('service', {
   id: {
@@ -8,7 +8,7 @@ const Service = conn.define('service', {
     defaultValue: UUIDV4
   },
   task: {
-    type: ENUM(['Dog Walking', 'House Sitting', 'Dog Day Care']),
+    type: ARRAY(ENUM(['Dog Walking', 'House Sitting', 'Dog Day Care'])),
     allowNull: false,
     validate: {
       notEmpty: true
@@ -18,7 +18,7 @@ const Service = conn.define('service', {
     type: TEXT
   },
   availability: {
-    type: ENUM(['Morning', 'Afternoon', 'Evening', 'Before Dark', 'Any Time'])
+    type: ARRAY(ENUM(['Morning', 'Afternoon', 'Evening', 'Before Dark', 'Any Time']))
   },
   serviceDogsize: {
     type: ENUM(['Any Size', 'Small', 'Medium', 'Large', 'Giant'])

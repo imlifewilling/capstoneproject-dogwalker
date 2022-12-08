@@ -5,6 +5,8 @@ import ServiceCard from "./ServiceCard";
 import FormGroup from '@mui/material/FormGroup';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
 import Checkbox from '@mui/material/Checkbox';
 import { useNavigate, Link, useParams } from "react-router-dom";
 
@@ -119,14 +121,31 @@ const Service = () => {
     const filterInPlace = filterExtractor(JSON.parse(id || '{}'));
 
     const filteredServices = services.filter(ele => {
+        const taskPresent = ele.task.reduce((acc,val) => {
+                            if(filterInPlace.includes(val)){
+                                acc=true;
+                            }
+                            return acc
+                            },false
+        );
+
+        const availabilityPresent = ele.availability.reduce((acc,val) => {
+            if(filterInPlace.includes(val)){
+                acc=true;
+            }
+            return acc
+            },false
+        );
+                        
+
         if(filterInPlace.length === 0){
             return ele;
         }
-        else if(filterInPlace.includes(ele.task) 
-                || filterInPlace.includes(ele.availability) 
+        else if(taskPresent
+                || availabilityPresent
                 || filterInPlace.includes(ele.serviceDogsize)){
             return ele ;
-        };
+        }
     });
 
     console.log(filterInPlace)
@@ -136,7 +155,6 @@ const Service = () => {
         <>
             <Grid container>
                 <Grid item md={2} key={'filter'} sx={{border: 'black solid 1px'}}>
-                    <h1>Filter</h1>
                     <FormControl>
                         <h2>Service Type:</h2>
                         {Object.keys(checked).slice(0,3).map((taskCheck, idx) => {
@@ -193,7 +211,7 @@ const Service = () => {
                         })}                        
                     </FormControl>
                 </Grid>
-                <Grid item md={7} key={'service list'} sx={{border: 'black solid 1px'}}>
+                <Grid item md={7} key={'service list'} sx={{border: 'black solid 1px', maxHeight: '100vh', overflow: 'auto'}}>
                     {
                         filteredServices.map((service, idx) => {
                             return <ServiceCard key={service.id} service={service} count={idx+1}/>
