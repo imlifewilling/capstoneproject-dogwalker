@@ -172,8 +172,13 @@ const Service = () => {
 
     return (
         <>
+            <nav>
+                <Typography gutterBottom variant="h2" component="div" sx={{textAlign:'center', fontWeight: 'bold'}}>
+                    Service Page
+                </Typography>
+            </nav>
             <Grid container>
-                <Grid item md={2} key={'filter'} sx={{ maxHeight: '100vh', overflow: 'auto', padding: '0 0 0 10px'}}>
+                <Grid item md={2} key={'filter'} sx={{display: { xs: 'none', md: 'grid' }, maxHeight: '100vh', overflow: 'auto', padding: '0 0 0 10px'}}>
                     <FormControl>
                         <h2>Service Type:</h2>
                         {Object.keys(checked).slice(0,3).map((taskCheck, idx) => {
