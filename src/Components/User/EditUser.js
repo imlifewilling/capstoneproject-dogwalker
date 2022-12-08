@@ -1,19 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { editUser } from '../../store';
+import { updateAuth } from '../../store';
 
 const EditUser = () => {
   const { auth } = useSelector((state) => state);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [el, setEl] = useState(null);
+  const [data, setData] = useState('');
+
+  useEffect(()=> {
+    if(el) {
+        el.addEventListener('change', (ev)=> {
+            const file = ev.target.files[0];
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.addEventListener('load', ()=> {
+                setData(reader.result);
+                console.log(data);
+            })
+        })
+    }
+  }, [el]);
+
   const [inputs, setInputs] = useState({
     firstname: auth.firstname,
     lastname: auth.lastname,
+    address: auth.address,
     email: auth.email,
     phone: auth.phone,
-    address: auth.address
+    avatar: auth.avatar
   });
 
   const onChange = (ev) => {
@@ -25,7 +43,8 @@ const EditUser = () => {
 
   const update = (ev) => {
     ev.preventDefault();
-    dispatch(editUser({ id: auth.id, ...inputs }, navigate));
+    dispatch(updateAuth({id: auth.id, ...inputs}, navigate));
+    // dispatch(editUser({ id: auth.id, ...inputs }, navigate));
   };
 
   return (
@@ -64,6 +83,19 @@ const EditUser = () => {
                             <input name="phone" value={inputs.phone} onChange={onChange} />
                         </div>
                     </div>
+                    <div>
+                        <input 
+                            type='file'
+                            ref={x => setEl(x)} 
+                            name="avatar"
+                            value={inputs.avatar}
+                            onChange={onChange}
+                        />
+                        {/* <button disabled={ !data }>Upload Profile Photo</button> */}
+                    </div>
+                    {/* image is loading */}
+                    <img src={data} />
+
                     <br></br>
                     <button id='edit-button'>Save</button>
                 </form>

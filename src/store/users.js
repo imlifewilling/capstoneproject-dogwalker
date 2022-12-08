@@ -4,11 +4,11 @@ const users = (state = [], action) => {
   if (action.type === 'SET_USERS') {
     state = action.users;
   }
-//   if (action.type === 'UPDATE_USER') {
-//     state = state.map((user) => 
-//     user.id === action.user.id ? action.user : user
-//     );
-//   }
+  // if (action.type === 'UPDATE_USER') {
+  //   state = state.map((user) => 
+  //   user.id === action.user.id ? action.user : user
+  //   );
+  // }
   return state;
 };
 
