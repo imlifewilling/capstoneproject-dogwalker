@@ -1,19 +1,15 @@
 import React, { useState } from 'react';
 import { attemptLogin } from '../../store';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, Link as RouterLink } from 'react-router-dom';
-import Link from '@mui/material/Link';
-import Typography from '@mui/material/Typography';
+import { useNavigate } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
 import InputLabel from '@mui/material/InputLabel';
 import Visibility from '@mui/icons-material/Visibility';
 import InputAdornment from '@mui/material/InputAdornment';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
-
 import OutlinedInput from '@mui/material/OutlinedInput';
 
 const Loginwithcredentials = () => {
@@ -59,7 +55,6 @@ const Loginwithcredentials = () => {
         alignItems: 'center',
       }}
     >
-      {auth.msg ? <Typography color="red">{auth.msg}</Typography> : null}
       <form
         onSubmit={login}
         style={{
@@ -70,13 +65,12 @@ const Loginwithcredentials = () => {
       >
         <div
           style={{
-            margin: 'auto',
             display: 'flex',
             flexDirection: 'column',
           }}
         >
-          <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-password">Email</InputLabel>
+          <FormControl sx={{ m: 1, width: '25ch'}} variant="outlined">
+            <InputLabel htmlFor="outlined-adornment-password" >Email</InputLabel>
             <OutlinedInput
               id="outlined-adornment-password"
               value={credentials.email}
@@ -86,7 +80,7 @@ const Loginwithcredentials = () => {
             />
           </FormControl>
 
-          <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+          <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined" >
             <InputLabel htmlFor="outlined-adornment-password">
               Password
             </InputLabel>
@@ -110,28 +104,10 @@ const Loginwithcredentials = () => {
             />
           </FormControl>
         </div>
-        <Grid
-          container
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-around',
-            alignItems: 'center',
-            marginBottom: '20px',
-          }}
-        >
-          <Button variant="contained" onClick={login}>
-            {' '}
-            Sign in
-          </Button>
-          <Link
-            variant="contained"
-            component={RouterLink}
-            to="/forgot-password"
-            sx={{ fontSize: '13px' }}
-          >
-            Forgot Your Password?
-          </Link>
-        </Grid>
+        
+        <Button variant="contained" onClick={login} >
+          Sign in
+        </Button>
       </form>
     </Box>
   );

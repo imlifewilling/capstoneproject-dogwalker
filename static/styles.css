@@ -74,13 +74,13 @@ nav {
 
 .loginButton{
   width: 150px;
-  padding: 15px 25px;
-  border-radius: 5px;
+  height: 30px;
+  padding: 5px 25px;
+  border-radius: 3px;
   color: white;
   display: flex;
   align-items: center;
   font-weight: bold;
-  margin-bottom: 20px;
   cursor: pointer;
 }
 

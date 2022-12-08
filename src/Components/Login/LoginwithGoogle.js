@@ -28,11 +28,19 @@ const LoginwithGoogle = () => {
     });
 
     google.accounts.id.renderButton(document.getElementById('signInDiv'), {
-      theme: 'outline',
+      theme: 'filled_blue',
       size: 'large',
+      logo_alignment: 'left',
+      width: '200',
     });
   }, []);
-  return <div id="signInDiv"></div>;
+  return (
+    <>
+      <div id="signInDiv"></div>
+      <div style = {{height: 15}}></div>
+    </>
+    
+  );
 };
 
 export default LoginwithGoogle;
