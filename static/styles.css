@@ -128,6 +128,7 @@ input {
   height: 10rem;
   width: 10rem;
   border-radius: 3px;
+  padding-right: 1rem;
 }
 
 #profile-card-container {
@@ -139,6 +140,16 @@ input {
 #profile-card {
   height: 30rem;
   width: 30rem;
+}
+
+#profile-info {
+  display: flex;
+  flex-direction: row;
+}
+
+#update-button-div {
+  display: flex;
+  flex-direction: row;
 }
 
 #edit-account-conatiner {
@@ -253,3 +264,4 @@ a {
 label {
   margin-bottom: 1rem;
 }
+
