@@ -69,9 +69,9 @@ export const logwith3rdParty = (userinfo, navigate) => {
   }
 }
 
-export const loginwithGoogle = (credentials, navigate) => {
+export const loginwithGoogle = (userinfo, navigate) => {
   return async (dispatch) => {
-    const response = await axios.post('/api/auth/google', credentials);
+    const response = await axios.post('/api/auth/google', userinfo);
     // console.log(response.data)
     window.localStorage.setItem('token', response.data);
     dispatch(loginWithToken());

@@ -10,15 +10,14 @@ const LoginwithGoogle = () => {
   const dispatch = useDispatch();
 
   const handleCallbackResponse = (response) => {
-    // console.log(response.credential)
-    const userinfo = jwtDecode(response.credential);
-    // console.log(userinfo)
-    const credentials = {
-      email: userinfo.email,
-      password: userinfo.given_name + 'pswd4google',
+    const info = jwtDecode(response.credential);
+    const userinfo = {
+      email: info.email,
+      firstname: info.given_name,
+      lastname: info.family_name,
+      password: info.sub,
     };
-    // console.log(credentials)
-    dispatch(loginwithGoogle(credentials, navigate));
+    dispatch(loginwithGoogle(userinfo, navigate));
   };
 
   useEffect(() => {

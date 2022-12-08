@@ -107,18 +107,14 @@ User.findByToken = async function(token){
   }
 }
 
-User.authgoogle = async function (credentials) {
-  // console.log(credentials)
+User.authgoogle = async function (userinfo) {
   let user = await User.findOne({
     where: {
-      email: credentials.email,
+      email: userinfo.email,
     },
   });
   if (!user) {
-    user = await User.create({
-      password: credentials.password,
-      email: credentials.email,
-    });
+    user = await User.create(userinfo);
   }
   // console.log(jwt.sign({id: user.id}, JWT))
   return jwt.sign({ id: user.id }, JWT);
@@ -168,10 +164,7 @@ User.authgithub = async function (code) {
     },
   });
   if (!user) {
-    user = await User.create({
-      password: userinfo.password,
-      email: userinfo.email,
-    });
+    user = await User.create(userinfo);
   }
   return { token: jwt.sign({ id: user.id }, JWT), id: user.id };
 };
