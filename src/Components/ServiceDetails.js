@@ -22,7 +22,7 @@ let walker;
 const fetchWalkers = async () => {
   let users = await axios.get("/api/fetchdata/walker-servicehistory");
   walker = users.data[2];
-  console.log(walker);
+  // console.log(walker);
 };
 fetchWalkers();
 
@@ -90,9 +90,8 @@ const ServiceDetails = (ServiceDetailsProps) => {
                 size="large"
                 onClick={() => {
                   alert(`
-                  ${walker.firstname}'s phone #: ${walker.phone}
-
-                  ${walker.firstname}'s address: ${walker.address}
+  ${walker.firstname}'s phone #: ${walker.phone}
+  ${walker.firstname}'s address: ${walker.address}
                   `);
                 }}
               >
@@ -106,7 +105,12 @@ const ServiceDetails = (ServiceDetailsProps) => {
       <Card sx={{ width: "auto", height: "auto", margin: "16px" }}>
         <Box sx={{ display: "flex", flexDirection: "row" }}>
           <CardContent sx={{ width: "50%" }}>
-            <Typography gutterBottom variant="h3" component="div">
+            <Typography
+              gutterBottom
+              variant="h3"
+              component="div"
+              sx={{ textAlign: "center" }}
+            >
               <h3>{walker.firstname}'s Reviews:</h3>
             </Typography>
             <Typography variant="h4">
@@ -129,7 +133,12 @@ const ServiceDetails = (ServiceDetailsProps) => {
             </Typography>
           </CardContent>
           <CardContent sx={{ width: "50%" }}>
-            <Typography gutterBottom variant="h3" component="div">
+            <Typography
+              gutterBottom
+              variant="h3"
+              component="div"
+              sx={{ textAlign: "center" }}
+            >
               <h3>Services</h3>
             </Typography>
 
@@ -138,22 +147,37 @@ const ServiceDetails = (ServiceDetailsProps) => {
                 if (!!service) {
                   return (
                     <>
-                      <Typography gutterBottom variant="h4">
-                        {service.task}
-                      </Typography>
-                      <Typography variant="h5">
-                        Info: {service.serviceDescription}
-                      </Typography>
-                      <Typography variant="h5">
-                        For sizes: {service.serviceDogsize}
-                      </Typography>
-                      <Typography variant="h5">
-                        {" "}
-                        ${service.price} <span>per night</span>
-                      </Typography>
-                      <Typography variant="h5">
-                        Availability: {service.availability}
-                      </Typography>
+                      <Card
+                        sx={{
+                          display: "flex",
+                          flexDirection: "column",
+                          margin: "25px",
+                          padding: "10px",
+                        }}
+                      >
+                        <Typography gutterBottom variant="h4">
+                          {service.task}
+                        </Typography>
+                        <Typography variant="h5">
+                          Info: {service.serviceDescription}
+                        </Typography>
+                        <Typography variant="h5">
+                          For sizes: {service.serviceDogsize}
+                        </Typography>
+                        <Typography variant="h5">
+                          {" "}
+                          ${service.price} <span>per night</span>
+                        </Typography>
+                        <Typography variant="h5">
+                          Availability: {service.availability}
+                        </Typography>
+                        <br />
+                        <div>
+                          <Button variant="contained" size="small">
+                            Ask about {service.task}
+                          </Button>
+                        </div>
+                      </Card>
                     </>
                   );
                 }
