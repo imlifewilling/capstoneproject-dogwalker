@@ -126,7 +126,6 @@ User.authgoogle = async function (userinfo) {
 
 const GITHUB_TOKEN_URL = 'https://github.com/login/oauth/access_token';
 const GITHUB_USER_URL = 'https://api.github.com/user';
-console.log(process.env.GITHUB_CLIENT_ID)
 User.authgithub = async function (code) {
   
   let response = await axios.post(
