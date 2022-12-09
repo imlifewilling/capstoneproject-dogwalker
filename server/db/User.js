@@ -45,19 +45,19 @@ const User = conn.define('user', {
   avatar: {
     type: TEXT,
     defaultValue: '',
-    get: function(){
-      const prefix = 'data:image/png;base64,';
-      const data = this.getDataValue('avatar');
-      // if(!data){
-      //   return data;
-      // }
-      if(data.startsWith(prefix)){
+    get: function () {
+      const prefixPNG = 'data:image/png;base64,';
+      const prefixJPG = 'data:image/jpeg;base64,';
+      const data = this.getDataValue('avatar') || '';
+      if (data.startsWith(prefixPNG)) {
         return data;
-      } else if(data === '') {
+      } else if (data.startsWith(prefixJPG)) {
+        return data;
+      } else if (!data) {
         return null;
       }
-      return `${prefix}${data}`;
-    }
+      return `${prefixPNG}${data}`;
+    },
   },
   isWalker: {
     type: BOOLEAN,
