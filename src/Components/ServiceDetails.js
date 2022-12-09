@@ -15,16 +15,18 @@ import {
   CardContent,
   CardMedia,
   Typography,
-} from "@mui/material";
+  Rating
+} 
+from "@mui/material";
 
-let walker;
+// let walker;
 
-const fetchWalkers = async () => {
-  let users = await axios.get("/api/fetchdata/walker-servicehistory");
-  walker = users.data[2];
-  // console.log(walker);
-};
-fetchWalkers();
+// const fetchWalkers = async () => {
+//   let users = await axios.get("/api/fetchdata/walker-servicehistory");
+//   walker = users.data[2];
+//   // console.log(walker);
+// };
+// fetchWalkers();
 
 const ServiceDetails = (ServiceDetailsProps) => {
   const { id } = useParams();
@@ -43,7 +45,6 @@ const ServiceDetails = (ServiceDetailsProps) => {
 
   console.log(walker)
 
-  console.log(walker)
   if (!walker) {
     return (
       <div>
@@ -76,7 +77,7 @@ const ServiceDetails = (ServiceDetailsProps) => {
             />
           </Box>
           <CardContent>
-            <Typography sx={{}} gutterBottom variant="h2" component="div">
+            <Typography gutterBottom variant="h2" component="div">
               <h2>
                 {walker.firstname} {walker.lastname}
               </h2>
@@ -124,12 +125,17 @@ const ServiceDetails = (ServiceDetailsProps) => {
                   if (!!review) {
                     return (
                       <li key={review.id}>
-                        <Box sx={{ margin: "5px" }}>
-                          Owner {review.userId}
-                          <br />
+                        <Box key={review.userId} sx={{ margin: "5px" }}>
+                          Owner: 
+                          {' ' + (users?.filter(ele => ele.id === review.userId)[0].firstname) + ' '}
+                          {users?.filter(ele => ele.id === review.userId)[0].lastname}
                         </Box>
-                        <em> '{review.comment}' </em> <br />
-                        Rating: {review.star * 1}/5
+                        <Box key={review.star} sx={{ margin: "5px" }}>
+                          Rating: <Rating name="read-only" value={review.star} readOnly />
+                        </Box>
+                        <Box key={review.comment} sx={{ margin: "5px" }}>
+                          Review: '{review.comment}'
+                        </Box>
                       </li>
                     );
                   }
