@@ -29,13 +29,21 @@ fetchWalkers();
 const ServiceDetails = (ServiceDetailsProps) => {
   const { id } = useParams();
   const { service, users } = useSelector((state) => state);
+  const [walker, setWalker] = useState();
   //const walker = users.find((user) => id === user.id)
   //  if (!walker) return <h2>Loading...</h2>;
 
-  // useEffect(() => {
-  //   fetchWalkers();
-  // }, []);
+  useEffect(() => {
+    const fetchWalkers = async () => {
+      let response = await axios.get("/api/fetchdata/walker-servicehistory");
+      setWalker(response.data.filter(ele => ele.id === id)[0]);
+    };
+    fetchWalkers();
+  }, []);
 
+  console.log(walker)
+
+  console.log(walker)
   if (!walker) {
     return (
       <div>
@@ -52,24 +60,21 @@ const ServiceDetails = (ServiceDetailsProps) => {
       <div></div>
 
       <Card
-        sx={{ width: "auto", height: "450", margin: "10px", boxShadow: false }}
+        sx={{ width: "auto", height: "450", boxShadow: false, display: 'flex', justifyContent:'space-around', alignItems:'center' }}
         // raised="true"
       >
         <Box
           sx={{ display: "flex", flexDirection: "row", textAlign: "center" }}
         >
-          <CardMedia
-            component="img"
-            height="350"
-            image="https://picsum.photos/350"
-            alt="random"
-            sx={{
-              textAlign: "center",
-              width: "auto",
-              borderRadius: "75px",
-              margin: "50px",
-            }}
-          />
+          <Box sx={{height: '400', width: '400', display:'flex', justifyContent:'center'}}>
+            <CardMedia
+              component="img"
+              height="400"
+              image={walker?.avatar || "https://picsum.photos/200/200"}
+              alt={walker?.firstname + 'profile'}
+              sx={{objectFit:'contain', border:'black solid 1px', borderRadius: '75px',}}
+            />
+          </Box>
           <CardContent>
             <Typography sx={{}} gutterBottom variant="h2" component="div">
               <h2>
@@ -90,8 +95,8 @@ const ServiceDetails = (ServiceDetailsProps) => {
                 size="large"
                 onClick={() => {
                   alert(`
-  ${walker.firstname}'s phone #: ${walker.phone}
-  ${walker.firstname}'s address: ${walker.address}
+                    ${walker.firstname}'s phone #: ${walker.phone}
+                    ${walker.firstname}'s address: ${walker.address}
                   `);
                 }}
               >
