@@ -44,17 +44,20 @@ const User = conn.define('user', {
   },
   avatar: {
     type: TEXT,
-    get: function(){
-      const prefix = 'data:image/png;base64,';
-      const data = this.getDataValue('avatar');
-      if(!data){
+    defaultValue: '',
+    get: function () {
+      const prefixPNG = 'data:image/png;base64,';
+      const prefixJPG = 'data:image/jpeg;base64,';
+      const data = this.getDataValue('avatar') || '';
+      if (data.startsWith(prefixPNG)) {
         return data;
-      }
-      if(data.startsWith(prefix)){
+      } else if (data.startsWith(prefixJPG)) {
         return data;
+      } else if (!data) {
+        return null;
       }
-      return `${prefix}${data}`;
-    }
+      return `${prefixPNG}${data}`;
+    },
   },
   isWalker: {
     type: BOOLEAN,
