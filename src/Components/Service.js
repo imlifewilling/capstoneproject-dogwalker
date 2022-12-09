@@ -250,7 +250,7 @@ const Service = () => {
                         </Typography>
                     :''}
                 </Grid>
-                <Grid item md={3} key={'map'} sx={{border: 'black solid 1px'}}>
+                <Grid item md={3} key={'map'} sx={{ maxHeight: '100vh'}}>
                     <Map />
                 </Grid>
             </Grid>
