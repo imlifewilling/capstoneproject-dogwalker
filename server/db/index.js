@@ -38,6 +38,7 @@ const syncAndSeed = async()=> {
   await conn.sync({ force: true });
   const kendalAvatar = await getImage(path.join(__dirname, '../../static/images/kendal.jpg'));
   const lucaAvatar = await getImage(path.join(__dirname, '../../static/images/luca.jpg'));
+  const janeAvatar = await getImage(path.join(__dirname, '../../static/images/jane.jpeg'));
   const hanAvatar = await getImage(path.join(__dirname, '../../static/images/han.jpg'));
   const maxAvatar = await getImage(path.join(__dirname, '../../static/images/max.jpg'));
 
@@ -90,7 +91,7 @@ const syncAndSeed = async()=> {
       address: '1100 2nd St SW, Albuquerque, NY, US, 87102',
       phone: '505-296-8295',
       userDescription: 'I have 10 years of experience',
-      avatar: '',
+      avatar: janeAvatar,
       isWalker: true
     },
     {

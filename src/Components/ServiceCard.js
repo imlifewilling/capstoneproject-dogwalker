@@ -16,13 +16,16 @@ const ServiceCard = (props) => {
             <Card variant='outlined' sx={{ width: 'auto', height: '200', margin: '10px' }}>
                 <CardActionArea component={Link} to={`/services/${service?.id}`}>
                     <Box sx={{display: 'flex', flexDirection: 'row'}}>
-                        <CardMedia
-                        component="img"
-                        height="200"
-                        image="https://picsum.photos/200/200"
-                        alt={service?.id}
-                        sx={{objectFit:'contain', width:'200'}}
-                        />
+                        <Box sx={{height:'200', width:'200'}}>
+                            <CardMedia
+                            component="img"
+                            height="200"
+                            // image="https://picsum.photos/200/200"
+                            image={users?.filter(ele=>ele.id===service?.userId)[0]?.avatar || "https://picsum.photos/200/200"}
+                            alt={service?.id}
+                            sx={{objectFit:'contain', width:'200'}}
+                            />
+                        </Box>
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="div">
                                 {count}. {(users?.filter(ele => ele.id === service?.userId))[0]?.firstname}

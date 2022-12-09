@@ -9,7 +9,7 @@ app.set('view engine', 'ejs');
 app.use(cors());
 // const session = require('express-session');
 // app.use(session({ secret: 'thisissecretkey' }));
-
+app.use(express.urlencoded({ limit: '50mb', extended: false }));
 
 app.use('/dist', express.static(path.join(__dirname, '../dist')));
 app.use('/static', express.static(path.join(__dirname, '../static')));

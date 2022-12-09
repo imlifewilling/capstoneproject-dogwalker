@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Grid } from "@mui/material";
+import { Box, Divider, Grid } from "@mui/material";
 import { useSelector } from "react-redux";
 import ServiceCard from "./ServiceCard";
 import FormGroup from '@mui/material/FormGroup';
@@ -8,6 +8,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import Checkbox from '@mui/material/Checkbox';
+import {Typography} from "@mui/material";
 import { useNavigate, Link, useParams } from "react-router-dom";
 
 const Service = () => {
@@ -148,13 +149,36 @@ const Service = () => {
         }
     });
 
-    console.log(filterInPlace)
-    // console.log(filteredServices)
+    // console.log(filterInPlace)
+    const [idx, setIdx] = useState(4);
+    const _filteredServices = filteredServices.slice(0,idx);
+
+    console.log(_filteredServices)
+    
+    const handleScroll = (ev) => {
+        // console.log(ev.currentTarget.scrollTop);
+        // console.log(window.innerHeight)
+        // console.log(ev.currentTarget.scrollHeight);
+        const scrollBottom = ev.currentTarget.scrollTop + window.innerHeight;
+        if(scrollBottom === ev.currentTarget.scrollHeight){
+            console.log('At the Bottom of the List')
+            setIdx(idx+4);
+        };
+    };
+
+    // useEffect(()=>{
+    //     _filteredServices = filteredServices.slice(0,idx);
+    // }, [idx]);
 
     return (
         <>
+            <nav>
+                <Typography gutterBottom variant="h2" component="div" sx={{textAlign:'center', fontWeight: 'bold'}}>
+                    Service Page
+                </Typography>
+            </nav>
             <Grid container>
-                <Grid item md={2} key={'filter'} sx={{border: 'black solid 1px'}}>
+                <Grid item md={2} key={'filter'} sx={{display: { xs: 'none', md: 'grid' }, maxHeight: '100vh', overflow: 'auto', padding: '0 0 0 10px'}}>
                     <FormControl>
                         <h2>Service Type:</h2>
                         {Object.keys(checked).slice(0,3).map((taskCheck, idx) => {
@@ -162,6 +186,7 @@ const Service = () => {
                                 <FormControlLabel
                                 key={idx}
                                 label={serviceName[idx]}
+                                sx={{margin:'0'}}
                                 control={
                                     <Checkbox
                                         checked={services[taskCheck]}
@@ -173,6 +198,7 @@ const Service = () => {
                             />
                             )
                         })}
+                        <Divider />
 
                         <h2>Availability:</h2>
                         {Object.keys(checked).slice(3,8).map((timeCheck, idx) => {
@@ -180,6 +206,7 @@ const Service = () => {
                                 <FormControlLabel
                                 key={idx}
                                 label={availabilityName[idx]}
+                                sx={{margin:'0'}}
                                 control={
                                     <Checkbox
                                         checked={services[timeCheck]}
@@ -191,6 +218,7 @@ const Service = () => {
                             />
                             )
                         })}  
+                        <Divider />
 
                         <h2>Dog Size:</h2>
                         {Object.keys(checked).slice(8,13).map((sizeCheck, idx) => {
@@ -198,6 +226,7 @@ const Service = () => {
                                 <FormControlLabel
                                 key={idx}
                                 label={sizeName[idx]}
+                                sx={{margin:'0'}}
                                 control={
                                     <Checkbox
                                         checked={services[sizeCheck]}
@@ -211,12 +240,17 @@ const Service = () => {
                         })}                        
                     </FormControl>
                 </Grid>
-                <Grid item md={7} key={'service list'} sx={{border: 'black solid 1px', maxHeight: '100vh', overflow: 'auto'}}>
+                <Grid item md={7} key={'service list'} sx={{ maxHeight: '100vh', overflow: 'auto'}} onScroll={handleScroll}>
                     {
-                        filteredServices.map((service, idx) => {
+                        _filteredServices.map((service, idx) => {
                             return <ServiceCard key={service.id} service={service} count={idx+1}/>
                         })
                     }
+                    {idx>filteredServices.length ? 
+                        <Typography gutterBottom variant="h6" component="div" sx={{textAlign:'center', fontWeight: 'bold'}}>
+                            You Reach The End
+                        </Typography>
+                    :''}
                 </Grid>
                 <Grid item md={3} key={'map'} sx={{border: 'black solid 1px'}}>
                     <h1>Map</h1>
