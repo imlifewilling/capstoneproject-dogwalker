@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Box, Divider, Grid } from "@mui/material";
+import { Divider, Grid } from "@mui/material";
 import { useSelector } from "react-redux";
 import ServiceCard from "./ServiceCard";
-import FormGroup from '@mui/material/FormGroup';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import Fab from '@mui/material/Fab';
-import AddIcon from '@mui/icons-material/Add';
 import Checkbox from '@mui/material/Checkbox';
 import {Typography} from "@mui/material";
-import { useNavigate, Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import Map from './Map'
 
 const Service = () => {
     const { id } = useParams();
@@ -252,8 +250,8 @@ const Service = () => {
                         </Typography>
                     :''}
                 </Grid>
-                <Grid item md={3} key={'map'} sx={{border: 'black solid 1px'}}>
-                    <h1>Map</h1>
+                <Grid item md={3} key={'map'} sx={{ maxHeight: '100vh'}}>
+                    <Map />
                 </Grid>
             </Grid>
         </>
