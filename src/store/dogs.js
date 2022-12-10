@@ -5,18 +5,6 @@ const dogs = (state = [], action) => {
   if (action.type === 'GET_DOGS') {
     return action.dogs;
   }
-//   if (action.type === 'ADD_REVIEW') {
-//     return [...state, action.review];
-//   }
-//   if (action.type === 'DELETE_REVIEW') {
-//     console.log(state);
-//     return state.filter((review) => review.id !== action.review.id);
-//   }
-//   if (action.type === 'UPDATE_REVIEW') {
-//     return state.map((review) =>
-//       review.id === action.review.id ? action.review : review
-//     );
-//   }
   return state;
 };
 
