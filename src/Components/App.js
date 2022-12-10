@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchUsers, loginWithToken } from '../store';
+import { fetchDogs } from '../store/dogs';
 import { Routes, Route } from 'react-router-dom';
 import { fetchServices } from '../store/service';
 import { ThemeProvider } from '@mui/material/styles';
@@ -24,6 +25,7 @@ const App = ()=> {
     dispatch(loginWithToken());
     dispatch(fetchServices());
     dispatch(fetchUsers());
+    dispatch(fetchDogs());
   }, []);
 
   return (
