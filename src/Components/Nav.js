@@ -157,6 +157,10 @@ const Nav = () => {
                       >{setting.name}</Typography>
                     </MenuItem>
                   ))}
+                    {auth?.isWalker ?
+                    <MenuItem key={'myService'} onClick={handleCloseUserMenu}>
+                      <Typography textAlign="center" component={Link} to={`/walkers/${auth?.id}/services`}>My Services</Typography>
+                    </MenuItem>:''}
                     <MenuItem key={'logout'} onClick={handleCloseUserMenu}>
                       <Typography textAlign="center" onClick={()=>dispatch(logout())}>Logout</Typography>
                     </MenuItem>
