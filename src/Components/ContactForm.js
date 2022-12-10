@@ -20,17 +20,26 @@ const ContactForm = () => {
         message: '',
     });
 
-    console.log(auth)
+    const inputChange = (ev) => {
+        // console.log(ev.target.value)
+        setInput({...input, [ev.target.name]: ev.target.value})
+    }
+
+    const submitEmail = () => {
+        console.log(input)
+        //window.open('mailto:test@example.com');
+    };
 
     return (        
-        <FormControl sx={{border: 'black 1px solid', borderRadius: '10px', margin:'10px', padding:'10px'}}>
-            <Typography variant="h4">Contact Via Email Here</Typography>
+        <FormControl sx={{border: 'black 1px solid', borderRadius: '10px', margin:'10px', padding:'10px'}} onChange={inputChange}>
+            <Typography variant="h4" sx={{marginBottom: '10'}}>Contact Via Email Here</Typography>
             <Box sx={{display:'flex', flexDirection:'row'}}>
                 <TextField
                     required
                     sx={{m:'3'}}
                     id="outlined-required"
                     label="First Name"
+                    name='firstname'
                     defaultValue={input.firstname}
                 />
                 <TextField
@@ -38,6 +47,7 @@ const ContactForm = () => {
                     sx={{m:'3'}}
                     id="outlined-required"
                     label="Last Name"
+                    name='lastname'
                     defaultValue={input.lastname}
                 />
             </Box>
@@ -46,7 +56,16 @@ const ContactForm = () => {
                 sx={{m:'3'}}
                 id="outlined-required"
                 label="Email"
+                name='email'
                 defaultValue={input.email}
+            />
+            <TextField
+                required
+                sx={{m:'3'}}
+                id="outlined-required"
+                label="Phone"
+                name='phone'
+                defaultValue={input.phone}
             />
             <TextField
                 required
@@ -56,14 +75,12 @@ const ContactForm = () => {
                 placeholder="Please Write Your Message Here"
                 multiline
                 rows={4}
+                name='message'
                 defaultValue={input.message}
             />
-            <Button variant="contained">
+            <Button variant="contained" onClick={submitEmail}>
                 Send Via Email
             </Button>
-            {/* {window.open('mailto:test@example.com')} */}
-
-
         </FormControl>
     )
 };
