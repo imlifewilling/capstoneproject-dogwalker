@@ -14,7 +14,8 @@ const ServiceCard = (props) => {
     return (
         <>
             <Card variant='outlined' sx={{ width: 'auto', height: '200', margin: '10px' }}>
-                <CardActionArea component={Link} to={`/services/${service?.id}`}>
+                {/* <CardActionArea component={Link} to={`/services/${service?.id}`}> */}
+                <CardActionArea component={Link} to={`/walker/${service?.userId}`}>
                     <Box sx={{display: 'flex', flexDirection: 'row'}}>
                         <Box sx={{height:'200', width:'200'}}>
                             <CardMedia

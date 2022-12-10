@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import services from "../store/service";
 import axios from "axios";
 import Card from "@mui/material/Card";
@@ -9,32 +9,44 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
+import ContactForm from "./ContactForm";
 
 import {
   CardActionArea,
   CardContent,
   CardMedia,
   Typography,
-} from "@mui/material";
+  Rating,
+  FormControl,
+  TextField
+} 
+from "@mui/material";
 
-let walker;
+// let walker;
 
-const fetchWalkers = async () => {
-  let users = await axios.get("/api/fetchdata/walker-servicehistory");
-  walker = users.data[2];
-  // console.log(walker);
-};
-fetchWalkers();
+// const fetchWalkers = async () => {
+//   let users = await axios.get("/api/fetchdata/walker-servicehistory");
+//   walker = users.data[2];
+//   // console.log(walker);
+// };
+// fetchWalkers();
 
 const ServiceDetails = (ServiceDetailsProps) => {
   const { id } = useParams();
-  const { service, users } = useSelector((state) => state);
+  const { auth, service, users } = useSelector((state) => state);
+  const [walker, setWalker] = useState();
+  const [view, setView] = useState(false);
+  const navigate = useNavigate();
   //const walker = users.find((user) => id === user.id)
   //  if (!walker) return <h2>Loading...</h2>;
 
-  // useEffect(() => {
-  //   fetchWalkers();
-  // }, []);
+  useEffect(() => {
+    const fetchWalkers = async () => {
+      let response = await axios.get("/api/fetchdata/walker-servicehistory");
+      setWalker(response.data.filter(ele => ele.id === id)[0]);
+    };
+    fetchWalkers();
+  }, []);
 
   if (!walker) {
     return (
@@ -45,62 +57,76 @@ const ServiceDetails = (ServiceDetailsProps) => {
   }
 
   const reviews = walker.services[0].serviceevents[0].reviews;
-  console.log("reviews", reviews);
+
+  const showContact = () => {
+    if(auth.id){
+      setView(!view);
+    }
+    else{
+      console.log('Not Logged In')
+      navigate('/login')
+    }
+  };
 
   return (
-    <div>
-      <div></div>
-
+    <div sx={{display: 'flex', justifyContent:'center', alignItems:'center'}}>
       <Card
-        sx={{ width: "auto", height: "450", margin: "10px", boxShadow: false }}
+        sx={{ width: "auto", height: "450", boxShadow: false, display: 'flex', justifyContent:'space-evenly', alignItems:'center' }}
         // raised="true"
       >
         <Box
           sx={{ display: "flex", flexDirection: "row", textAlign: "center" }}
         >
-          <CardMedia
-            component="img"
-            height="350"
-            image="https://picsum.photos/350"
-            alt="random"
-            sx={{
-              textAlign: "center",
-              width: "auto",
-              borderRadius: "75px",
-              margin: "50px",
-            }}
-          />
-          <CardContent>
-            <Typography sx={{}} gutterBottom variant="h2" component="div">
-              <h2>
+          <Box sx={{height: '400', width: '400', display:'flex', justifyContent:'center'}}>
+            <CardMedia
+              component="img"
+              height="400"
+              image={walker?.avatar || "https://picsum.photos/200/200"}
+              alt={walker?.firstname + 'profile'}
+              sx={{objectFit:'contain', border:'black solid 1px', borderRadius: '75px',}}
+            />
+          </Box>
+          <CardContent sx={{width:'500', display: 'flex', flexDirection:'column', justifyContent:'center', alignItems: 'center'}}>
+            <Typography gutterBottom variant="h2" component="div">
                 {walker.firstname} {walker.lastname}
-              </h2>
             </Typography>
             <Typography variant="h3">
-              <div>
-                <span>Bio: {walker.userDescription}</span>
-              </div>
-              <br />
+                Bio: {walker.userDescription}
             </Typography>
             <div>
               <Button
-                sx={{ borderRadius: "25px" }}
+                sx={{ borderRadius: "25px", marginTop: '5px' }}
                 variant="contained"
                 color="success"
                 size="large"
-                onClick={() => {
-                  alert(`
-  ${walker.firstname}'s phone #: ${walker.phone}
-  ${walker.firstname}'s address: ${walker.address}
-                  `);
-                }}
+                // onClick={() => {
+                //   alert(`
+                //     ${walker.firstname}'s phone #: ${walker.phone}
+                //     ${walker.firstname}'s address: ${walker.address}
+                //   `);
+                // }}
+                onClick={showContact}
               >
-                Contact {walker.firstname}
+                {view ? 'Hide Contact': `Contact ${walker.firstname}`}
               </Button>
             </div>
+            {view ? 
+            <>
+              <Typography variant="h4">Contact Email: {walker.email}</Typography>
+              <Typography variant="h4">Contact Phone Number: {walker.phone}</Typography>
+            </>
+            :
+            ''}
           </CardContent>
         </Box>
       </Card>
+
+      {view ? 
+      <Box sx={{textAlign:'center'}}>
+        <ContactForm email={walker.email}/>
+      </Box>
+      : ''}
+
 
       <Card sx={{ width: "auto", height: "auto", margin: "16px" }}>
         <Box sx={{ display: "flex", flexDirection: "row" }}>
@@ -119,12 +145,17 @@ const ServiceDetails = (ServiceDetailsProps) => {
                   if (!!review) {
                     return (
                       <li key={review.id}>
-                        <Box sx={{ margin: "5px" }}>
-                          Owner {review.userId}
-                          <br />
+                        <Box key={review.userId} sx={{ margin: "5px" }}>
+                          Owner: 
+                          {' ' + (users?.filter(ele => ele.id === review.userId)[0]?.firstname) + ' '}
+                          {users?.filter(ele => ele.id === review.userId)[0].lastname}
                         </Box>
-                        <em> '{review.comment}' </em> <br />
-                        Rating: {review.star * 1}/5
+                        <Box key={review.star} sx={{ margin: "5px" }}>
+                          Rating: <Rating name="read-only" value={review.star} readOnly />
+                        </Box>
+                        <Box key={review.comment} sx={{ margin: "5px" }}>
+                          Review: '{review.comment}'
+                        </Box>
                       </li>
                     );
                   }
@@ -156,20 +187,30 @@ const ServiceDetails = (ServiceDetailsProps) => {
                         }}
                       >
                         <Typography gutterBottom variant="h4">
-                          {service.task}
+                          Tasks: {
+                          service.task.length>1 
+                          ? 
+                            service.task.join(', ')
+                          :
+                            service.task}
                         </Typography>
                         <Typography variant="h5">
                           Info: {service.serviceDescription}
                         </Typography>
                         <Typography variant="h5">
-                          For sizes: {service.serviceDogsize}
+                          Dog Size: {service.serviceDogsize}
                         </Typography>
                         <Typography variant="h5">
-                          {" "}
-                          ${service.price} <span>per night</span>
+                          Price: ${service.price}
                         </Typography>
                         <Typography variant="h5">
-                          Availability: {service.availability}
+                          Availability: {
+                          service.availability.length>1
+                          ?
+                            service.availability.join(', ')
+                          :
+                            service.availability
+                          }
                         </Typography>
                         <br />
                         <div>

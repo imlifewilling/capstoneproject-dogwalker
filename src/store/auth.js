@@ -48,7 +48,7 @@ export const attemptLogin = (credentials, navigate)=> {
     const response = await axios.post('/api/auth', credentials); //try to get the data (token) from ther server
     window.localStorage.setItem('token', response.data); //after get the token, store it in localStorage
     dispatch(loginWithToken()); //then use this token to login 
-    navigate('/')
+    navigate(-1);
   };
 };
 
