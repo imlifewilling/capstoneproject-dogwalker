@@ -8,6 +8,7 @@ import {
   Circle,
   MarkerClusterer,
 } from "@react-google-maps/api";
+import { Tune } from '@mui/icons-material';
 // import Places from "./places";
 // import Distance from "./distance";
 
@@ -58,7 +59,14 @@ const generateHouses = ({position: LatLngLiteral}) => {
 };
 
 const Map = () => {
-    const center = useMemo(()=>({lat: 43, lng: -80}), [])
+    const center = useMemo(()=>({lat: 43, lng: -80}), []) // need to change to the position of login user here
+    //setup the map options
+    const options = useMemo(
+        () => ({
+            disableDefaultUI: true,
+            clickableIcons: false
+        }), 
+    [])
 
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: 'AIzaSyCOsnnYOPmcaO-dAFsdqxofdQdUzp7JSiE',
@@ -76,6 +84,7 @@ const Map = () => {
                 <GoogleMap
                     zoom = {10}
                     center = {center}
+                    options = {options}
                     mapContainerClassName = 'map-container'
                 > 
                 </GoogleMap>
