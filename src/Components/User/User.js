@@ -47,6 +47,10 @@ const User = () => {
         {/* <button onClick={() => deleteAccount()}>Delete Account</button> */}
         </div>
       </div>
+      <div id='pets-container'>
+          
+
+      </div>
     </div>
   );
 };
