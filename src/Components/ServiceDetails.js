@@ -69,9 +69,7 @@ const ServiceDetails = (ServiceDetailsProps) => {
   };
 
   return (
-    <div>
-      <div></div>
-
+    <div sx={{display: 'flex', justifyContent:'center', alignItems:'center'}}>
       <Card
         sx={{ width: "auto", height: "450", boxShadow: false, display: 'flex', justifyContent:'space-evenly', alignItems:'center' }}
         // raised="true"
@@ -112,12 +110,21 @@ const ServiceDetails = (ServiceDetailsProps) => {
                 {view ? 'Hide Contact': `Contact ${walker.firstname}`}
               </Button>
             </div>
+            {view ? 
+            <>
+              <Typography variant="h4">Contact Email: {walker.email}</Typography>
+              <Typography variant="h4">Contact Phone Number: {walker.phone}</Typography>
+            </>
+            :
+            ''}
           </CardContent>
         </Box>
       </Card>
 
       {view ? 
+      <Box sx={{textAlign:'center'}}>
         <ContactForm />
+      </Box>
       : ''}
 
 
