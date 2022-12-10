@@ -123,7 +123,7 @@ const ServiceDetails = (ServiceDetailsProps) => {
 
       {view ? 
       <Box sx={{textAlign:'center'}}>
-        <ContactForm />
+        <ContactForm email={walker.email}/>
       </Box>
       : ''}
 

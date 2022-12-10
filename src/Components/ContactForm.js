@@ -10,7 +10,7 @@ from "@mui/material";
 import { useSelector } from "react-redux";
   
 
-const ContactForm = () => {
+const ContactForm = (props) => {
     const {auth} = useSelector(state=>state);
     const [input, setInput] = useState({
         firstname: auth?.firstname,
@@ -27,7 +27,15 @@ const ContactForm = () => {
 
     const submitEmail = () => {
         console.log(input)
-        //window.open('mailto:test@example.com');
+        const body = (`FROM
+            ${input.firstname} ${input.lastname}
+            ${input.email}
+            ${input.phone}
+            \n${input.message}`
+        );
+        const subject = (`GOJI Contact Request From ${input.firstname} ${input.lastname}`);
+        // console.log(body)
+        window.open(`mailto:${props.email}?subject=${subject}&body=${encodeURIComponent(body)}`);
     };
 
     return (        
