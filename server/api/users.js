@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express.Router();
-const { User } = require('../db');
+const { User, Dog } = require('../db');
 const { isLoggedIn } = require('./middleware');
 
 module.exports = app;
@@ -48,7 +48,17 @@ app.post('/', async (req, res, next) => {
   }
 });
 
-
+// app.get('/:id/dogs', async (req, res, next) => {
+//   try {
+//     const dogs = await Dog.findAll({
+//       include: [{ model: User }],
+//       paranoid: false,
+//     });
+//     res.send(dogs);
+//   } catch (ex) {
+//     next(ex);
+//   }
+// });
 
 // app.delete('/:id', async (req, res, next) => {
 //   try {

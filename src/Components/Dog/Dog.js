@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
-const Dog = (props) => {
-  const dispatch = useDispatch();
+const Dog = () => {
   const { dogs, auth } = useSelector((state) => state);
-  const authID = props.id;
-  const getDogs = dogs.filter((dog) => dog.authId === authID);
+
+  console.log(dogs)
+
+  const getDogs = dogs.filter((dog) => dog.userId === auth.id); 
+
+  if(!getDogs) return <h1>...loading</h1>
 
   return (
     <div>
@@ -18,8 +21,9 @@ const Dog = (props) => {
                 </div>
               )
             }
-          )
-        ) : (
+          ) 
+         )
+         : (
           <div>
             Add a pet!
           </div>
@@ -30,3 +34,4 @@ const Dog = (props) => {
 };
 
 export default Dog;
+
