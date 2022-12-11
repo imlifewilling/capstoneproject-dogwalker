@@ -12,14 +12,12 @@ import {
   ComboboxOption,
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
-import { Description } from '@mui/icons-material';
 
-export default function Searchbar() {
-  const [curlocaiton, setCurlocaiton ] = useState();
-  console.log(curlocaiton)
-  // useEffect(() => {
+const setPosition = (position) =>{
+  google.maps.LatLng
+}
 
-  // }, [])
+export default function Searchbar({setPosition}) {
   const {ready, 
     value, 
     setValue, 
@@ -34,7 +32,7 @@ export default function Searchbar() {
 
     const results = await getGeocode({ address:val })
     const { lat, lng} = await getLatLng(results[0])
-    setCurlocaiton({lat, lng})
+    setPosition({lat, lng})
   }
 
 
