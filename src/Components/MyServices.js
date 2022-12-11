@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import MyServicesCard from './ServiceCard';
+import MyServicesCard from './MyServicesCard';
 import { Box } from "@mui/material";
 
 const MyServices = () => {
@@ -14,7 +14,7 @@ const MyServices = () => {
         <>
             <h1>My Services {auth?.firstname}</h1>
             <Box sx={{display:'flex', flexDirection:'row', justifyContent: 'space-around'}}>
-                <Box sx={{flex:'1'}}>
+                <Box sx={{flex:'3'}}>
                     {
                         filteredServices.map((service, idx)=>{
                             return (
@@ -23,7 +23,7 @@ const MyServices = () => {
                         })
                     }
                 </Box>
-                <Box sx={{flex:'1'}}>
+                <Box sx={{flex:'2'}}>
                     <h1>Form</h1>
                 </Box>
             </Box>

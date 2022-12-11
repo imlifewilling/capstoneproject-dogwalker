@@ -4,7 +4,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea, Box } from '@mui/material';
+import { CardActionArea, Box, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 const MyServicesCard = (props) => {
@@ -14,14 +14,12 @@ const MyServicesCard = (props) => {
     return (
         <>
             <Card variant='outlined' sx={{ width: 'auto', height: '200', margin: '10px' }}>
-                {/* <CardActionArea component={Link} to={`/services/${service?.id}`}> */}
                 <CardActionArea component={Link} to={`/walker/${service?.userId}`}>
                     <Box sx={{display: 'flex', flexDirection: 'row'}}>
                         <Box sx={{height:'200', width:'200'}}>
                             <CardMedia
                             component="img"
                             height="200"
-                            // image="https://picsum.photos/200/200"
                             image={users?.filter(ele=>ele.id===service?.userId)[0]?.avatar || "https://picsum.photos/200/200"}
                             alt={service?.id}
                             sx={{objectFit:'contain', width:'200'}}
@@ -42,8 +40,6 @@ const MyServicesCard = (props) => {
                             <Typography variant="body2" color="text.secondary">
                             <span style={{color:'black'}}>Dog Size:</span> {service?.serviceDogsize}
                             </Typography>
-                        </CardContent>
-                        <CardContent sx={{width: '20%'}}>
                             <Typography variant="body2" color="text.secondary">
                             <span style={{color:'black'}}>Price:</span> $ {service?.price}
                             </Typography>
@@ -54,6 +50,10 @@ const MyServicesCard = (props) => {
                                 service?.availability
                                 }
                             </Typography>
+                        </CardContent>
+                        <CardContent sx={{width: '10%'}}>
+                            <Button>Edit</Button>
+                            <Button>Delete</Button>
                         </CardContent>
                     </Box>
                 </CardActionArea>

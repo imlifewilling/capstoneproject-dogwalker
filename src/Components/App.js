@@ -30,9 +30,9 @@ const App = ()=> {
   }, []);
 
   return (
-
     <ThemeProvider theme={Theme}>
       <Nav />
+      <div style={{minHeight:'80vh'}}>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/services' element={<Service />} />
@@ -46,6 +46,7 @@ const App = ()=> {
         <Route path="/owner/:id" element={<Owners/>}/>
         <Route path="/walkers/:id/services" element={<MyServices />} />
       </Routes>
+      </div>
       <Footer />
     </ThemeProvider>
   );
