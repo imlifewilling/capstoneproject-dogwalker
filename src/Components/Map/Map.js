@@ -77,13 +77,13 @@ const Map = () => {
         });
     
     useEffect(() => {
-        if(coords){
+        if(!auth.address && coords){
             setPosition({
                 lat: coords.latitude,
                 lng: coords.longitude
             })
         }
-    }, [coords])
+    }, [coords, auth])
     
 
     
@@ -103,7 +103,6 @@ const Map = () => {
         }   
     }, [auth])
 
-    console.log(position)
 
     const mapRef = useRef(GoogleMap);
     //setup the map options
@@ -152,6 +151,7 @@ const Map = () => {
                     onLoad = {onLoad}
                     mapContainerClassName = 'map-container'
                 > 
+                    {position && <Marker position = {position} />}
                 </GoogleMap>
             </div>
         </div>
