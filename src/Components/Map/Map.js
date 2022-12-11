@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import { useLoadScript } from '@react-google-maps/api';
+import { useSelector } from 'react-redux'
 import { useState, useMemo, useCallback, useRef } from "react";
+import { useGeolocated } from "react-geolocated";
+import Geocode from "react-geocode";
 import {
   GoogleMap,
   Marker,
@@ -60,12 +63,49 @@ const generateHouses = ({position: LatLngLiteral}) => {
 };
 
 const Map = () => {
-    const [position, setPosition] = useState(//set up the map center 
-        {lat: 40.789142, lng: -73.13496099999999}
-    ) 
-    // console.log(position)
+    const { auth } = useSelector(state => state);
+    const [position, setPosition] = useState(//set up the map center to long isalnd, syosset
+        // {lat: 40.789142, lng: -73.13496099999999}
+    )
+    
+    const { coords } = //get the address from the IP
+        useGeolocated({
+            positionOptions: {
+                enableHighAccuracy: false,
+            },
+            userDecisionTimeout: 5000,
+        });
+    
+    useEffect(() => {
+        if(coords){
+            setPosition({
+                lat: coords.latitude,
+                lng: coords.longitude
+            })
+        }
+    }, [coords])
+    
+
+    
+    Geocode.setApiKey("AIzaSyCOsnnYOPmcaO-dAFsdqxofdQdUzp7JSiE");
+    
+    useEffect(() => {
+        if(auth.address){//get the lat and lng of login user
+            Geocode.fromAddress(auth.address).then(
+            (response) => {
+              const { lat, lng } = response.results[0].geometry.location;
+              setPosition({lat, lng});
+            },
+            (error) => {
+              console.error(error);
+            }
+          );
+        }   
+    }, [auth])
+
+    console.log(position)
+
     const mapRef = useRef(GoogleMap);
-    // const center = useMemo(()=>({lat: 40.789142, lng: -73.13496099999999}), []) // useMemo returns a memorized value, need to change to the position of login user here
     //setup the map options
     const options = useMemo(
         (GoogleMap) => ({
@@ -99,7 +139,6 @@ const Map = () => {
                     setPosition = {
                         (position) => {
                             setPosition(position);
-                            mapRef.panTo(position);
                         }
                     }
                 />

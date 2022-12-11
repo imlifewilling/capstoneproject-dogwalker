@@ -38,6 +38,8 @@
     "passport-github2": "^0.1.12",
     "passport-google-oauth20": "^2.0.0",
     "pg": "^8.8.0",
+    "react-geocode": "^0.2.3",
+    "react-geolocated": "^4.0.3",
     "sequelize": "^6.25.3",
     "use-places-autocomplete": "^4.0.0"
   },
