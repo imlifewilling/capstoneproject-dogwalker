@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useLoadScript } from '@react-google-maps/api';
 import { useState, useMemo, useCallback, useRef } from "react";
 import {
@@ -6,9 +6,10 @@ import {
   Marker,
   DirectionsRenderer,
   Circle,
-  MarkerClusterer,
+  MarkerClusterer
 } from "@react-google-maps/api";
 import { Tune } from '@mui/icons-material';
+import Searchbar from './Searchbar'
 // import Places from "./places";
 // import Distance from "./distance";
 
@@ -59,14 +60,26 @@ const generateHouses = ({position: LatLngLiteral}) => {
 };
 
 const Map = () => {
-    const center = useMemo(()=>({lat: 43, lng: -80}), []) // need to change to the position of login user here
+    const mapRef = useRef(GoogleMap);
+    const center = useMemo(()=>({lat: 43, lng: -80}), []) // useMemo returns a memorized value, need to change to the position of login user here
     //setup the map options
     const options = useMemo(
-        () => ({
+        (GoogleMap) => ({
             disableDefaultUI: true,
-            clickableIcons: false
+            clickableIcons: false,
+            styles: [ //turn off original markers
+                {
+                    featureType: "poi",
+                    elementType: "labels",
+                    stylers: [
+                          { visibility: "off" }
+                    ]
+                }
+            ]
         }), 
     [])
+
+    const onLoad = useCallback(() => (mapRef.current = Map), []) //the Map here is referred to the Map Compnent
 
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: 'AIzaSyCOsnnYOPmcaO-dAFsdqxofdQdUzp7JSiE',
@@ -78,13 +91,15 @@ const Map = () => {
     return (
         <div className = 'container'>
             <div className = 'controls'>
-                <h1>Commute?</h1>
+                <Searchbar />
             </div>
+            
             <div className = 'map'>
                 <GoogleMap
                     zoom = {10}
                     center = {center}
                     options = {options}
+                    onLoad = {onLoad}
                     mapContainerClassName = 'map-container'
                 > 
                 </GoogleMap>

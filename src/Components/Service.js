@@ -7,7 +7,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import {Typography} from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
-import Map from './Map'
+import Map from './Map/Map'
 
 const Service = () => {
     const { id } = useParams();
