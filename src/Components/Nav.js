@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../store";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -22,6 +22,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 
 const Nav = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { auth } = useSelector(state=>state);
 
     const pages = [{name: 'Find a Walker', link: '/services'}, {name: 'Become a Walker', link: '/link2'}];
@@ -43,6 +44,11 @@ const Nav = () => {
   
     const handleCloseUserMenu = () => {
       setAnchorElUser(null);
+    };
+
+    const loggingout = () => {
+      dispatch(logout());
+      navigate('/');
     };
   
     return (
@@ -162,7 +168,7 @@ const Nav = () => {
                       <Typography textAlign="center" component={Link} to={`/walkers/${auth?.id}/services`}>My Services</Typography>
                     </MenuItem>:''}
                     <MenuItem key={'logout'} onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center" onClick={()=>dispatch(logout())}>Logout</Typography>
+                      <Typography textAlign="center" onClick={loggingout}>Logout</Typography>
                     </MenuItem>
                 </Menu>
               </Box>
