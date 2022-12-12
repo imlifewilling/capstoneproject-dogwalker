@@ -2,23 +2,17 @@ import React, { useEffect } from 'react';
 import { useLoadScript } from '@react-google-maps/api';
 import { useSelector } from 'react-redux'
 import { useState, useMemo, useCallback, useRef } from "react";
+import { Link } from 'react-router-dom';
 import { useGeolocated } from "react-geolocated";
 import Geocode from "react-geocode";
 import {
   GoogleMap,
   Marker,
-  DirectionsRenderer,
   Circle,
   MarkerClusterer
 } from "@react-google-maps/api";
 import { Tune } from '@mui/icons-material';
 import Searchbar from './Searchbar'
-// import Places from "./places";
-// import Distance from "./distance";
-
-// let LatLngLiteral = google.maps.LatLngLiteral;
-// let DirectionsResult = google.maps.DirectionsResult;
-// let MapOptions = google.maps.MapOptions;
 
 const defaultOptions = {
     strokeOpacity: 0.5,
@@ -150,6 +144,10 @@ const Map = ({servicelist}) => {
         libraries: ['places']
     })
 
+    // const routeChange = () => {
+
+    // }
+
     if(!isLoaded) return <div>Loadingg...</div>
 
     return (
@@ -183,12 +181,13 @@ const Map = ({servicelist}) => {
                             enableRetinaIcons 
                         >
                             {(clusterer) =>
-                            walkerpositions.map((walkerposition) => (
+                            walkerpositions.map((walkerposition, idx) => (
                                 <Marker
-                                    key = {walkerpositions.indexOf(walkerposition)}
+                                    key = {idx}
                                     enableRetinaIcons
                                     position = {walkerposition}
                                     clusterer = {clusterer}
+                                    // onClick = {routeChange}
                                 />
                             ))
                             }
