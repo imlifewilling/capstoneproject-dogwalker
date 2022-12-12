@@ -13,7 +13,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 const theme = createTheme();
 
@@ -107,7 +107,9 @@ const Owners = () => {
                     <Typography>Availability: </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small">See Details</Button>
+                    <Button size="small" component={Link} to={`/owners/${owner.id}`}>
+                      See Details
+                    </Button>
                     <Button
                       size="small"
                       onClick={() => {

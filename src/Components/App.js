@@ -16,6 +16,7 @@ import Signup from './Signup';
 import ServiceDetails from './ServiceDetails'
 import Footer from './Footer';
 import Owners from './Owners'
+import OwnerDetails from './OwnerDetails';
 
 const App = ()=> {
   const { auth } = useSelector(state => state);
@@ -42,7 +43,8 @@ const App = ()=> {
         <Route path='/signup' element={<Signup />} />
         {/* <Link to='/walker/id'>Service Detail</Link> */}
         <Route path="/walker/:id" element={<ServiceDetails/>}/>
-        <Route path="/owner/:id" element={<Owners/>}/>
+        <Route path="/owners" element={<Owners/>}/>
+        <Route path="/owners/:id" element={<OwnerDetails/>}/>
       </Routes>
       <Footer />
     </ThemeProvider>
