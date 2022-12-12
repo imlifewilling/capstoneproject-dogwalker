@@ -4,6 +4,10 @@ body {
   min-height: 100vh;
 }
 
+.MuiInputLabel-outlined.MuiInputLabel-shrink {
+  background-color: #FFF !important;
+}
+
 form {
   display: flex;
   flex-direction: column;

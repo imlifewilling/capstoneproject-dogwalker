@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import MyServicesCard from './MyServicesCard';
 import { Box } from "@mui/material";
+import MyServicesForm from "./MyServicesForm";
 
 const MyServices = () => {
     const { id } = useParams();
@@ -18,13 +19,13 @@ const MyServices = () => {
                     {
                         filteredServices.map((service, idx)=>{
                             return (
-                                <MyServicesCard service={service} count={idx+1}/>
+                                <MyServicesCard key={idx} service={service} count={idx+1}/>
                             )
                         })
                     }
                 </Box>
                 <Box sx={{flex:'2'}}>
-                    <h1>Form</h1>
+                    <MyServicesForm />
                 </Box>
             </Box>
         </>
