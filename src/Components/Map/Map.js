@@ -187,6 +187,10 @@ const Map = ({servicelist}) => {
                                     enableRetinaIcons
                                     position = {walkerposition}
                                     clusterer = {clusterer}
+                                    icon = {
+                                        {url: "../../static/images/googleicon.png",
+                                        scaledSize: new google.maps.Size(50, 50)}
+                                    } 
                                     // onClick = {routeChange}
                                 />
                             ))
