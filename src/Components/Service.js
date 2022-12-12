@@ -251,7 +251,7 @@ const Service = () => {
                     :''}
                 </Grid>
                 <Grid item md={3} key={'map'} sx={{ maxHeight: '100vh'}}>
-                    <Map />
+                    <Map servicelist = { _filteredServices }/>
                 </Grid>
             </Grid>
         </>

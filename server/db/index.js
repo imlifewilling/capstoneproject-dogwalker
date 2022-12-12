@@ -99,7 +99,7 @@ const syncAndSeed = async()=> {
       lastname: 'Cotlet',
       password: '123',
       email: 'cody@gmail.com',
-      address: '4709 Plume Rd NW, Albuquerque, NY, US, 87102',
+      address: '806 Central Ave SE, Albuquerque, NM 87102',
       phone: '505-296-8295',
       userDescription: 'I have 5 years of experience',
       avatar: '',

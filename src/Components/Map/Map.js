@@ -31,43 +31,31 @@ const defaultOptions = {
 const closeOptions = {
     ...defaultOptions,
     zIndex: 3,
-    fillOpacity: 0.05,
-    strokeColor: "#8BC34A",
-    fillColor: "#8BC34A",
+    fillOpacity: 0.1,
+    strokeColor: "#495579",
+    fillColor: "#495579",
 };
 const middleOptions = {
     ...defaultOptions,
     zIndex: 2,
-    fillOpacity: 0.05,
-    strokeColor: "#FBC02D",
-    fillColor: "#FBC02D",
+    fillOpacity: 0.1,
+    strokeColor: "#5F8D4E",
+    fillColor: "#5F8D4E",
 };
 const farOptions = {
     ...defaultOptions,
     zIndex: 1,
-    fillOpacity: 0.05,
-    strokeColor: "#FF5252",
-    fillColor: "#FF5252",
+    fillOpacity: 0.1,
+    strokeColor: "#DC3535",
+    fillColor: "#DC3535",
 };
 
-const generateHouses = ({position: LatLngLiteral}) => {
-    const _houses = [];
-    for (let i = 0; i < 100; i++) {
-        const direction = Math.random() < 0.5 ? -2 : 2;
-        _houses.push({
-        lat: position.lat + Math.random() / direction,
-        lng: position.lng + Math.random() / direction,
-        });
-    }
-    return _houses;
-};
-
-const Map = () => {
+const Map = ({servicelist}) => {
     const { auth } = useSelector(state => state);
-    const [position, setPosition] = useState(//set up the map center to long isalnd, syosset
-        // {lat: 40.789142, lng: -73.13496099999999}
-    )
-    
+    const { users } = useSelector(state=>state)
+    const [ownerposition, setOwnerPosition] = useState() //state to store the ownerposition
+    const [walkerpositions, setWalkerPositions] = useState([]) //an empty list to store the walkers' positions
+ 
     const { coords } = //get the address from the IP
         useGeolocated({
             positionOptions: {
@@ -75,26 +63,25 @@ const Map = () => {
             },
             userDecisionTimeout: 5000,
         });
-    
+
+    //set the center position as IP location if no user login
     useEffect(() => {
         if(!auth.address && coords){
-            setPosition({
+            setOwnerPosition({
                 lat: coords.latitude,
                 lng: coords.longitude
             })
         }
-    }, [coords, auth])
-    
+    }, [coords, auth]) 
 
-    
+    //if owner login, set the center to owner position
     Geocode.setApiKey("AIzaSyCOsnnYOPmcaO-dAFsdqxofdQdUzp7JSiE");
-    
     useEffect(() => {
         if(auth.address){//get the lat and lng of login user
             Geocode.fromAddress(auth.address).then(
             (response) => {
               const { lat, lng } = response.results[0].geometry.location;
-              setPosition({lat, lng});
+              setOwnerPosition({lat, lng});
             },
             (error) => {
               console.error(error);
@@ -103,6 +90,40 @@ const Map = () => {
         }   
     }, [auth])
 
+    //get the walkers' position around ownerposition
+    useEffect(() => {
+        const memo = new Set()
+        servicelist.filter(
+            service => {
+                if(!memo.has(service.userId)){
+                    memo.add(service.userId)
+                    return service
+                }
+            }
+        ).map(
+            service => {
+                let walker = users.find(
+                    user => user.id === service.userId
+                )
+                return walker.address
+            }
+        ).map(
+            walkerposition => {
+                Geocode.fromAddress(walkerposition).then(
+                    (response) => {
+                        const { lat, lng } = response.results[0].geometry.location;
+                        setWalkerPositions(walkerpositions => [...walkerpositions, {lat, lng}]);
+                    },
+                    (error) => {
+                        console.error(error);
+                    }
+                    );
+            }
+        )
+        
+    }, [ownerposition])
+
+    console.log(walkerpositions)
 
     const mapRef = useRef(GoogleMap);
     //setup the map options
@@ -137,7 +158,7 @@ const Map = () => {
                 <Searchbar 
                     setPosition = {
                         (position) => {
-                            setPosition(position);
+                            setOwnerPosition(position);
                         }
                     }
                 />
@@ -146,12 +167,50 @@ const Map = () => {
             <div className = 'map'>
                 <GoogleMap
                     zoom = {10}
-                    center = {position}
+                    center = {ownerposition}
                     options = {options}
                     onLoad = {onLoad}
                     mapContainerClassName = 'map-container'
                 > 
-                    {position && <Marker position = {position} />}
+                    {ownerposition && 
+                    <>
+                        <Marker 
+                            position = {ownerposition} 
+                        />
+
+                        <MarkerClusterer
+                            averageCenter 
+                            enableRetinaIcons 
+                        >
+                            {(clusterer) =>
+                            walkerpositions.map((walkerposition) => (
+                                <Marker
+                                    key = {walkerpositions.indexOf(walkerposition)}
+                                    enableRetinaIcons
+                                    position = {walkerposition}
+                                    clusterer = {clusterer}
+                                />
+                            ))
+                            }
+                        </MarkerClusterer>
+
+                        <Circle 
+                            center = {ownerposition}
+                            radius = {10000}
+                            options = {closeOptions}
+                        />
+                        <Circle 
+                            center = {ownerposition}
+                            radius = {20000}
+                            options = {middleOptions}
+                        />
+                        <Circle 
+                            center = {ownerposition}
+                            radius = {30000}
+                            options = {farOptions}
+                        />
+                    </>
+                    }
                 </GoogleMap>
             </div>
         </div>
