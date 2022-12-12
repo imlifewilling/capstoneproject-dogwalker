@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useLoadScript } from '@react-google-maps/api';
 import { useSelector } from 'react-redux'
 import { useState, useMemo, useCallback, useRef } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useGeolocated } from "react-geolocated";
 import Geocode from "react-geocode";
 import {
@@ -11,7 +11,6 @@ import {
   Circle,
   MarkerClusterer
 } from "@react-google-maps/api";
-import { Tune } from '@mui/icons-material';
 import Searchbar from './Searchbar'
 
 const defaultOptions = {
@@ -47,8 +46,9 @@ const farOptions = {
 const Map = ({servicelist}) => {
     const { auth } = useSelector(state => state);
     const { users } = useSelector(state=>state)
+    const navigate = useNavigate()
     const [ownerposition, setOwnerPosition] = useState() //state to store the ownerposition
-    const [walkerpositions, setWalkerPositions] = useState([]) //an empty list to store the walkers' positions
+    const [walkers, setWalkers] = useState([]) //an empty list to store the walkers' positions
  
     const { coords } = //get the address from the IP
         useGeolocated({
@@ -99,14 +99,14 @@ const Map = ({servicelist}) => {
                 let walker = users.find(
                     user => user.id === service.userId
                 )
-                return walker.address
+                return walker
             }
         ).map(
-            walkerposition => {
-                Geocode.fromAddress(walkerposition).then(
+            walker => {
+                Geocode.fromAddress(walker.address).then(
                     (response) => {
                         const { lat, lng } = response.results[0].geometry.location;
-                        setWalkerPositions(walkerpositions => [...walkerpositions, {lat, lng}]);
+                        setWalkers(walkers => [...walkers, {id: walker.id, address: {lat, lng}}]);
                     },
                     (error) => {
                         console.error(error);
@@ -115,9 +115,9 @@ const Map = ({servicelist}) => {
             }
         )
         
-    }, [ownerposition])
+    }, [])
 
-    console.log(walkerpositions)
+    // console.log(walkers)
 
     const mapRef = useRef(GoogleMap);
     //setup the map options
@@ -137,16 +137,16 @@ const Map = ({servicelist}) => {
         }), 
     [])
 
+    const routeChange = (id) => {
+        navigate(`/walker/${id}`)
+    }
+
     const onLoad = useCallback(() => (mapRef.current = GoogleMap), []) //the Map here is referred to the Map Compnent
 
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: 'AIzaSyCOsnnYOPmcaO-dAFsdqxofdQdUzp7JSiE',
         libraries: ['places']
     })
-
-    // const routeChange = () => {
-
-    // }
 
     if(!isLoaded) return <div>Loadingg...</div>
 
@@ -181,17 +181,16 @@ const Map = ({servicelist}) => {
                             enableRetinaIcons 
                         >
                             {(clusterer) =>
-                            walkerpositions.map((walkerposition, idx) => (
+                            walkers.map((walker) => (
                                 <Marker
-                                    key = {idx}
-                                    enableRetinaIcons
-                                    position = {walkerposition}
+                                    key = {walker.id}
+                                    position = {walker.address}
                                     clusterer = {clusterer}
                                     icon = {
                                         {url: "../../static/images/googleicon.png",
                                         scaledSize: new google.maps.Size(50, 50)}
                                     } 
-                                    // onClick = {routeChange}
+                                    onClick = {() => routeChange(walker.id)} 
                                 />
                             ))
                             }
