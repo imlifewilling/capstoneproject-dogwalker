@@ -104,7 +104,7 @@ const MyServicesForm = () => {
                             </Box>
                         )}
                         // MenuProps={MenuProps}
-                        sx={{width:'90%', m:'5'}}
+                        sx={{width:'90%', m:'10'}}
                         >
                         {taskList.map((name) => (
                             <MenuItem
@@ -127,7 +127,7 @@ const MyServicesForm = () => {
                     maxRows={4}
                     value={input.price}
                     onChange={handleSingleChange}
-                    sx={{width:'90%', m:'5'}}
+                    sx={{width:'90%', m:'10'}}
                 />
 
                 <FormControl fullWidth>
@@ -138,7 +138,7 @@ const MyServicesForm = () => {
                     value={input.serviceDogsize}
                     name="serviceDogsize"
                     onChange={handleSingleChange}
-                    sx={{width:'90%', m:'5'}}
+                    sx={{width:'90%', m:'10'}}
                     >
                         {dogSizeList.map(size => {
                             return (<MenuItem key={size} value={size}>{size}</MenuItem>)
@@ -164,7 +164,7 @@ const MyServicesForm = () => {
                             </Box>
                         )}
                         // MenuProps={MenuProps}
-                        sx={{width:'90%', m:'5'}}
+                        sx={{width:'90%', m:'10'}}
                         >
                         {availabilityList.map((name) => (
                             <MenuItem
@@ -197,7 +197,7 @@ const MyServicesForm = () => {
                         :input.serviceDescription.length === 0 ? true
                         :input.serviceDogsize.length === 0 ? true
                         :false}
-                    sx={{width:'90%', m:'5'}}
+                    sx={{width:'90%', m:'10'}}
                 >
                 Add Service</Button>
             </Box>

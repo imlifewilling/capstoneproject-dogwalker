@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import MyServicesCard from './MyServicesCard';
-import { Box } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import MyServicesForm from "./MyServicesForm";
 
 const MyServices = () => {
@@ -13,9 +13,10 @@ const MyServices = () => {
 
     return (
         <>
-            <h1>My Services {auth?.firstname}</h1>
+            <h1>My Services For: {auth?.firstname} {auth?.lastname}</h1>
             <Box sx={{display:'flex', flexDirection:'row', justifyContent: 'space-around'}}>
                 <Box sx={{flex:'3'}}>
+                    <Grid item md={7} key={'service list'} sx={{ maxHeight: '80vh', overflow: 'auto'}}>
                     {
                         filteredServices.map((service, idx)=>{
                             return (
@@ -23,8 +24,9 @@ const MyServices = () => {
                             )
                         })
                     }
+                    </Grid>
                 </Box>
-                <Box sx={{flex:'2'}}>
+                <Box sx={{flex:'2', m:'5'}}>
                     <MyServicesForm />
                 </Box>
             </Box>
