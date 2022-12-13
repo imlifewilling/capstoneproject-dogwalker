@@ -9,6 +9,8 @@ import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
 import { TextField, Button } from "@mui/material";
 import axios from 'axios';
+import { addService } from "../store/service";
+import { useDispatch } from "react-redux";
 
 // const ITEM_HEIGHT = 48;
 // const ITEM_PADDING_TOP = 8;
@@ -22,6 +24,7 @@ import axios from 'axios';
 // };
 
 const MyServicesForm = () => {
+    const dispatch = useDispatch();
     const theme = useTheme();
     const [input, setInput] = useState({
         task: [],
@@ -66,15 +69,14 @@ const MyServicesForm = () => {
         );
     };
 
-    const addService = async() => {
-        // console.log(input)
-        const token = window.localStorage.getItem('token');
-        console.log(token)
-        const response = await axios.post('/api/fetchdata/service', input,         {
-            headers: {
-                authorization: token
-            }});
-    }
+    const submitService = async() => {
+        // const token = window.localStorage.getItem('token');
+        // const response = await axios.post('/api/fetchdata/service', input, {
+        //     headers: {
+        //         authorization: token
+        //     }});
+        dispatch(addService(input));
+    };
     
     const taskList = ['Dog Walking', 'House Sitting', 'Dog Day Care'];
     const availabilityList = ['Morning', 'Afternoon', 'Evening', 'Before Dark', 'Any Time'];
@@ -188,7 +190,7 @@ const MyServicesForm = () => {
                 />
                 <Button 
                     variant="contained"
-                    onClick={addService}
+                    onClick={submitService}
                     disabled={input.task.length === 0 ? true
                         :input.price.length === 0 ? true
                         :input.availability.length === 0 ? true
