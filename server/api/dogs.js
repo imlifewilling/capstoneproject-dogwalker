@@ -16,6 +16,30 @@ app.get('/', async (req, res, next) => {
   }
 });
 
+app.put('/:id', async (req, res, next) => {
+  try {
+    const dog = await Dog.findByPk(req.params.id 
+    //   {
+    //   include: [{ model: User }],
+    //   paranoid: false,
+    // }
+    );
+    await dog.update(req.body);
+    res.send(dog);
+  } catch (ex) {
+    next(ex);
+  }
+});
+
+// app.put('/:id', async (req, res, next) => {
+//   try {
+//     const user = await User.findByPk(req.params.id);
+//     res.send(await user.update(req.body));
+//   } catch (err) {
+//     next(err);
+//   }
+// });
+
 // app.post('/', async (req, res, next) => {
 //   try {
 //     const review = await Review.create(req.body);
@@ -24,23 +48,6 @@ app.get('/', async (req, res, next) => {
 //       paranoid: false,
 //     });
 //     res.send(reviewPlus);
-//   } catch (ex) {
-//     next(ex);
-//   }
-// });
-
-// app.put('/:id', async (req, res, next) => {
-//   console.log(req.body);
-//   try {
-//     console.log('put route', req.body);
-//     const review = await Review.findByPk(req.params.id, {
-//       include: [{ model: User }, { model: Book }],
-//       paranoid: false,
-//     });
-//     console.log('update', review);
-//     await review.update(req.body);
-
-//     res.send(review);
 //   } catch (ex) {
 //     next(ex);
 //   }

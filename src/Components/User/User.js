@@ -48,7 +48,6 @@ const User = () => {
         <div id='update-button-div'>
           <h3><Link to={`/users/${auth.id}/edit`}>Update</Link></h3>
         </div>
-        <br></br>
         {/* <button onClick={() => deleteAccount()}>Delete Account</button> */}
         </div>
       </div>
