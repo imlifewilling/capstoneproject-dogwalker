@@ -131,18 +131,18 @@ input {
   padding-right: 1rem;
 }
 
-#profile-card-container {
+.profile-card-container {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-#profile-card {
-  height: 30rem;
+.profile-card {
+  height: 20rem;
   width: 30rem;
 }
 
-#profile-info {
+.profile-info {
   display: flex;
   flex-direction: row;
 }
