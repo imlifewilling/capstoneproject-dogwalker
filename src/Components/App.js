@@ -18,12 +18,13 @@ import ServiceDetails from './ServiceDetails'
 import Footer from './Footer';
 import Owners from './Owners'
 import OwnerDetails from './OwnerDetails';
+import BecomeAWalker from "./BecomeAWalker";
 
-const App = ()=> {
-  const { auth } = useSelector(state => state);
+const App = () => {
+  const { auth } = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  useEffect(()=> {
+  useEffect(() => {
     dispatch(loginWithToken());
     dispatch(fetchServices());
     dispatch(fetchUsers());
@@ -31,7 +32,6 @@ const App = ()=> {
   }, []);
 
   return (
-
     <ThemeProvider theme={Theme}>
       <Nav />
       <Routes>
@@ -44,9 +44,10 @@ const App = ()=> {
         <Route path='/dogs/:id/edit' element={<EditDog />} />
         <Route path='/signup' element={<Signup />} />
         {/* <Link to='/walker/id'>Service Detail</Link> */}
-        <Route path="/walker/:id" element={<ServiceDetails/>}/>
-        <Route path="/owners" element={<Owners/>}/>
-        <Route path="/owners/:id" element={<OwnerDetails/>}/>
+        <Route path="/walker/:id" element={<ServiceDetails />} />
+        <Route path="/owners" element={<Owners />} />
+        <Route path="/owners/:id" element={<OwnerDetails />} />
+        <Route path="/BecomeAWalker" element={<BecomeAWalker />} />
       </Routes>
       <Footer />
     </ThemeProvider>

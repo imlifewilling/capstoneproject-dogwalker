@@ -24,27 +24,27 @@ const Nav = () => {
     const dispatch = useDispatch();
     const { auth } = useSelector(state=>state);
 
-    const pages = [{name: 'Find a Walker', link: '/services'}, {name: 'Become a Walker', link: '/link2'}];
+    const pages = [{name: 'Find a Walker', link: '/services'}, {name: 'Become a Walker', link: '/BecomeAWalker'}];
     const settings = [{name: 'Profile', link: `/users/${auth.id}`}];
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
-  
+
     const handleOpenNavMenu = (event) => {
       setAnchorElNav(event.currentTarget);
     };
     const handleOpenUserMenu = (event) => {
       setAnchorElUser(event.currentTarget);
     };
-  
+
     const handleCloseNavMenu = () => {
       setAnchorElNav(null);
     };
-  
+
     const handleCloseUserMenu = () => {
       setAnchorElUser(null);
     };
-  
+
     return (
       <AppBar position="static">
         <Container maxWidth="xl">
@@ -53,7 +53,7 @@ const Nav = () => {
             <Box component="a" href="/" sx={{display: { xs: 'none', md: 'flex' }, mr: 1}}>
               <img src="/static/images/GOJI_LOGO.png" style={{width: '200', height: '50', objectFit:'contain'}}/>
             </Box>
-  
+
             {/* MOBILE */}
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
               <IconButton
@@ -127,8 +127,8 @@ const Nav = () => {
                 </Button>
               ))}
             </Box>
-  
-            {!!auth.id ? 
+
+            {!!auth.id ?
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -162,7 +162,7 @@ const Nav = () => {
                     </MenuItem>
                 </Menu>
               </Box>
-            : 
+            :
               <Typography textAlign="center" component={Link} to='/login'
               sx={{color:'white', textDecoration:'none'}}>
                 Login | Sign Up
