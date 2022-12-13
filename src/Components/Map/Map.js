@@ -121,7 +121,7 @@ const Map = ({servicelist}) => {
         
     }, [])
 
-    console.log(walkers)
+    // console.log(walkers)
 
     const mapRef = useRef(GoogleMap);
     //setup the map options
