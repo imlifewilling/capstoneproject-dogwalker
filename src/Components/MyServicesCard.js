@@ -24,7 +24,7 @@ const MyServicesCard = (props) => {
                             sx={{objectFit:'contain', width:'200'}}
                             />
                         </Box>
-                        <CardContent>
+                        <CardContent sx={{width: '50%'}}>
                             <Typography gutterBottom variant="h5" component="div">
                                 {count}. {(users?.filter(ele => ele.id === service?.userId))[0]?.firstname}
                             </Typography>

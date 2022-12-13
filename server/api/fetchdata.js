@@ -50,6 +50,16 @@ app.get('/services', async(req, res, next)=> {
     }
 })
 
+app.post('/service', async(req,res,next)=>{
+    try{
+        const user = await User.findByToken(req.headers.authorization);
+        res.send(await Service.create({...req.body, userId: user.id}))
+    }
+    catch(err){
+        next(err);
+    };
+});
+
 //get all users with services, which means dogwalkers with their service types
 app.get('/user-services', async(req, res, next)=> {
     try {

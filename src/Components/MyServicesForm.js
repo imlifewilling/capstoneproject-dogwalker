@@ -8,6 +8,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
 import { TextField, Button } from "@mui/material";
+import axios from 'axios';
 
 // const ITEM_HEIGHT = 48;
 // const ITEM_PADDING_TOP = 8;
@@ -24,7 +25,7 @@ const MyServicesForm = () => {
     const theme = useTheme();
     const [input, setInput] = useState({
         task: [],
-        description: '',
+        serviceDescription: '',
         serviceDogsize: '',
         price: '',
         availability: [],
@@ -65,8 +66,14 @@ const MyServicesForm = () => {
         );
     };
 
-    const addService = () => {
-        console.log(input)
+    const addService = async() => {
+        // console.log(input)
+        const token = window.localStorage.getItem('token');
+        console.log(token)
+        const response = await axios.post('/api/fetchdata/service', input,         {
+            headers: {
+                authorization: token
+            }});
     }
     
     const taskList = ['Dog Walking', 'House Sitting', 'Dog Day Care'];
@@ -175,9 +182,9 @@ const MyServicesForm = () => {
                     label="Description"
                     multiline
                     rows={4}
-                    name='description'
+                    name='serviceDescription'
                     onChange={handleSingleChange}
-                    value={input.description}
+                    value={input.serviceDescription}
                 />
                 <Button 
                     variant="contained"
@@ -185,7 +192,7 @@ const MyServicesForm = () => {
                     disabled={input.task.length === 0 ? true
                         :input.price.length === 0 ? true
                         :input.availability.length === 0 ? true
-                        :input.description.length === 0 ? true
+                        :input.serviceDescription.length === 0 ? true
                         :input.serviceDogsize.length === 0 ? true
                         :false}
                     sx={{width:'90%', m:'5'}}
