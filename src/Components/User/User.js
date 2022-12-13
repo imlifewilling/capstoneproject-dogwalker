@@ -27,12 +27,12 @@ const User = () => {
 
   return (
     <div id='account_page'>
-      <div id='profile-card-container'>
-        <div id='profile-card'>
+      <div className='profile-card-container'>
+        <div className='profile-card'>
           <h1>Account Information</h1>
-          <div id='profile-info'>
+          <div className='profile-info'>
             <img className='profile-img'src={auth.avatar}></img>
-            <div id='user-info-div'>
+            <div className='user-info-div'>
               <strong>Name:</strong> {auth.firstname} {auth.lastname}
               <p>
               <p>
@@ -52,8 +52,7 @@ const User = () => {
         {/* <button onClick={() => deleteAccount()}>Delete Account</button> */}
         </div>
       </div>
-      <div id='pets-container'>
-          <h2>Pets</h2>
+      <div className='profile-card-container'>
           <Dog />
       </div>
     </div>
