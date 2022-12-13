@@ -138,7 +138,12 @@ input {
 }
 
 .profile-card {
-  height: 20rem;
+  height: 18rem;
+  width: 30rem;
+}
+
+#pet-profile-card {
+  height: 15rem;
   width: 30rem;
 }
 
@@ -146,6 +151,11 @@ input {
   display: flex;
   flex-direction: row;
 }
+
+/* hr {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+} */
 
 #update-button-div {
   display: flex;

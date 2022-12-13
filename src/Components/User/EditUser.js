@@ -17,7 +17,6 @@ const EditUser = () => {
     const [data, setData] = useState('');
 
     const [el, setEl] = useState(null);
-    // const [data, setData] = useState('');
 
     useEffect(()=> {
         if(el) {
