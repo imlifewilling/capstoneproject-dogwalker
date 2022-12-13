@@ -43,7 +43,7 @@ const MyServicesForm = () => {
           target: { value },
         } = event;
 
-        console.log(event.target.name)
+        // console.log(event.target.name)
 
         setInput(
           // On autofill we get a stringified value.
@@ -52,6 +52,8 @@ const MyServicesForm = () => {
       };
 
     const taskList = ['Dog Walking', 'House Sitting', 'Dog Day Care'];
+
+    debugger;
 
     return (
         <>
