@@ -6,6 +6,7 @@ const ServiceEvent = require('./ServiceEvent');
 const Review = require('./Review');
 const fs = require('fs');
 const path = require('path');
+const { faker } = require ('@faker-js/faker');
 
 //set the relatioship between models
 Dog.belongsTo(User);
@@ -42,13 +43,66 @@ const syncAndSeed = async()=> {
   const hanAvatar = await getImage(path.join(__dirname, '../../static/images/han.jpg'));
   const maxAvatar = await getImage(path.join(__dirname, '../../static/images/max.jpg'));
 
+
+  let walker = []
+  for(let i = 0; i < 30; i++) {
+      walker.push( await User.create({
+        firstname: faker.name.firstName(),
+        lastname: faker.name.lastName(),
+        password: '123',
+        email: faker.internet.email(),
+        latlng: faker.address.nearbyGPSCoordinate([35.073920, -106.546940], 100, true),
+        phone: faker.phone.number(),
+        userDescription: 'I have 10 years of experience',
+        avatar: faker.internet.avatar(),
+        isWalker: true
+    })
+    )
+  }
+
+  let service = []
+  for(let i = 0; i < 10; i++) {
+    service.push( await Service.create({
+        task: ['Dog Walking'],
+        serviceDescription: 'walk your dog in your neighborhood',
+        availability: ['Morning'],
+        serviceDogsize: 'Small',
+        price: 20,
+        userId: walker[i].id
+      })
+    )
+  }
+  for(let i = 10; i < 20; i++) {
+    service.push( await Service.create({
+        task: ['House Sitting'],
+        serviceDescription: 'take care of your dogs at home',
+        availability: ['Afternoon'],
+        serviceDogsize: 'Large',
+        price: 15,
+        userId: walker[i].id
+      })
+    )
+  }
+  for(let i = 20; i < 30; i++) {
+    service.push( await Service.create({
+        task: ['Dog Day Care'],
+        serviceDescription: 'take care of your dog the whole day',
+        availability: ['Any Time'],
+        serviceDogsize: 'Any Size',
+        price: 12,
+        userId: walker[i].id
+      })
+    )
+  }
+
+
   const userslist = [
     {
       firstname: 'Max',
       lastname: 'Li',
       password: '123',
       email: 'lmx4wo@gmail.com',
-      address: '724 Central Ave SE, Albuquerque, NY, US, 87102',
+      address: '724 Central Ave SE, Albuquerque, NM, US, 87102',
       phone: '505-243-4688',
       avatar: maxAvatar,
       isWalker: false
@@ -58,7 +112,7 @@ const syncAndSeed = async()=> {
       lastname: 'Liu',
       password: '123',
       email: 'luca@gmail.com',
-      address: '9001 Central Ave NE, Albuquerque, NY, US, 87123',
+      address: '9001 Central Ave NE, Albuquerque, NM, US, 87123',
       phone: '505-293-3953',
       avatar: lucaAvatar,
       isWalker: false
@@ -68,7 +122,7 @@ const syncAndSeed = async()=> {
       lastname: 'Lu',
       password: '123',
       email: 'han@gmail.com',
-      address: '3401 Ladera Dr NW, Albuquerque, NY, US, 87120',
+      address: '3401 Ladera Dr NW, Albuquerque, NM, US, 87120',
       phone: '505-836-4449',
       avatar: hanAvatar,
       isWalker: false
@@ -78,7 +132,7 @@ const syncAndSeed = async()=> {
       lastname: 'Enz',
       password: '123',
       email: 'kendal@gmail.com',
-      address: '5200 Eubank Blvd NE, Albuquerque, NY, US, 87111',
+      address: '5200 Eubank Blvd NE, Albuquerque, NM, US, 87111',
       phone: '505-296-8195',
       avatar: kendalAvatar,
       isWalker: false
@@ -88,7 +142,7 @@ const syncAndSeed = async()=> {
       lastname: 'Zheng',
       password: '123',
       email: 'jane@gmail.com',
-      address: '1100 2nd St SW, Albuquerque, NY, US, 87102',
+      address: '1100 2nd St SW, Albuquerque, NM, US, 87102',
       phone: '505-296-8295',
       userDescription: 'I have 10 years of experience',
       avatar: janeAvatar,
@@ -110,7 +164,7 @@ const syncAndSeed = async()=> {
       lastname: 'Cohen',
       password: '123',
       email: 'alex@gmail.com',
-      address: '6703 Academy Rd NE, Albuquerque, NY, US, 87102',
+      address: '6703 Academy Rd NE, Albuquerque, NM, US, 87102',
       phone: '505-750-3305',
       userDescription: 'I have only 1 year of experience, but I am very patient',
       avatar: '',

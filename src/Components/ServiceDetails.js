@@ -56,8 +56,12 @@ const ServiceDetails = (ServiceDetailsProps) => {
     );
   }
 
-  const reviews = walker.services[0].serviceevents[0].reviews;
-
+  let reviews = []
+  if(walker.services[0].serviceevents[0]){
+    reviews = walker.services[0].serviceevents[0].reviews;
+  }
+    
+  console.log(reviews)
   const showContact = () => {
     if(auth.id){
       setView(!view);
