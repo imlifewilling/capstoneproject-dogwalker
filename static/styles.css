@@ -198,6 +198,11 @@ input {
   flex-direction: column;
 }
 
+#checkbox {
+  display: flex;
+  flex-direction: row;
+}
+
 #email-phone {
   display: flex;
   flex-direction: row;
