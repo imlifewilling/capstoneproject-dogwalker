@@ -103,21 +103,24 @@ const Map = ({servicelist}) => {
             }
         ).map(
             walker => {
+                if(walker.latlng.length !== 0) {
+                    setWalkers(walkers => [...walkers, {id: walker.id, address: {lat: walker.latlng[0]*1, lng: walker.latlng[1]*1}}])
+                }
                 Geocode.fromAddress(walker.address).then(
-                    (response) => {
-                        const { lat, lng } = response.results[0].geometry.location;
-                        setWalkers(walkers => [...walkers, {id: walker.id, address: {lat, lng}}]);
-                    },
-                    (error) => {
-                        console.error(error);
-                    }
-                    );
+                (response) => {
+                    const { lat, lng } = response.results[0].geometry.location;
+                    setWalkers(walkers => [...walkers, {id: walker.id, address: {lat, lng}}]);
+                },
+                (error) => {
+                    console.error(error);
+                }
+                );
             }
         )
         
     }, [])
 
-    // console.log(walkers)
+    console.log(walkers)
 
     const mapRef = useRef(GoogleMap);
     //setup the map options

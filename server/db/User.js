@@ -1,5 +1,5 @@
 const conn = require('./conn');
-const { STRING, UUID, UUIDV4, TEXT, BOOLEAN } = conn.Sequelize;
+const { STRING, UUID, UUIDV4, TEXT, BOOLEAN, ARRAY } = conn.Sequelize;
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const JWT = process.env.JWT;
@@ -36,6 +36,10 @@ const User = conn.define('user', {
   address: {
     type: STRING
   },
+  latlng: {
+    type: ARRAY(STRING),
+    defaultValue: []
+  },
   phone: {
     type: STRING
   },
@@ -49,7 +53,10 @@ const User = conn.define('user', {
       const prefixPNG = 'data:image/png;base64,';
       const prefixJPG = 'data:image/jpeg;base64,';
       const data = this.getDataValue('avatar') || '';
-      if (data.startsWith(prefixPNG)) {
+      if(data.startsWith('http')){
+        return data
+      }
+      else if (data.startsWith(prefixPNG)) {
         return data;
       } else if (data.startsWith(prefixJPG)) {
         return data;
