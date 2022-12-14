@@ -14,6 +14,7 @@ const EditUser = () => {
     const [address, setAddress] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
+    const [isWalker, setIsWalker] = useState(false);
     const [data, setData] = useState('');
 
     const [el, setEl] = useState(null);
@@ -34,9 +35,8 @@ const EditUser = () => {
 
     const update = (ev) => {
         ev.preventDefault();
-        dispatch(updateAuth({id: auth.id, firstname, lastname, address, email, phone, avatar: data}, navigate))
+        dispatch(updateAuth({id: auth.id, firstname, lastname, address, email, phone, isWalker, avatar: data}, navigate))
         // navigate(`/users/${auth.id}`)
-    
     };
 
     return (
@@ -91,6 +91,17 @@ const EditUser = () => {
                                 />
                             </div>
                         </div>
+                        <div id='checkbox'>
+                            <label for="yes">Become a walker</label><br/>
+                            <input 
+                                type="checkbox" 
+                                id="yes" 
+                                name="yes" 
+                                // value="Yes" 
+                                onChange={ev => setIsWalker(ev.target.value)}
+                            />
+                            {/* <input type="submit" value="Submit" /> */}
+                        </div>
                         <div>
                             <div className='inputPair'>
                                 <label><strong>Profile Photo</strong></label>
@@ -102,9 +113,7 @@ const EditUser = () => {
                                     onChange={ev => setData(ev.target.value)}
                                 />
                             </div>
-                            {/* <button disabled={ !data }>Upload Profile Photo</button> */}
                         </div>
-                        {/* image is loading */}
                         <img src={data} />
                         <br></br>
                         <button id='edit-button'>Save</button>
