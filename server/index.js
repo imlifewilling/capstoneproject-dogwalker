@@ -1,5 +1,5 @@
 try { 
-  require('../secrets'); 
+  require('../.secrets'); 
 }
 catch(ex){ 
   console.log(ex); 

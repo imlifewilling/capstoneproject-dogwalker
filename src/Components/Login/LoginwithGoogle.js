@@ -14,7 +14,7 @@ const LoginwithGoogle = () => {
     const userinfo = {
       email: info.email,
       firstname: info.given_name,
-      lastname: info.family_name,
+      lastname: info.family_name, 
       password: info.sub,
     };
     dispatch(loginwithGoogle(userinfo, navigate));
@@ -23,7 +23,7 @@ const LoginwithGoogle = () => {
   useEffect(() => {
     /* golabal google */
     google.accounts.id.initialize({
-      client_id: '130142692712-dk8nq3p24qsmn72o457ncve4s12fjsd5.apps.googleusercontent.com',
+      client_id: process.env.GOOGLE_CLIENT_ID,
       callback: handleCallbackResponse,
     });
 
