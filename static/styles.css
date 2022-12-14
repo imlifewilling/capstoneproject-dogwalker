@@ -173,10 +173,14 @@ input {
   height: 3rem;
   width: 11rem;
   border-radius: 20px;
-  background-color: blue;
+  background-color: #FFA500;
   color: white;
   border: none;
   font-size: 15;
+}
+
+#edit-button:hover {
+  background-color: #EC5800;
 }
 
 #first-last {
