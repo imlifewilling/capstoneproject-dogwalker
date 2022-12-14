@@ -104,7 +104,6 @@ const Map = ({servicelist}) => {
         ).map(
             walker => {
                 if(walker.latlng.length !== 0) {
-                    console.log(walker.latlng[0])
                     setWalkers(walkers => [...walkers, {id: walker.id, address: {lat: walker.latlng[0]*1, lng: walker.latlng[1]*1}}])
                 }
                 Geocode.fromAddress(walker.address).then(
@@ -121,7 +120,7 @@ const Map = ({servicelist}) => {
         
     }, [])
 
-    // console.log(walkers)
+    console.log(walkers)
 
     const mapRef = useRef(GoogleMap);
     //setup the map options

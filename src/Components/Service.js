@@ -151,7 +151,7 @@ const Service = () => {
     const [idx, setIdx] = useState(4);
     const _filteredServices = filteredServices.slice(0,idx);
 
-    console.log(_filteredServices)
+    // console.log(_filteredServices)
     
     const handleScroll = (ev) => {
         // console.log(ev.currentTarget.scrollTop);

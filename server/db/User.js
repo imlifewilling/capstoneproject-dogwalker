@@ -53,7 +53,10 @@ const User = conn.define('user', {
       const prefixPNG = 'data:image/png;base64,';
       const prefixJPG = 'data:image/jpeg;base64,';
       const data = this.getDataValue('avatar') || '';
-      if (data.startsWith(prefixPNG)) {
+      if(data.startsWith('http')){
+        return data
+      }
+      else if (data.startsWith(prefixPNG)) {
         return data;
       } else if (data.startsWith(prefixJPG)) {
         return data;
