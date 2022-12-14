@@ -1,3 +1,4 @@
+import { CatchingPokemonSharp } from "@mui/icons-material";
 import axios from "axios";
 
 const services = (state = [], action) => {
@@ -6,6 +7,9 @@ const services = (state = [], action) => {
   }
   if (action.type === 'ADD_SERVICE'){
     return [...state, action.service];
+  }
+    if (action.type === 'DELETE_SERVICE'){
+    return state.filter(ele => ele.id !== action.service.id);
   }
   return state;
 };
@@ -28,5 +32,13 @@ export const addService = (input) => {
     dispatch({type:'ADD_SERVICE', service: response.data});
   };
 };
+
+export const deleteService = (id) => {
+  return async(dispatch) => {
+    const response = await axios.delete(`/api/fetchdata/delete_service/${id}`);
+    console.log(response.data)
+    dispatch({type: 'DELETE_SERVICE', service: response.data})
+  }
+}
 
 export default services;

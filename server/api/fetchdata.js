@@ -60,6 +60,18 @@ app.post('/service', async(req,res,next)=>{
     };
 });
 
+app.delete('/delete_service/:id', async(req,res,next)=>{
+    try{
+        const id = req.params.id;
+        const service = await Service.findByPk(id);
+        await service.destroy()
+        res.send(service);
+    }
+    catch(err){
+        next(err);
+    };
+});
+
 //get all users with services, which means dogwalkers with their service types
 app.get('/user-services', async(req, res, next)=> {
     try {
