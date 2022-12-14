@@ -1,16 +1,17 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
 import { Typography, Grid } from '@mui/material';
-const StyledFooter = styled('div')`
-  position: relative,
-  bottom: 0,
-  left:0,
-  width: 100%;
-  background-color: #303030;
-  text-align: center;
-  margin-top: 0;
-  padding: 5 0 20 0;
-`;
+const StyledFooter = styled('div')({
+  position: "relative",
+  bottom: "0",
+  left:'0',
+  right: '100',
+  width: '100%',
+  backgroundColor: "#303030",
+  textAlign: "center",
+  marginTop: "0",
+  padding: "5 0 20 0",
+});
 
 const Footer = () => {
   return (

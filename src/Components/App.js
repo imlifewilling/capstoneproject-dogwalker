@@ -16,7 +16,8 @@ import EditDog from './Dog/EditDog'
 import Signup from './Signup';
 import ServiceDetails from './ServiceDetails'
 import Footer from './Footer';
-import Owners from './Owners'
+import Owners from './Owners';
+import MyServices from './MyServices';
 import OwnerDetails from './OwnerDetails';
 import BecomeAWalker from "./BecomeAWalker";
 
@@ -34,6 +35,7 @@ const App = () => {
   return (
     <ThemeProvider theme={Theme}>
       <Nav />
+      <div style={{minHeight:'80vh'}}>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/services' element={<Service />} />
@@ -44,11 +46,13 @@ const App = () => {
         <Route path='/dogs/:id/edit' element={<EditDog />} />
         <Route path='/signup' element={<Signup />} />
         {/* <Link to='/walker/id'>Service Detail</Link> */}
+        <Route path="/walkers/:id/services" element={<MyServices />} />
         <Route path="/walker/:id" element={<ServiceDetails />} />
         <Route path="/owners" element={<Owners />} />
         <Route path="/owners/:id" element={<OwnerDetails />} />
         <Route path="/BecomeAWalker" element={<BecomeAWalker />} />
       </Routes>
+      </div>
       <Footer />
     </ThemeProvider>
   );

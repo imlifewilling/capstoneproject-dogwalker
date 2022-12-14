@@ -1,6 +1,11 @@
 body {
   font-family: verdana;
   margin: 0;
+  min-height: 100vh;
+}
+
+.MuiInputLabel-outlined.MuiInputLabel-shrink {
+  background-color: #FFF !important;
 }
 
 form {

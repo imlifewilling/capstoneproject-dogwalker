@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../store";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -22,6 +22,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 
 const Nav = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { auth } = useSelector(state=>state);
 
     const pages = [{name: 'Find a Walker', link: '/services'}, {name: 'Become a Walker', link: '/BecomeAWalker'}];
@@ -45,6 +46,11 @@ const Nav = () => {
       setAnchorElUser(null);
     };
 
+    const loggingout = () => {
+      dispatch(logout());
+      navigate('/');
+    };
+  
     return (
       <AppBar position="static">
         <Container maxWidth="xl">
@@ -132,7 +138,7 @@ const Nav = () => {
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt={ auth.firstname } src="/static/images/avatar/2.jpg" />
+                    <Avatar alt={ auth.firstname } src={ auth.avatar } />
                   </IconButton>
                 </Tooltip>
                 <Menu
@@ -157,8 +163,12 @@ const Nav = () => {
                       >{setting.name}</Typography>
                     </MenuItem>
                   ))}
+                    {auth?.isWalker ?
+                    <MenuItem key={'myService'} onClick={handleCloseUserMenu}>
+                      <Typography textAlign="center" component={Link} to={`/walkers/${auth?.id}/services`}>My Services</Typography>
+                    </MenuItem>:''}
                     <MenuItem key={'logout'} onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center" onClick={()=>dispatch(logout())}>Logout</Typography>
+                      <Typography textAlign="center" onClick={loggingout}>Logout</Typography>
                     </MenuItem>
                 </Menu>
               </Box>
