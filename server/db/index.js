@@ -41,6 +41,12 @@ const syncAndSeed = async()=> {
   const janeAvatar = await getImage(path.join(__dirname, '../../static/images/jane.jpeg'));
   const hanAvatar = await getImage(path.join(__dirname, '../../static/images/han.jpg'));
   const maxAvatar = await getImage(path.join(__dirname, '../../static/images/max.jpg'));
+  const cocoAvatar = await getImage(path.join(__dirname, '../../static/images/coco.jpg'));
+  const benbenAvatar = await getImage(path.join(__dirname, '../../static/images/benben.jpg'));
+  const chunkAvatar = await getImage(path.join(__dirname, '../../static/images/chunk.jpg'));
+  const mochaAvatar = await getImage(path.join(__dirname, '../../static/images/mocha.jpg'));
+  const barkleyAvatar = await getImage(path.join(__dirname, '../../static/images/barkley.jpg'));
+
 
   const userslist = [
     {
@@ -99,7 +105,7 @@ const syncAndSeed = async()=> {
       lastname: 'Cotlet',
       password: '123',
       email: 'cody@gmail.com',
-      address: '4709 Plume Rd NW, Albuquerque, NY, US, 87102',
+      address: '806 Central Ave SE, Albuquerque, NM 87102',
       phone: '505-296-8295',
       userDescription: 'I have 5 years of experience',
       avatar: '',
@@ -134,7 +140,7 @@ const syncAndSeed = async()=> {
         weight: '15',
         breed: 'Bulldog',
         dogDescription: 'Benben is an active boy',
-        avatar: '',
+        avatar: benbenAvatar,
         userId: max.id
       }),
       Dog.create({
@@ -145,7 +151,7 @@ const syncAndSeed = async()=> {
         weight: '40',
         breed: 'Rottweiler',
         dogDescription: 'Chunk is huge but nice',
-        avatar: '',
+        avatar: chunkAvatar,
         userId: luca.id
       }),
       Dog.create({
@@ -156,7 +162,7 @@ const syncAndSeed = async()=> {
         weight: '100',
         breed: 'Bulldog',
         dogDescription: 'Mocha likes to play with all kinds of balls',
-        avatar: '',
+        avatar: mochaAvatar,
         userId: han.id
       }),
       Dog.create({
@@ -167,18 +173,18 @@ const syncAndSeed = async()=> {
         weight: '40',
         breed: 'Husky',
         dogDescription: 'Barkley is always full of energy',
-        avatar: '',
+        avatar: barkleyAvatar,
         userId: han.id
       }),
       Dog.create({
-        nickname: 'coco',
+        nickname: 'Coco',
         age_year: 1,
         age_month: 7,
         gender: 'female',
         weight: '4120',
         breed: 'Pomeranian',
         dogDescription: 'coco likes to take pictures',
-        avatar: '',
+        avatar: cocoAvatar,
         userId: kendal.id
       })
     ]

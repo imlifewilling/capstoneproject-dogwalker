@@ -12,17 +12,20 @@ import Nav from './Nav';
 import Service from './Service';
 import User from './User/User';
 import EditUser from './User/EditUser';
+import EditDog from './Dog/EditDog'
 import Signup from './Signup';
 import ServiceDetails from './ServiceDetails'
 import Footer from './Footer';
 import Owners from './Owners';
 import MyServices from './MyServices';
+import OwnerDetails from './OwnerDetails';
+import BecomeAWalker from "./BecomeAWalker";
 
-const App = ()=> {
-  const { auth } = useSelector(state => state);
+const App = () => {
+  const { auth } = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  useEffect(()=> {
+  useEffect(() => {
     dispatch(loginWithToken());
     dispatch(fetchServices());
     dispatch(fetchUsers());
@@ -40,11 +43,14 @@ const App = ()=> {
         <Route path='/login' element={<Login />} />
         <Route path='/users/:id' element={<User />} />
         <Route path='/users/:id/edit' element={<EditUser />} />
+        <Route path='/dogs/:id/edit' element={<EditDog />} />
         <Route path='/signup' element={<Signup />} />
         {/* <Link to='/walker/id'>Service Detail</Link> */}
-        <Route path="/walker/:id" element={<ServiceDetails/>}/>
-        <Route path="/owner/:id" element={<Owners/>}/>
         <Route path="/walkers/:id/services" element={<MyServices />} />
+        <Route path="/walker/:id" element={<ServiceDetails />} />
+        <Route path="/owners" element={<Owners />} />
+        <Route path="/owners/:id" element={<OwnerDetails />} />
+        <Route path="/BecomeAWalker" element={<BecomeAWalker />} />
       </Routes>
       </div>
       <Footer />

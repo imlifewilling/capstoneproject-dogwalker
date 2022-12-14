@@ -21,10 +21,13 @@
     "@emotion/styled": "^11.10.5",
     "@mui/icons-material": "^5.10.16",
     "@mui/material": "^5.10.16",
+    "@reach/combobox": "^0.18.0",
     "@react-google-maps/api": "^2.17.1",
     "bcrypt": "^5.1.0",
+    "combobox": "^1.0.1",
     "cookie-session": "^2.0.0",
     "cors": "^2.8.5",
+    "css-loader": "^6.7.2",
     "dotenv": "^16.0.3",
     "dotenv-webpack": "^8.0.1",
     "ejs": "^3.1.8",
@@ -36,7 +39,10 @@
     "passport-github2": "^0.1.12",
     "passport-google-oauth20": "^2.0.0",
     "pg": "^8.8.0",
-    "sequelize": "^6.25.3"
+    "react-geocode": "^0.2.3",
+    "react-geolocated": "^4.0.3",
+    "sequelize": "^6.25.3",
+    "use-places-autocomplete": "^4.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.19.6",

@@ -1,10 +1,15 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import Dog from '../Dog/Dog'; 
 // import { deleteUser } from '../../store';
+
+//add button to become walker 
 
 const User = () => {
   const { auth } = useSelector((state) => state);
+  const { id } = useParams();
+  console.log(id)
   // const dispatch = useDispatch();
   // const navigate = useNavigate();
 
@@ -22,12 +27,12 @@ const User = () => {
 
   return (
     <div id='account_page'>
-      <div id='profile-card-container'>
-        <div id='profile-card'>
+      <div className='profile-card-container'>
+        <div className='profile-card'>
           <h1>Account Information</h1>
-          <div id='profile-info'>
+          <div className='profile-info'>
             <img className='profile-img'src={auth.avatar}></img>
-            <div id='user-info-div'>
+            <div className='user-info-div'>
               <strong>Name:</strong> {auth.firstname} {auth.lastname}
               <p>
               <p>
@@ -43,13 +48,11 @@ const User = () => {
         <div id='update-button-div'>
           <h3><Link to={`/users/${auth.id}/edit`}>Update</Link></h3>
         </div>
-        <br></br>
         {/* <button onClick={() => deleteAccount()}>Delete Account</button> */}
         </div>
       </div>
-      <div id='pets-container'>
-          
-
+      <div className='profile-card-container'>
+          <Dog />
       </div>
     </div>
   );

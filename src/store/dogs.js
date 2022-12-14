@@ -5,18 +5,11 @@ const dogs = (state = [], action) => {
   if (action.type === 'GET_DOGS') {
     return action.dogs;
   }
-//   if (action.type === 'ADD_REVIEW') {
-//     return [...state, action.review];
-//   }
-//   if (action.type === 'DELETE_REVIEW') {
-//     console.log(state);
-//     return state.filter((review) => review.id !== action.review.id);
-//   }
-//   if (action.type === 'UPDATE_REVIEW') {
-//     return state.map((review) =>
-//       review.id === action.review.id ? action.review : review
-//     );
-//   }
+  if (action.type === 'UPDATE_DOG') {
+    state = state.map((dog) =>
+      dog.id === action.dog.id ? action.dog : dog
+    );
+  }
   return state;
 };
 
@@ -28,24 +21,10 @@ const getDogs = (dogs) => {
   };
 };
 
-// const addReview = (review) => {
+// const updateDog = (dog) => {
 //   return {
-//     type: 'ADD_REVIEW',
-//     review,
-//   };
-// };
-
-// const removeReview = (review) => {
-//   return {
-//     type: 'DELETE_REVIEW',
-//     review,
-//   };
-// };
-
-// const updateReview = (review) => {
-//   return {
-//     type: 'UPDATE_REVIEW',
-//     review,
+//     type: 'UPDATE_DOG',
+//     dog,
 //   };
 // };
 
@@ -57,27 +36,12 @@ export const fetchDogs = () => {
   };
 };
 
-// export const createReview = (review) => {
-//   return async (dispatch) => {
-//     const response = await axios.post('/api/reviews', review);
-//     dispatch(addReview(response.data));
-//   };
-// };
-
-// export const deleteReview = (review) => {
-//   return async (dispatch) => {
-//     console.log(review.id);
-//     await axios.delete(`/api/reviews/${review.id}`);
-//     dispatch(removeReview(review));
-//   };
-// };
-
-// export const editReview = (review) => {
-//   console.log(review);
-//   return async (dispatch) => {
-//     const response = await axios.put(`/api/reviews/${review.id}`, review);
-//     dispatch(updateReview(response.data));
-//   };
-// };
+export const editDog = (dog, navigate) => {
+  return async (dispatch) => {
+    const response = await axios.put(`/api/dogs/${dog.id}`, dog);
+    dispatch({type: 'UPDATE_DOG', dog: (response.data)});
+    navigate(-1);
+  };
+};
 
 export default dogs;

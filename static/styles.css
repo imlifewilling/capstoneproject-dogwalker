@@ -136,21 +136,31 @@ input {
   padding-right: 1rem;
 }
 
-#profile-card-container {
+.profile-card-container {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-#profile-card {
-  height: 30rem;
+.profile-card {
+  height: 18rem;
   width: 30rem;
 }
 
-#profile-info {
+#pet-profile-card {
+  height: 15rem;
+  width: 30rem;
+}
+
+.profile-info {
   display: flex;
   flex-direction: row;
 }
+
+/* hr {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+} */
 
 #update-button-div {
   display: flex;
@@ -280,8 +290,9 @@ label {
 .controls {
   width: auto;
   height: 15%;
-  padding: 1rem;
-  background: #14161a;
+  padding: 0.5rem;
+  background: #2a86c7;
+  opacity: 0.8;
   color: #fff
 }
 
@@ -299,3 +310,22 @@ label {
   height: 50%;
 }
 
+.combobox-input {
+  width: 100%;
+  padding: 0.5rem;
+  margin: 0;
+  border-radius: 3px
+}
+
+.address-option {
+  background-color: #2a86c7;
+}
+
+.addressselect {
+  cursor: pointer;
+}
+
+.highlight {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
