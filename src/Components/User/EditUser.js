@@ -50,7 +50,7 @@ const EditUser = () => {
                                 <label><strong>First Name </strong></label>
                                 <input
                                     name="firstname"
-                                    value={firstname}
+                                    defaultValue={auth.firstname}
                                     onChange={ev => setFirstname(ev.target.value)}
                                 />
                             </div>
@@ -58,7 +58,7 @@ const EditUser = () => {
                                 <label><strong>Last Name </strong></label>
                                 <input 
                                     name="lastname" 
-                                    value={lastname} 
+                                    defaultValue={auth.lastname}
                                     onChange={ev => setLastname(ev.target.value)}
                                 />
                             </div>
@@ -68,7 +68,7 @@ const EditUser = () => {
                                 <label><strong>Address </strong></label>
                                 <input 
                                     name="address" 
-                                    value={address} 
+                                    defaultValue={auth.address}
                                     onChange={ev => setAddress(ev.target.value)}
                                 />
                             </div>
@@ -78,7 +78,7 @@ const EditUser = () => {
                                 <label><strong>Email </strong></label>
                                 <input 
                                     name="email" 
-                                    value={email} 
+                                    defaultValue={auth.email}
                                     onChange={ev => setEmail(ev.target.value)}
                                 />
                             </div>
@@ -86,36 +86,35 @@ const EditUser = () => {
                                 <label><strong>Phone </strong></label>
                                 <input 
                                     name="phone" 
-                                    value={phone} 
+                                    defaultValue={auth.phone}
                                     onChange={ev => setPhone(ev.target.value)}
                                 />
                             </div>
                         </div>
                         <div id='checkbox'>
-                            <label for="yes">Become a walker</label><br/>
+                            <label for="yes"><strong>Become a walker</strong></label><br/>
                             <input 
                                 type="checkbox" 
                                 id="yes" 
                                 name="yes" 
-                                // value="Yes" 
                                 onChange={ev => setIsWalker(ev.target.value)}
                             />
-                            {/* <input type="submit" value="Submit" /> */}
                         </div>
                         <div>
                             <div className='inputPair'>
                                 <label><strong>Profile Photo</strong></label>
+                                <div id='input-field'>
                                  <input 
+                                    className='photo-upload'
                                     type='file'
                                     ref={x => setEl(x)} 
                                     name="data"
-                                    // value={data}
                                     onChange={ev => setData(ev.target.value)}
                                 />
+                                </div>
                             </div>
                         </div>
                         <img src={data} />
-                        <br></br>
                         <button id='edit-button'>SAVE</button>
                     </form>
                 </div>

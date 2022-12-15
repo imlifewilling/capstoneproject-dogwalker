@@ -207,6 +207,10 @@ input {
   align-items: center;
 }
 
+#yes {
+  width: 2rem;
+}
+
 #edit-button {
   height: 3rem;
   width: 11rem;
@@ -215,6 +219,7 @@ input {
   color: black;
   border: none;
   font-size: 15;
+  padding: 0px;
 }
 
 #edit-button:hover {
@@ -229,6 +234,7 @@ input {
 .inputPair {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 }
 
 #checkbox {
@@ -239,6 +245,32 @@ input {
 #email-phone {
   display: flex;
   flex-direction: row;
+}
+
+#input-field {
+display: flex;
+justify-content: flex-start;
+align-items: flex-start;
+}
+
+.photo-upload {
+  margin-left: 0px ;
+  align-items: flex-start;
+}
+
+.profile-link {
+  color: #FFA500;
+}
+
+.profile-heading {
+  color: #386890;
+}
+.profile-link:hover {
+  text-decoration: underline;
+}
+
+.img-size {
+  max-width: 15rem;
 }
 
 .signupLink {
