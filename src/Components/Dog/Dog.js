@@ -15,7 +15,7 @@ const Dog = () => {
         <div className='profile-info'>
           <img className='profile-img'src={props.avatar}></img>
           <div className='user-info-div'>
-            <strong>Name:</strong> {props.nickname}
+            <strong className='profile-heading'>{props.nickname}</strong> 
             <p>
             <strong>Breed:</strong> {props.breed}
             </p>
@@ -28,7 +28,7 @@ const Dog = () => {
           </div>
         </div>
         <div id='update-button-div'>
-          <h3><Link to={`/dogs/${props.id}/edit`}>Update</Link></h3>
+          <h3><Link className='profile-link' to={`/dogs/${props.id}/edit`}>Update</Link></h3>
         </div> 
       </div>
     )
@@ -41,25 +41,31 @@ const Dog = () => {
         {getDogs.length >= 1 ? (
             getDogs.map((dog)=> {
               return (
-                <DogCard 
-                  id={dog.id}
-                  key={dog.id}
-                  avatar={dog.avatar}
-                  nickname={dog.nickname}
-                  breed={dog.breed}
-                  age_year={dog.age_year}
-                  weight={dog.weight}
-                />
+                <div>
+                  <div>
+                    <DogCard 
+                      id={dog.id}
+                      key={dog.id}
+                      avatar={dog.avatar}
+                      nickname={dog.nickname}
+                      breed={dog.breed}
+                      age_year={dog.age_year}
+                      weight={dog.weight}
+                    />
+                  </div>
+                </div>
               )
-            }
+            }        
           ) 
          )
          : (
           <div>
-            Add a pet!
           </div>
         )
       }
+      <div>
+        <h4>Add pet</h4>
+      </div>
     </div>
   )
 };

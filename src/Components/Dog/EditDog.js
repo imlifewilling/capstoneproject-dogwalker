@@ -50,7 +50,7 @@ const EditDog = () => {
                                 <label><strong>Name </strong></label>
                                 <input
                                     name="nickname"
-                                    // value={dog.nickname}
+                                    defaultValue={dog.nickname}
                                     onChange={ev => setNickname(ev.target.value)}
                                 />
                             </div>
@@ -58,7 +58,7 @@ const EditDog = () => {
                                 <label><strong>Breed </strong></label>
                                 <input 
                                     name="breed" 
-                                    // value={dog.breed} 
+                                    defaultValue={dog.breed}
                                     onChange={ev => setBreed(ev.target.value)}
                                 />
                             </div>
@@ -68,7 +68,7 @@ const EditDog = () => {
                                 <label><strong>Age </strong></label>
                                 <input 
                                     name="age" 
-                                    // value={dog.age_year} 
+                                    defaultValue={dog.age_year}
                                     onChange={ev => setAge_year(ev.target.value)}
                                 />
                             </div>
@@ -78,7 +78,7 @@ const EditDog = () => {
                                 <label><strong>Weight </strong></label>
                                 <input 
                                     name="weight" 
-                                    // value={dog.weight} 
+                                    defaultValue={dog.weight}
                                     onChange={ev => setWeight(ev.target.value)}
                                 />
                             </div>
@@ -94,8 +94,7 @@ const EditDog = () => {
                                 />
                             </div>
                         </div>
-                        <img src={data} />
-                        <br></br>
+                        <img className='img-size' style={{width:'20rem'}}src={data} />
                         <button id='edit-button'>SAVE</button>
                     </form>
                 </div>

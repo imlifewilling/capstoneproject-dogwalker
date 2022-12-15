@@ -34,7 +34,7 @@ const User = () => {
           <div className='profile-info'>
             <img className='profile-img'src={auth.avatar}></img>
             <div className='user-info-div'>
-              <strong>Name:</strong> {auth.firstname} {auth.lastname}
+              <strong className='profile-heading'>{auth.firstname} {auth.lastname}</strong>
               <p>
               <p>
               <strong>Address:</strong> {auth.address}
@@ -47,7 +47,7 @@ const User = () => {
             </div>
           </div>
         <div id='update-button-div'>
-          <h3><Link to={`/users/${auth.id}/edit`}>Update</Link></h3>
+          <h3><Link className='profile-link' to={`/users/${auth.id}/edit`}>Update</Link></h3>
         </div>
         {/* <button onClick={() => deleteAccount()}>Delete Account</button> */}
         </div>
