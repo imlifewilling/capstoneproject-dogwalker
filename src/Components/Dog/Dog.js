@@ -36,8 +36,8 @@ const Dog = () => {
 
   return (
     <div>
-      <hr></hr> 
-      <h2>Pets</h2>
+      {/* <hr></hr> 
+      <h2>Pets</h2> */}
         {getDogs.length >= 1 ? (
             getDogs.map((dog)=> {
               return (
