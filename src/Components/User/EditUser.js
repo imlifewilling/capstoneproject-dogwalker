@@ -116,7 +116,7 @@ const EditUser = () => {
                         </div>
                         <img src={data} />
                         <br></br>
-                        <button id='edit-button'>Save</button>
+                        <button id='edit-button'>SAVE</button>
                     </form>
                 </div>
             </div>
