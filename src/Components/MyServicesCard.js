@@ -1,15 +1,21 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea, Box, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { deleteService } from '../store/service';
 
 const MyServicesCard = (props) => {
     const { users } = useSelector(state=>state);
     const { service, count } = props;
+    const dispatch = useDispatch();
+
+    const deleting = () => {
+        dispatch(deleteService(service.id));
+    };
 
     return (
         <>
@@ -51,8 +57,8 @@ const MyServicesCard = (props) => {
                             </Typography>
                         </CardContent>
                         <CardContent sx={{width: '10%'}}>
-                            <Button>Edit</Button>
-                            <Button>Delete</Button>
+                            <Button component={Link} to={`/myservices/card/${service?.id}`}>Edit</Button>
+                            <Button onClick={deleting}>Delete</Button>
                         </CardContent>
                     </Box>
             </Card>

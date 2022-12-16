@@ -158,7 +158,8 @@ const Service = () => {
         // console.log(window.innerHeight)
         // console.log(ev.currentTarget.scrollHeight);
         const scrollBottom = ev.currentTarget.scrollTop + window.innerHeight;
-        if(scrollBottom === ev.currentTarget.scrollHeight){
+        // console.log(`${scrollBottom}/${ev.currentTarget.scrollHeight*0.9}`)
+        if(scrollBottom >= (ev.currentTarget.scrollHeight)){
             console.log('At the Bottom of the List')
             setIdx(idx+4);
         };
