@@ -7,12 +7,34 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import {Typography} from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
-import Map from './Map/Map'
+import Map from './Map/Map';
+
+function Obj2URI(obj) {
+    return Object.keys(obj).map( key => {
+        return `${key}=${encodeURIComponent(obj[key])}`})
+        .join('&')
+};
+
+function URI2Obj(str){
+    if(!str){
+        return '';
+    }
+    else{
+        const result = JSON.parse('{"' + decodeURI(str).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
+        const resultBoolean = Object.keys(result).reduce((acc, key)=>{
+            acc[key] = (result[key]==="true")
+            return acc
+        }, {});
+        return resultBoolean
+    }
+};
 
 const Service = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const { services } = useSelector(state=>state);
+
+    let converted = URI2Obj(id);
 
     const serviceName = [
         'Dog Walking', 
@@ -36,7 +58,7 @@ const Service = () => {
         'Giant'
     ];
 
-    const [checked, setChecked] = useState(id || {
+    const [checked, setChecked] = useState(converted || {
         dogWalking: false,
         houseSitting: false,
         dogDaycare: false,
@@ -57,8 +79,13 @@ const Service = () => {
     };
 
     useEffect(()=>{
-        navigate(`/services/filter/${JSON.stringify(checked)}`);
+        // console.log(Obj2URI(checked));
+        // console.log(URI2Obj(Obj2URI(checked)));
+        // navigate(`/services/filter/${JSON.stringify(checked)}`);
+        navigate(`/services/filter/${Obj2URI(checked)}`);
     }, [checked])
+
+    // console.log(converted)
 
     const filterExtractor = (obj) => {
         const result=[];
@@ -117,7 +144,8 @@ const Service = () => {
         return result;
     };
 
-    const filterInPlace = filterExtractor(JSON.parse(id || '{}'));
+    // const filterInPlace = filterExtractor(JSON.parse(converted || '{}'));
+    const filterInPlace = filterExtractor(converted);
 
     const filteredServices = services.filter(ele => {
         const taskPresent = ele.task.reduce((acc,val) => {
@@ -148,7 +176,7 @@ const Service = () => {
     });
 
     // console.log(filterInPlace)
-    const [idx, setIdx] = useState(4);
+    const [idx, setIdx] = useState(5);
     const _filteredServices = filteredServices.slice(0,idx);
 
     // console.log(_filteredServices)
@@ -161,7 +189,7 @@ const Service = () => {
         // console.log(`${scrollBottom}/${ev.currentTarget.scrollHeight*0.9}`)
         if(scrollBottom >= (ev.currentTarget.scrollHeight)){
             console.log('At the Bottom of the List')
-            setIdx(idx+4);
+            setIdx(idx+5);
         };
     };
 
@@ -188,7 +216,7 @@ const Service = () => {
                                 sx={{margin:'0'}}
                                 control={
                                     <Checkbox
-                                        checked={services[taskCheck]}
+                                        checked={checked[taskCheck]}
                                         onChange={handleChange}
                                         inputProps={{ 'aria-label': 'controlled' }}
                                         name={taskCheck}
@@ -208,7 +236,7 @@ const Service = () => {
                                 sx={{margin:'0'}}
                                 control={
                                     <Checkbox
-                                        checked={services[timeCheck]}
+                                        checked={checked[timeCheck]}
                                         onChange={handleChange}
                                         inputProps={{ 'aria-label': 'controlled' }}
                                         name={timeCheck}
@@ -228,7 +256,7 @@ const Service = () => {
                                 sx={{margin:'0'}}
                                 control={
                                     <Checkbox
-                                        checked={services[sizeCheck]}
+                                        checked={checked[sizeCheck]}
                                         onChange={handleChange}
                                         inputProps={{ 'aria-label': 'controlled' }}
                                         name={sizeCheck}
@@ -239,7 +267,7 @@ const Service = () => {
                         })}                        
                     </FormControl>
                 </Grid>
-                <Grid item md={7} key={'service list'} sx={{ maxHeight: '100vh', overflow: 'auto'}} onScroll={handleScroll}>
+                <Grid item md={7} key={'service list'} sx={{ maxHeight: '90vh', overflow: 'auto'}} onScroll={handleScroll}>
                     {
                         _filteredServices.map((service, idx) => {
                             return <ServiceCard key={service.id} service={service} count={idx+1}/>
