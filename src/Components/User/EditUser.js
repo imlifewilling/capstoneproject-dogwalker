@@ -27,7 +27,6 @@ const EditUser = () => {
                 reader.readAsDataURL(file);
                 reader.addEventListener('load', ()=> {
                     setData(reader.result);
-                    // console.log(avatar);
                 })
             })
         }
@@ -36,7 +35,6 @@ const EditUser = () => {
     const update = (ev) => {
         ev.preventDefault();
         dispatch(updateAuth({id: auth.id, firstname, lastname, address, email, phone, isWalker, avatar: data}, navigate))
-        // navigate(`/users/${auth.id}`)
     };
 
     return (

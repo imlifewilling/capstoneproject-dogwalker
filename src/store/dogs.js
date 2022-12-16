@@ -10,6 +10,9 @@ const dogs = (state = [], action) => {
       dog.id === action.dog.id ? action.dog : dog
     );
   }
+  if(action.type === 'CREATE_DOG') {
+    state = [...state, action.dog]
+  }
   return state;
 };
 
@@ -41,6 +44,14 @@ export const editDog = (dog, navigate) => {
     const response = await axios.put(`/api/dogs/${dog.id}`, dog);
     dispatch({type: 'UPDATE_DOG', dog: (response.data)});
     navigate(-1);
+  };
+};
+
+export const createDog = (dog, navigate) => {
+  return async (dispatch) => {
+    const response = await axios.post('/api/dogs', dog);
+    dispatch({type: 'CREATE_DOG', dog: response.data});
+    navigate(`/users/${response.data.id}`);
   };
 };
 
