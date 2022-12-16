@@ -70,124 +70,126 @@ const UpdateService = () => {
 
     return (
         <>
-            <h1>Edit Service</h1>
-            <ServiceCard key={'unique'} count={1} service={filteredService} />
+            <h1 style={{textAlign:'center'}}>Edit Service</h1>
+            <Box sx={{display:'flex', flexDirection:'row', justifyContent:'center', alignItems:'flex-start'}}>
+                <ServiceCard key={'unique'} count={1} service={filteredService} />
 
-            <Box sx={{display:'flex', flexDirection:'column', justifyContent:'center'}}>
-                <FormControl>
-                <Box sx={{ m: '1', width: '100%' }}>
-                        <InputLabel htmlFor="services">Services</InputLabel>
-                        <Select
-                        multiple
-                        id='services'
-                        name='task'
-                        value={input.task}
-                        onChange={handleChange}
-                        input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
-                        renderValue={(selected) => (
-                            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: "0.5" }}>
-                            {selected.map((value) => (
-                                <Chip key={value} label={value} />
+                <Box sx={{display:'flex', flexDirection:'column', justifyContent:'center', width: '50%'}}>
+                    <FormControl>
+                    <Box sx={{ m: '1', width: '100%' }}>
+                            <InputLabel htmlFor="services">Services</InputLabel>
+                            <Select
+                            multiple
+                            id='services'
+                            name='task'
+                            value={input.task}
+                            onChange={handleChange}
+                            input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+                            renderValue={(selected) => (
+                                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: "0.5" }}>
+                                {selected.map((value) => (
+                                    <Chip key={value} label={value} />
+                                ))}
+                                </Box>
+                            )}
+                            // MenuProps={MenuProps}
+                            sx={{width:'90%', m:'10'}}
+                            >
+                            {taskList.map((name) => (
+                                <MenuItem
+                                key={name}
+                                value={name}
+                                style={getStyles(name, input.task, theme)}
+                                >
+                                {name}
+                                </MenuItem>
                             ))}
-                            </Box>
-                        )}
-                        // MenuProps={MenuProps}
+                            </Select>
+                    </Box>
+                    </FormControl>
+
+                    <TextField
+                        id="price"
+                        label="Price $"
+                        name='price'
+                        multiline
+                        maxRows={4}
+                        value={input.price}
+                        onChange={handleSingleChange}
+                        sx={{width:'90%', m:'10'}}
+                    />
+
+                    <FormControl fullWidth>
+                        <InputLabel id="Dog Size">Service Dog Size</InputLabel>
+                        <Select
+                        labelId="Dog Size"
+                        id="demo-simple-select"
+                        value={input.serviceDogsize}
+                        name="serviceDogsize"
+                        onChange={handleSingleChange}
                         sx={{width:'90%', m:'10'}}
                         >
-                        {taskList.map((name) => (
-                            <MenuItem
-                            key={name}
-                            value={name}
-                            style={getStyles(name, input.task, theme)}
-                            >
-                            {name}
-                            </MenuItem>
-                        ))}
+                            {dogSizeList.map(size => {
+                                return (<MenuItem key={size} value={size}>{size}</MenuItem>)
+                            })}
                         </Select>
-                </Box>
-                </FormControl>
+                    </FormControl>
 
-                <TextField
-                    id="price"
-                    label="Price $"
-                    name='price'
-                    multiline
-                    maxRows={4}
-                    value={input.price}
-                    onChange={handleSingleChange}
-                    sx={{width:'90%', m:'10'}}
-                />
-
-                <FormControl fullWidth>
-                    <InputLabel id="Dog Size">Service Dog Size</InputLabel>
-                    <Select
-                    labelId="Dog Size"
-                    id="demo-simple-select"
-                    value={input.serviceDogsize}
-                    name="serviceDogsize"
-                    onChange={handleSingleChange}
-                    sx={{width:'90%', m:'10'}}
+                    <FormControl>
+                    <Box sx={{ m: '1', width: '100%' }}>
+                            <InputLabel htmlFor="availability">Availability</InputLabel>
+                            <Select
+                            multiple
+                            id='availability'
+                            name='availability'
+                            value={input.availability}
+                            onChange={handleChange}
+                            input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+                            renderValue={(selected) => (
+                                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: "0.5" }}>
+                                {selected.map((value) => (
+                                    <Chip key={value} label={value} />
+                                ))}
+                                </Box>
+                            )}
+                            // MenuProps={MenuProps}
+                            sx={{width:'90%', m:'10'}}
+                            >
+                            {availabilityList.map((name) => (
+                                <MenuItem
+                                key={name}
+                                value={name}
+                                style={getStyles(name, input.availability, theme)}
+                                >
+                                {name}
+                                </MenuItem>
+                            ))}
+                            </Select>
+                    </Box>
+                    </FormControl>
+                    <TextField
+                        sx={{m:'10', lineHeight:'3', width:'90%'}}
+                        id="outlined-required"
+                        label="Description"
+                        multiline
+                        rows={4}
+                        name='serviceDescription'
+                        onChange={handleSingleChange}
+                        value={input.serviceDescription}
+                    />
+                    <Button 
+                        variant="contained"
+                        onClick={submitService}
+                        disabled={input.task.length === 0 ? true
+                            :input.price.length === 0 ? true
+                            :input.availability.length === 0 ? true
+                            :input.serviceDescription.length === 0 ? true
+                            :input.serviceDogsize.length === 0 ? true
+                            :false}
+                        sx={{width:'90%', m:'10'}}
                     >
-                        {dogSizeList.map(size => {
-                            return (<MenuItem key={size} value={size}>{size}</MenuItem>)
-                        })}
-                    </Select>
-                </FormControl>
-
-                <FormControl>
-                <Box sx={{ m: '1', width: '100%' }}>
-                        <InputLabel htmlFor="availability">Availability</InputLabel>
-                        <Select
-                        multiple
-                        id='availability'
-                        name='availability'
-                        value={input.availability}
-                        onChange={handleChange}
-                        input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
-                        renderValue={(selected) => (
-                            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: "0.5" }}>
-                            {selected.map((value) => (
-                                <Chip key={value} label={value} />
-                            ))}
-                            </Box>
-                        )}
-                        // MenuProps={MenuProps}
-                        sx={{width:'90%', m:'10'}}
-                        >
-                        {availabilityList.map((name) => (
-                            <MenuItem
-                            key={name}
-                            value={name}
-                            style={getStyles(name, input.availability, theme)}
-                            >
-                            {name}
-                            </MenuItem>
-                        ))}
-                        </Select>
+                    Update Service</Button>
                 </Box>
-                </FormControl>
-                <TextField
-                    sx={{m:'5', lineHeight:'3', width:'90%'}}
-                    id="outlined-required"
-                    label="Description"
-                    multiline
-                    rows={4}
-                    name='serviceDescription'
-                    onChange={handleSingleChange}
-                    value={input.serviceDescription}
-                />
-                <Button 
-                    variant="contained"
-                    onClick={submitService}
-                    disabled={input.task.length === 0 ? true
-                        :input.price.length === 0 ? true
-                        :input.availability.length === 0 ? true
-                        :input.serviceDescription.length === 0 ? true
-                        :input.serviceDogsize.length === 0 ? true
-                        :false}
-                    sx={{width:'90%', m:'10'}}
-                >
-                Update Service</Button>
             </Box>
         </>
     )
