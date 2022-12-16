@@ -8,8 +8,12 @@ const services = (state = [], action) => {
   if (action.type === 'ADD_SERVICE'){
     return [...state, action.service];
   }
-    if (action.type === 'DELETE_SERVICE'){
+  if (action.type === 'DELETE_SERVICE'){
     return state.filter(ele => ele.id !== action.service.id);
+  }
+  if (action.type === 'UPDATE_SERVICE'){
+    return state.map(service => service.id === action.service.id ? 
+                                action.service : service)
   }
   return state;
 };
@@ -38,6 +42,18 @@ export const deleteService = (id) => {
     const response = await axios.delete(`/api/fetchdata/delete_service/${id}`);
     console.log(response.data)
     dispatch({type: 'DELETE_SERVICE', service: response.data})
+  }
+}
+
+export const updateService = (id, input) => {
+  return async(dispatch) => {
+    const token = window.localStorage.getItem('token');
+    console.log(input)
+    const response = await axios.put(`/api/fetchdata/update_service/${id}`, input, {
+      headers: {
+          authorization: token
+      }});
+    dispatch({type: 'UPDATE_SERVICE', service: response.data})
   }
 }
 

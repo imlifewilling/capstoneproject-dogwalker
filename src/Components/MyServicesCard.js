@@ -14,7 +14,6 @@ const MyServicesCard = (props) => {
     const dispatch = useDispatch();
 
     const deleting = () => {
-        console.log('deleting');
         dispatch(deleteService(service.id));
     };
 
@@ -58,7 +57,7 @@ const MyServicesCard = (props) => {
                             </Typography>
                         </CardContent>
                         <CardContent sx={{width: '10%'}}>
-                            <Button>Edit</Button>
+                            <Button component={Link} to={`/myservices/card/${service?.id}`}>Edit</Button>
                             <Button onClick={deleting}>Delete</Button>
                         </CardContent>
                     </Box>

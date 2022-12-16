@@ -20,6 +20,7 @@ import Owners from './Owners';
 import MyServices from './MyServices';
 import OwnerDetails from './OwnerDetails';
 import BecomeAWalker from "./BecomeAWalker";
+import UpdateService from './UpdateService';
 
 const App = () => {
   const { auth } = useSelector((state) => state);
@@ -51,6 +52,7 @@ const App = () => {
         <Route path="/owners" element={<Owners />} />
         <Route path="/owners/:id" element={<OwnerDetails />} />
         <Route path="/BecomeAWalker" element={<BecomeAWalker />} />
+        <Route path="/myservices/card/:id" element={<UpdateService />}/>
       </Routes>
       </div>
       <Footer />
