@@ -69,7 +69,7 @@ const Map = ({servicelist}) => {
     }, [coords, auth]) 
 
     //if owner login, set the center to owner position
-    Geocode.setApiKey("AIzaSyCOsnnYOPmcaO-dAFsdqxofdQdUzp7JSiE");
+    Geocode.setApiKey(process.env.GOOGLE_MAPS_API_KEY);
     useEffect(() => {
         if(auth.address){//get the lat and lng of login user
             Geocode.fromAddress(auth.address).then(
@@ -86,6 +86,7 @@ const Map = ({servicelist}) => {
 
     //get the walkers' position around ownerposition
     useEffect(() => {
+        setWalkers([])
         const memo = new Set()
         servicelist.filter(
             service => {
@@ -118,9 +119,9 @@ const Map = ({servicelist}) => {
             }
         )
         
-    }, [])
+    }, [servicelist])
 
-    console.log(walkers)
+    // console.log(walkers)
 
     const mapRef = useRef(GoogleMap);
     //setup the map options
@@ -147,7 +148,7 @@ const Map = ({servicelist}) => {
     const onLoad = useCallback(() => (mapRef.current = GoogleMap), []) //the Map here is referred to the Map Compnent
 
     const { isLoaded } = useLoadScript({
-        googleMapsApiKey: 'AIzaSyCOsnnYOPmcaO-dAFsdqxofdQdUzp7JSiE',
+        googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
         libraries: ['places']
     })
 
@@ -184,9 +185,9 @@ const Map = ({servicelist}) => {
                             enableRetinaIcons 
                         >
                             {(clusterer) =>
-                            walkers.map((walker) => (
+                            walkers.map((walker, idx) => (
                                 <Marker
-                                    key = {walker.id}
+                                    key = {walker.idx}
                                     position = {walker.address}
                                     clusterer = {clusterer}
                                     icon = {

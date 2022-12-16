@@ -171,15 +171,15 @@ const Service = () => {
 
     return (
         <>
-            <nav>
+            {/* <nav>
                 <Typography gutterBottom variant="h2" component="div" sx={{textAlign:'center', fontWeight: 'bold'}}>
                     Service Page
                 </Typography>
-            </nav>
+            </nav> */}
             <Grid container>
                 <Grid item md={2} key={'filter'} sx={{display: { xs: 'none', md: 'grid' }, maxHeight: '100vh', overflow: 'auto', padding: '0 0 0 10px'}}>
                     <FormControl>
-                        <h2>Service Type:</h2>
+                        <h4>Service Type:</h4>
                         {Object.keys(checked).slice(0,3).map((taskCheck, idx) => {
                             return (
                                 <FormControlLabel
@@ -199,7 +199,7 @@ const Service = () => {
                         })}
                         <Divider />
 
-                        <h2>Availability:</h2>
+                        <h4>Availability:</h4>
                         {Object.keys(checked).slice(3,8).map((timeCheck, idx) => {
                             return (
                                 <FormControlLabel
@@ -219,7 +219,7 @@ const Service = () => {
                         })}  
                         <Divider />
 
-                        <h2>Dog Size:</h2>
+                        <h4>Dog Size:</h4>
                         {Object.keys(checked).slice(8,13).map((sizeCheck, idx) => {
                             return (
                                 <FormControlLabel
