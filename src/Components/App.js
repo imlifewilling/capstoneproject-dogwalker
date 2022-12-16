@@ -13,6 +13,7 @@ import Service from './Service';
 import User from './User/User';
 import EditUser from './User/EditUser';
 import EditDog from './Dog/EditDog'
+import CreateDog from './Dog/CreateDog';
 import Signup from './Signup';
 import ServiceDetails from './ServiceDetails'
 import Footer from './Footer';
@@ -45,6 +46,7 @@ const App = () => {
         <Route path='/users/:id' element={<User />} />
         <Route path='/users/:id/edit' element={<EditUser />} />
         <Route path='/dogs/:id/edit' element={<EditDog />} />
+        <Route path='/createdog' element={<CreateDog />} />
         <Route path='/signup' element={<Signup />} />
         {/* <Link to='/walker/id'>Service Detail</Link> */}
         <Route path="/walkers/:id/services" element={<MyServices />} />

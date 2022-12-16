@@ -19,10 +19,6 @@ app.get('/', async (req, res, next) => {
 app.put('/:id', async (req, res, next) => {
   try {
     const dog = await Dog.findByPk(req.params.id 
-    //   {
-    //   include: [{ model: User }],
-    //   paranoid: false,
-    // }
     );
     await dog.update(req.body);
     res.send(dog);
@@ -31,27 +27,18 @@ app.put('/:id', async (req, res, next) => {
   }
 });
 
-// app.put('/:id', async (req, res, next) => {
-//   try {
-//     const user = await User.findByPk(req.params.id);
-//     res.send(await user.update(req.body));
-//   } catch (err) {
-//     next(err);
-//   }
-// });
-
-// app.post('/', async (req, res, next) => {
-//   try {
-//     const review = await Review.create(req.body);
-//     const reviewPlus = await Review.findByPk(review.id, {
-//       include: [{ model: User }, { model: Book }],
-//       paranoid: false,
-//     });
-//     res.send(reviewPlus);
-//   } catch (ex) {
-//     next(ex);
-//   }
-// });
+app.post('/', async (req, res, next) => {
+  try {
+    const dog = await Dog.create(req.body);
+    const dogPlus = await Dog.findByPk(dog.id, {
+      include: [{ model: User }],
+      paranoid: false,
+    });
+    res.send(dogPlus);
+  } catch (ex) {
+    next(ex);
+  }
+});
 
 // app.delete('/:id', async (req, res, next) => {
 //   try {
