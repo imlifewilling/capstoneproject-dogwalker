@@ -57,6 +57,16 @@ const ServiceDetails = (ServiceDetailsProps) => {
     }
   };
 
+  const addReview = () => {
+    console.log('add review');
+    if(auth.id){
+      navigate(`/walker/${id}/add_review`);
+    }
+    else{
+      navigate('/login');
+    };
+  };
+
   return (
     <div sx={{display: 'flex', justifyContent:'center', alignItems:'center'}}>
       <Card
@@ -126,7 +136,7 @@ const ServiceDetails = (ServiceDetailsProps) => {
               component="div"
               sx={{ textAlign: "center" }}
             >
-              <h3>{walker.firstname}'s Reviews:</h3>
+              <h3 style={{display:'inline'}}>{walker.firstname}'s Reviews: {' '}</h3><Button variant='outlined'onClick={addReview}>Add Review</Button>
             </Typography>
             <Typography variant="h4">
               <ul>

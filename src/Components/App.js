@@ -22,6 +22,7 @@ import MyServices from './MyServices';
 import OwnerDetails from './OwnerDetails';
 import BecomeAWalker from "./BecomeAWalker";
 import UpdateService from './UpdateService';
+import AddReview from './AddReview';
 
 const App = () => {
   const { auth } = useSelector((state) => state);
@@ -57,6 +58,7 @@ const App = () => {
         <Route path="/owners/:id" element={<OwnerDetails />} />
         <Route path="/BecomeAWalker" element={<BecomeAWalker />} />
         <Route path="/myservices/card/:id" element={<UpdateService />}/>
+        <Route path="/walker/:id/add_review" element={<AddReview />}/>
       </Routes>
       </div>
       <Footer />
