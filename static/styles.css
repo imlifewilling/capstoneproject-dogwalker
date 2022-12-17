@@ -127,7 +127,7 @@ input {
 .loginTitle {
   position: relative;
   top:70px;
-  color:lightgray
+  color:rgb(103, 100, 100)
 }
 
 .profile-img {
@@ -289,7 +289,7 @@ align-items: flex-start;
 .signupLink {
   position: relative;;
   bottom:60px;
-  color:lightgray
+  color:rgb(103, 100, 100)
 }
 
 a {
@@ -307,7 +307,7 @@ a {
 .signupTitle {
   position: relative;
   top:20px;
-  color:lightgray
+  color:rgb(103, 100, 100)
 }
 
 .steps{
