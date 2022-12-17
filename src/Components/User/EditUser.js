@@ -43,7 +43,7 @@ const EditUser = () => {
                 <div id='edit-account-div'>
                     <form onSubmit={update}>
                         <h1>Edit Account Info</h1>
-                        <div id='first-last'>
+                        <div id='first-last' className='side-by-side'>
                             <div className='inputPair'>
                                 <label><strong>First Name </strong></label>
                                 <input
@@ -112,8 +112,8 @@ const EditUser = () => {
                                 </div>
                             </div>
                         </div>
-                        <img src={data} />
-                        <button id='edit-button'>SAVE</button>
+                        <img className='img-size' src={data} />
+                        <button className='account-button'>SAVE</button>
                     </form>
                 </div>
             </div>
