@@ -29,10 +29,9 @@ function URI2Obj(str){
     }
 };
 
-const Service = () => {
+const Service = ({services}) => {
     const { id } = useParams();
     const navigate = useNavigate();
-    const { services } = useSelector(state=>state);
 
     let converted = URI2Obj(id);
 
@@ -145,6 +144,7 @@ const Service = () => {
     };
 
     // const filterInPlace = filterExtractor(JSON.parse(converted || '{}'));
+
     const filterInPlace = filterExtractor(converted);
 
     const filteredServices = services.filter(ele => {
@@ -174,6 +174,7 @@ const Service = () => {
             return ele ;
         }
     });
+    // console.log(filteredServices)
 
     // console.log(filterInPlace)
     const [idx, setIdx] = useState(5);
@@ -280,7 +281,7 @@ const Service = () => {
                     :''}
                 </Grid>
                 <Grid item md={3} key={'map'} sx={{ maxHeight: '100vh'}}>
-                    <Map servicelist = { filteredServices }/>
+                    <Map servicelist = { filteredServices } />
                 </Grid>
             </Grid>
         </>
