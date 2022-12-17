@@ -46,12 +46,13 @@ const OwnerDetails = () => {
   };
   return (
   <>
+    <Box sx={{display:'flex', flexDirection:'column', alignItems:'center'}}>
     <div
       sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
     >
       <Card
         sx={{
-          width: "auto",
+          width: "1000vw",
           height: "450",
           boxShadow: false,
           display: "flex",
@@ -143,11 +144,14 @@ const OwnerDetails = () => {
         ""
       )}
     </div>
-    {filteredDog.map((pet, idx)=> {
-      return (
-        <PetCard key={idx+1} pet={pet} count={idx+1}/>
-      )
-    })}
+    <Box sx={{display:'flex', flexDirection:'column', width:'700', justifyContent:'center', alignItems:'center'}}>
+      {filteredDog.map((pet, idx)=> {
+        return (
+          <PetCard key={idx+1} pet={pet} count={idx+1}/>
+        )
+      })}
+    </Box>
+    </Box>
   </>
   );
 };

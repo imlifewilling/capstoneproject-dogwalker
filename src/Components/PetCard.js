@@ -12,7 +12,7 @@ const PetCard = (props) => {
 
     return (
         <>
-            <Card variant='outlined' sx={{ width: 'auto', height: '200', margin: '10px' }}>
+            <Card variant='outlined' sx={{ width: '700', height: '200', margin: '10px' }}>
                 {/* <CardActionArea component={Link} to={`/walker/${service?.userId}`}> */}
                 <Box>
                     <Box sx={{display: 'flex', flexDirection: 'row'}}>
