@@ -25,7 +25,7 @@ const Nav = () => {
     const navigate = useNavigate();
     const { auth } = useSelector(state=>state);
 
-    const pages = [{name: 'Find a Walker', link: '/services'}, {name: 'Become a Walker', link: '/BecomeAWalker'}];
+    const pages = [{name: 'Find a Walker', link: '/services'}, {name: 'Become a Walker', link: '/BecomeAWalker'}, {name: 'Find an owner', link: '/owners'}];
     const settings = [{name: 'Profile', link: `/users/${auth.id}`}];
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -50,7 +50,7 @@ const Nav = () => {
       dispatch(logout());
       navigate('/');
     };
-  
+
     return (
       <AppBar position="static">
         <Container maxWidth="xl">
