@@ -21,7 +21,7 @@ const Owners = () => {
   const id = useParams();
   const owners = [];
   //taking owners from redux store
-  const { users } = useSelector((state) => state);
+  const { users, auth } = useSelector((state) => state);
 
   //taking owners from /api/fetchdata/user-servces, which includes services array
   for (const user of users) {
@@ -51,7 +51,7 @@ const Owners = () => {
               color="text.primary"
               gutterBottom
             >
-              Hello walker.firstname!
+              Hello {auth.firstname}!
             </Typography>
             <Typography
               variant="h5"
@@ -71,16 +71,17 @@ const Owners = () => {
           </Container>
         </Box>
 
-        <Container sx={{ py: 8 }} maxWidth="md">
+        <Container sx={{ py: 8, display:'flex', flexDirection:'row' }} maxWidth="md">
           <Grid container spacing={3} sx={{ justifyContent: "center" }}>
             {owners.map((owner) => (
-              <Grid item key={owner?.id} xs={12} sm={6} md={4}>
+              <Grid item key={owner?.id} xs={12} sm={6} md={4} sx={{display:'flex', flexDirection:'row'}}>
                 <Card
                   sx={
                     {
                       // height: "auto",
                       // display: "flex",
                       // flexDirection: "column",
+                      width: '300'
                     }
                   }
                 >
@@ -95,16 +96,13 @@ const Owners = () => {
                     // src={owner.avatar};
                     alt="random"
                   /> */}
-                  <img src={owner.avatar} height="auto" width="300px" />
-
+                  <img src={owner.avatar} height="400" width="300" style={{objectFit:'contain'}}/>
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography gutterBottom variant="h5" component="h2">
                       {owner.firstname} {owner.lastname}
                     </Typography>
-                    <Typography>Service needed: </Typography>
                     <Typography>Description/Notes: </Typography>
-                    <Typography>DogSize: </Typography>
-                    <Typography>Availability: </Typography>
+                    <Typography>Number Dog: </Typography>
                   </CardContent>
                   <CardActions>
                     <Button size="small" component={Link} to={`/owners/${owner.id}`}>
@@ -114,7 +112,7 @@ const Owners = () => {
                       size="small"
                       onClick={() => {
                         alert(`Phone: ${owner?.phone}
-Address: ${owner?.address}
+                        Address: ${owner?.address}
                         `);
                       }}
                     >

@@ -14,14 +14,16 @@ const EditDog = () => {
     // const [age_year, setAge_year] = useState(0);
     // const [weight, setWeight] = useState('');
 
-    const [nickname, setNickname] = useState('');
-    const [age_year, setAge_year] = useState(0);
-    const [age_month, setAge_month] = useState(0);
-    const [gender, setGender] = useState('');
-    const [weight, setWeight] = useState('');
-    const [breed, setBreed] = useState('');
-    const [dogDescription, setDogDescription] = useState('');
-    const [data, setData] = useState('');
+    const dog = dogs.find((dog) => dog.id === id);
+
+    const [nickname, setNickname] = useState(dog.nickname || '');
+    const [age_year, setAge_year] = useState(dog.age_year || 0);
+    const [age_month, setAge_month] = useState(dog.age_month || 0);
+    const [gender, setGender] = useState(dog.gender || '');
+    const [weight, setWeight] = useState(dog.weight || '');
+    const [breed, setBreed] = useState(dog.breed || '');
+    const [dogDescription, setDogDescription] = useState(dog.dogDescription || '');
+    const [data, setData] = useState(dog.avatar || '');
     const [el, setEl] = useState(null);
 
     useEffect(()=> {
@@ -36,8 +38,6 @@ const EditDog = () => {
             })
         }
     }, [el]);
-
-    const dog = dogs.find((dog) => dog.id === id);
 
     if(!dog) return <h1>...loading</h1>
 

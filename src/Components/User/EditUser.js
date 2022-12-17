@@ -9,13 +9,13 @@ const EditUser = () => {
     
     const { auth } = useSelector((state) => state);
  
-    const [firstname, setFirstname] = useState('');
-    const [lastname, setLastname] = useState('');
-    const [address, setAddress] = useState('');
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
-    const [isWalker, setIsWalker] = useState(false);
-    const [data, setData] = useState('');
+    const [firstname, setFirstname] = useState(auth.firstname || '');
+    const [lastname, setLastname] = useState(auth.lastname || '');
+    const [address, setAddress] = useState(auth.address || '');
+    const [email, setEmail] = useState(auth.email || '');
+    const [phone, setPhone] = useState(auth.phone || '');
+    const [isWalker, setIsWalker] = useState(auth.isWalker || false);
+    const [data, setData] = useState(auth.avatar || '');
 
     const [el, setEl] = useState(null);
 
@@ -36,6 +36,8 @@ const EditUser = () => {
         ev.preventDefault();
         dispatch(updateAuth({id: auth.id, firstname, lastname, address, email, phone, isWalker, avatar: data}, navigate))
     };
+
+    console.log(isWalker)
 
     return (
         <div id='edit_account_page'>
@@ -91,12 +93,22 @@ const EditUser = () => {
                         </div>
                         <div id='checkbox'>
                             <label for="yes"><strong>Become a walker</strong></label><br/>
-                            <input 
+                            {isWalker ? 
+                             <input 
                                 type="checkbox" 
                                 id="yes" 
                                 name="yes" 
-                                onChange={ev => setIsWalker(ev.target.value)}
+                                checked
+                                onChange={ev => setIsWalker(!isWalker)}
                             />
+                            :
+                            <input 
+                            type="checkbox" 
+                            id="yes" 
+                            name="yes" 
+                            onChange={ev => setIsWalker(!isWalker)}
+                            />
+                            }
                         </div>
                         <div>
                             <div className='inputPair'>

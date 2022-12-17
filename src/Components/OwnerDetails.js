@@ -6,6 +6,7 @@ import { Card } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import ContactForm from "./ContactForm";
+import PetCard from "./PetCard";
 
 import { CardContent, CardMedia, Typography } from "@mui/material";
 
@@ -13,9 +14,9 @@ const OwnerDetails = () => {
   const [view, setView] = useState(false);
   const [owner, setOwner] = useState([]);
   const { id } = useParams();
-  const { auth } = useSelector((state) => state);
+  const { auth, dogs, users } = useSelector((state) => state);
   const navigate = useNavigate();
-  console.log(auth);
+  // console.log(auth);
   useEffect(() => {
     const fetchOwners = async () => {
       let response = await axios.get("/api/fetchdata/users");
@@ -24,6 +25,9 @@ const OwnerDetails = () => {
     };
     fetchOwners();
   }, []);
+  
+  const filteredDog = dogs.filter(ele => ele.userId === id);
+  console.log(filteredDog)
 
   if (!owner) {
     return (
@@ -41,6 +45,7 @@ const OwnerDetails = () => {
     }
   };
   return (
+  <>
     <div
       sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
     >
@@ -138,6 +143,12 @@ const OwnerDetails = () => {
         ""
       )}
     </div>
+    {filteredDog.map((pet, idx)=> {
+      return (
+        <PetCard key={idx+1} pet={pet} count={idx+1}/>
+      )
+    })}
+  </>
   );
 };
 

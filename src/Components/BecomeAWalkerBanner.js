@@ -2,6 +2,7 @@ import React from 'react';
 import { styled } from '@mui/material/styles';
 import { Typography, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 const StyledBanner = styled('div')`
   position: relative;
   width: 100%;
@@ -24,6 +25,7 @@ const StyleContent = styled('div')`
   transform: translate(-50%, -50%);
 `;
 const BecomeAWalkerBanner = () => {
+  const {auth} = useSelector(state=>state)
   const navigate = useNavigate();
   return (
     <StyledBanner>
@@ -31,6 +33,15 @@ const BecomeAWalkerBanner = () => {
         <Typography variant='h1' sx={{ my: 4 }} color = "white">
           BECOME A GOJI WALKER
         </Typography>
+        {auth.id?
+        <Button
+          variant='contained'
+          color='secondary'
+          onClick={() => navigate(`/users/${auth.id}`)}
+        >
+          Update Your Profile
+        </Button>
+        :
         <Button
           variant='contained'
           color='secondary'
@@ -38,6 +49,7 @@ const BecomeAWalkerBanner = () => {
         >
           Create a profile
         </Button>
+        }
       </StyleContent>
     </StyledBanner>
   );
