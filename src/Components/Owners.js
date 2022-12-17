@@ -21,12 +21,23 @@ const Owners = () => {
   const id = useParams();
   const owners = [];
   //taking owners from redux store
-  const { users, auth } = useSelector((state) => state);
+  const { users, auth, dogs } = useSelector((state) => state);
 
   //taking owners from /api/fetchdata/user-servces, which includes services array
   for (const user of users) {
     if (!user.isWalker) {
-      console.log(user);
+      const checkDogs = (user) => {
+        let dogCount = 0;
+        for (const dog of dogs) {
+          if (dog.userId === user.id) {
+            dogCount++;
+          }
+        }
+        user['dogCount'] = dogCount;
+        return dogCount;
+
+      };
+      checkDogs(user);
       owners.push(user);
     }
   }
@@ -51,7 +62,7 @@ const Owners = () => {
               color="text.primary"
               gutterBottom
             >
-              Hello {auth.firstname}!
+              Hello{!!auth.firstname ? ' '+auth.firstname+'!' : '!'}
             </Typography>
             <Typography
               variant="h5"
@@ -60,7 +71,7 @@ const Owners = () => {
               paragraph
             >
               This is a list of dogs/owners in need of a walker near your
-              location at walker.address
+              location. Reach out and make a furry friend today!
             </Typography>
             <Stack
               sx={{ pt: 4 }}
@@ -71,19 +82,27 @@ const Owners = () => {
           </Container>
         </Box>
 
-        <Container sx={{ py: 8, display:'flex', flexDirection:'row' }} maxWidth="md">
+        <Container
+          sx={{ py: 8, display: "flex", flexDirection: "row" }}
+          maxWidth="md"
+        >
           <Grid container spacing={3} sx={{ justifyContent: "center" }}>
             {owners.map((owner) => (
-              <Grid item key={owner?.id} xs={12} sm={6} md={4} sx={{display:'flex', flexDirection:'row'}}>
+              <Grid
+                item
+                key={owner?.id}
+                xs={12}
+                sm={6}
+                md={4}
+                sx={{ display: "flex", flexDirection: "row" }}
+              >
                 <Card
-                  sx={
-                    {
-                      // height: "auto",
-                      // display: "flex",
-                      // flexDirection: "column",
-                      width: '300'
-                    }
-                  }
+                  sx={{
+                    // height: "auto",
+                    // display: "flex",
+                    // flexDirection: "column",
+                    width: "400",
+                  }}
                 >
                   {/* <CardMedia
                   //why doesnt this shit work
@@ -96,16 +115,25 @@ const Owners = () => {
                     // src={owner.avatar};
                     alt="random"
                   /> */}
-                  <img src={owner.avatar} height="400" width="300" style={{objectFit:'contain'}}/>
+                  <img
+                    src={owner.avatar}
+                    height="400"
+                    width="300"
+                    style={{ objectFit: "contain" }}
+                  />
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography gutterBottom variant="h5" component="h2">
                       {owner.firstname} {owner.lastname}
                     </Typography>
-                    <Typography>Description/Notes: </Typography>
-                    <Typography>Number Dog: </Typography>
+                    <Typography>Description/Notes: {owner.userDescription} </Typography>
+                    <Typography># of Dogs: {owner.dogCount} </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small" component={Link} to={`/owners/${owner.id}`}>
+                    <Button
+                      size="small"
+                      component={Link}
+                      to={`/owners/${owner.id}`}
+                    >
                       See Details
                     </Button>
                     <Button
