@@ -282,6 +282,14 @@ align-items: flex-start;
   text-decoration: underline;
 }
 
+#add-pet {
+  color: #89CFF0;
+}
+
+#add-pet:hover {
+  text-decoration: underline;
+}
+
 .img-size {
   max-width: 15rem;
 }

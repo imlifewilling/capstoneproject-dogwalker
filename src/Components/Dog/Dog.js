@@ -64,7 +64,7 @@ const Dog = () => {
         )
       }
       <div>
-        <h4><Link to={'/createdog'}>Add pet</Link></h4>
+        <h4><Link id='add-pet' to={'/createdog'}>Add pet</Link></h4>
       </div>
     </div>
   )
