@@ -43,6 +43,8 @@ const farOptions = {
     fillColor: "#DC3535",
 };
 
+const libraries = ['places']
+
 const Map = ({servicelist}) => {
     const { auth } = useSelector(state => state);
     const { users } = useSelector(state=>state)
@@ -86,40 +88,45 @@ const Map = ({servicelist}) => {
 
     //get the walkers' position around ownerposition
     useEffect(() => {
-        setWalkers([])
-        const memo = new Set()
-        servicelist.filter(
-            service => {
-                if(!memo.has(service.userId)){
-                    memo.add(service.userId)
-                    return service
-                }
-            }
-        ).map(
-            service => {
-                let walker = users.find(
-                    user => user.id === service.userId
+        if(servicelist.length > 0){
+            let walkerslist = [];
+            const memo = new Set();
+            if(users.length > 0){
+                servicelist.forEach(
+                    service => {
+                        const walker = users.find(user => user.id === service.userId)
+                        if(!memo.has(walker)){
+                            walkerslist.push(walker);
+                            memo.add(walker);
+                        }
+                    }
                 )
-                return walker
             }
-        ).map(
-            walker => {
-                if(walker.latlng.length !== 0) {
-                    setWalkers(walkers => [...walkers, {id: walker.id, address: {lat: walker.latlng[0]*1, lng: walker.latlng[1]*1}}])
-                }
-                Geocode.fromAddress(walker.address).then(
-                (response) => {
-                    const { lat, lng } = response.results[0].geometry.location;
-                    setWalkers(walkers => [...walkers, {id: walker.id, address: {lat, lng}}]);
-                },
-                (error) => {
-                    console.error(error);
-                }
-                );
+            if(walkerslist.length > 0){
+                let walkerslocation = [];
+                walkerslist.map(
+                    walker => {
+                        if(walker.latlng.length !== 0) {
+                            walkerslocation.push({id: walker.id, address: {lat: walker.latlng[0]*1, lng: walker.latlng[1]*1}})
+                        }
+                        if(walker.address){
+                            Geocode.fromAddress(walker.address).then(
+                            (response) => {
+                                const { lat, lng } = response.results[0].geometry.location;
+                                walkerslocation.push({id: walker.id, address: {lat, lng}});
+                            },
+                            (error) => {
+                                console.error(error);
+                            }
+                            );
+                        }
+                    }
+                )
+                setWalkers(walkerslocation)
             }
-        )
-        
-    }, [servicelist])
+            
+        }
+    }, [servicelist, users])
 
     // console.log(walkers)
 
@@ -149,7 +156,7 @@ const Map = ({servicelist}) => {
 
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
-        libraries: ['places']
+        libraries
     })
 
     if(!isLoaded) return <div>Loadingg...</div>
@@ -187,7 +194,7 @@ const Map = ({servicelist}) => {
                             {(clusterer) =>
                             walkers.map((walker, idx) => (
                                 <Marker
-                                    key = {walker.idx}
+                                    key = {idx}
                                     position = {walker.address}
                                     clusterer = {clusterer}
                                     icon = {

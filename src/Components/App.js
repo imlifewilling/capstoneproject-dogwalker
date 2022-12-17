@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchUsers, loginWithToken } from '../store';
 import { fetchDogs } from '../store/dogs';
 import { Routes, Route } from 'react-router-dom';
-import { fetchServices } from '../store/service';
+import services, { fetchServices } from '../store/service';
 import { ThemeProvider } from '@mui/material/styles';
 import Theme from './Theme';
 import Home from './Home';
@@ -25,6 +25,7 @@ import UpdateService from './UpdateService';
 
 const App = () => {
   const { auth } = useSelector((state) => state);
+  const { services } = useSelector(state=>state);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -40,8 +41,8 @@ const App = () => {
       <div style={{minHeight:'80vh'}}>
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/services' element={<Service />} />
-        <Route path='/services/filter/:id' element={<Service />} />
+        <Route path='/services' element={<Service services = {services}/>} />
+        <Route path='/services/filter/:id' element={<Service services = { services }/>} />
         <Route path='/login' element={<Login />} />
         <Route path='/users/:id' element={<User />} />
         <Route path='/users/:id/edit' element={<EditUser />} />
