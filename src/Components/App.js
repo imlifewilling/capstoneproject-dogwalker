@@ -26,7 +26,6 @@ import UpdateService from './UpdateService';
 const App = () => {
   const { auth } = useSelector((state) => state);
   const { services } = useSelector(state=>state);
-  console.log('services:', services)
   const dispatch = useDispatch();
 
   useEffect(() => {

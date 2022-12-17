@@ -27,7 +27,7 @@ const getImage = (path)=> {
     fs.readFile(path, 'base64', (err, data)=> {
       if(err) {
         reject(err);
-      } 
+      }
       else {
         resolve(data);
       }
@@ -110,6 +110,7 @@ const syncAndSeed = async()=> {
       email: 'lmx4wo@gmail.com',
       address: '724 Central Ave SE, Albuquerque, NM, US, 87102',
       phone: '505-243-4688',
+      userDescription: 'My dog is adorable and easy to work with!',
       avatar: maxAvatar,
       isWalker: false
     },
@@ -120,6 +121,7 @@ const syncAndSeed = async()=> {
       email: 'luca@gmail.com',
       address: '9001 Central Ave NE, Albuquerque, NM, US, 87123',
       phone: '505-293-3953',
+      userDescription: 'Cute and adorable puppy in need of a caring walker!',
       avatar: lucaAvatar,
       isWalker: false
     },
@@ -130,6 +132,7 @@ const syncAndSeed = async()=> {
       email: 'han@gmail.com',
       address: '3401 Ladera Dr NW, Albuquerque, NM, US, 87120',
       phone: '505-836-4449',
+      userDescription: 'Two dogs means double trouble. Looking for experienced walkers.',
       avatar: hanAvatar,
       isWalker: false
     },
@@ -140,6 +143,7 @@ const syncAndSeed = async()=> {
       email: 'kendal@gmail.com',
       address: '5200 Eubank Blvd NE, Albuquerque, NM, US, 87111',
       phone: '505-296-8195',
+      userDescription: 'My pomeranian is a lot heavier than you would think!',
       avatar: kendalAvatar,
       isWalker: false
     },
