@@ -32,12 +32,11 @@ function URI2Obj(str){
 const Service = ({services}) => {
     const { id } = useParams();
     const navigate = useNavigate();
-
     let converted = URI2Obj(id);
 
     const serviceName = [
-        'Dog Walking', 
-        'House Sitting', 
+        'Dog Walking',
+        'House Sitting',
         'Dog Day Care',
     ];
 
@@ -163,7 +162,7 @@ const Service = ({services}) => {
             return acc
             },false
         );
-                        
+
 
         if(filterInPlace.length === 0){
             return ele;
@@ -181,7 +180,7 @@ const Service = ({services}) => {
     const _filteredServices = filteredServices.slice(0,idx);
 
     // console.log(_filteredServices)
-    
+
     const handleScroll = (ev) => {
         // console.log(ev.currentTarget.scrollTop);
         // console.log(window.innerHeight)
@@ -245,7 +244,7 @@ const Service = ({services}) => {
                                 }
                             />
                             )
-                        })}  
+                        })}
                         <Divider />
 
                         <h4>Dog Size:</h4>
@@ -265,7 +264,7 @@ const Service = ({services}) => {
                                 }
                             />
                             )
-                        })}                        
+                        })}
                     </FormControl>
                 </Grid>
                 <Grid item md={7} key={'service list'} sx={{ maxHeight: '90vh', overflow: 'auto'}} onScroll={handleScroll}>
@@ -274,7 +273,7 @@ const Service = ({services}) => {
                             return <ServiceCard key={service.id} service={service} count={idx+1}/>
                         })
                     }
-                    {idx>filteredServices.length ? 
+                    {idx>filteredServices.length ?
                         <Typography gutterBottom variant="h6" component="div" sx={{textAlign:'center', fontWeight: 'bold'}}>
                             You Reach The End
                         </Typography>
