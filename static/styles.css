@@ -208,11 +208,18 @@ input {
   align-items: center;
 }
 
+#create-dog-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 #yes {
   width: 2rem;
 }
 
-#edit-button {
+.account-button {
   height: 3rem;
   width: 11rem;
   border-radius: 20px;
@@ -223,11 +230,16 @@ input {
   padding: 0px;
 }
 
-#edit-button:hover {
+.account-button:hover {
   background-color: #EC5800;
 }
 
 #first-last {
+  display: flex;
+  flex-direction: row;
+}
+
+.side-by-side {
   display: flex;
   flex-direction: row;
 }
