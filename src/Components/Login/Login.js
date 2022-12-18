@@ -1,7 +1,7 @@
 import React from 'react';
 import LoginwithGoogle from './LoginwithGoogle';
 import LoginwithGithub from './LoginwithGithub';
-import Loginwithcredentials from './Loginwithcredentials';
+import Loginwithcredentials from './Loginwithcredentials.js';
 
 
 const Login = () => {
