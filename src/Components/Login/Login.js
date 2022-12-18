@@ -1,7 +1,7 @@
 import React from 'react';
 import LoginwithGoogle from './LoginwithGoogle';
 import LoginwithGithub from './LoginwithGithub';
-import Loginwithcredentials from './Loginwithcredentials';
+import LoginwithCredentials from './LoginwithCredentials';
 
 
 const Login = () => {
@@ -29,7 +29,7 @@ const Login = () => {
                 <div className = "or">OR</div>
             </div>
             <div className = "right">
-                <Loginwithcredentials />
+                <LoginwithCredentials />
             </div>
         </div>
         <h5 className = "signupLink">Don't have an account? Sign up <a href = "#/signup">here</a></h5>
