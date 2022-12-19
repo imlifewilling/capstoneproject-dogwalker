@@ -23,6 +23,13 @@ const Review = conn.define('review', {
     comment: {
         type: TEXT,
         allowNull: true,
+    },
+    walkerId: {
+        type: UUID,
+        allowNull: false,
+        validate:{
+            notEmpty:true
+        }
     }
 });
 

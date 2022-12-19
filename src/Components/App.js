@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchUsers, loginWithToken } from '../store';
+import { fetchUsers, loginWithToken, fetchReview } from '../store';
 import { fetchDogs } from '../store/dogs';
 import { Routes, Route } from 'react-router-dom';
 import services, { fetchServices } from '../store/service';
@@ -22,6 +22,7 @@ import MyServices from './MyServices';
 import OwnerDetails from './OwnerDetails';
 import BecomeAWalker from "./BecomeAWalker";
 import UpdateService from './UpdateService';
+import AddReview from './AddReview';
 
 const App = () => {
   const { auth } = useSelector((state) => state);
@@ -33,6 +34,7 @@ const App = () => {
     dispatch(fetchServices());
     dispatch(fetchUsers());
     dispatch(fetchDogs());
+    dispatch(fetchReview());
   }, []);
 
   return (
@@ -56,6 +58,7 @@ const App = () => {
         <Route path="/owners/:id" element={<OwnerDetails />} />
         <Route path="/BecomeAWalker" element={<BecomeAWalker />} />
         <Route path="/myservices/card/:id" element={<UpdateService />}/>
+        <Route path="/walker/:id/add_review" element={<AddReview />}/>
       </Routes>
       </div>
       <Footer />
