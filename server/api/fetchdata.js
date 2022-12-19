@@ -84,6 +84,26 @@ app.put('/update_service/:id', async(req,res,next)=> {
     };
 });
 
+app.post('/add_review', async (req,res,next)=> {
+    try{
+        const user = await User.findByToken(req.headers.authorization);
+        res.send(await Review.create({...req.body, userId: user.id}))
+    }
+    catch(err){
+        next(err);
+    };
+});
+
+app.get('/reviews', async(req,res,next)=> {
+    try{
+        const review = await Review.findAll();
+        res.send(review)
+    }
+    catch(err){
+        next(err);
+    };
+});
+
 //get all users with services, which means dogwalkers with their service types
 app.get('/user-services', async(req, res, next)=> {
     try {

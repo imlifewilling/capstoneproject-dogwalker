@@ -20,7 +20,7 @@ from "@mui/material";
 
 const ServiceDetails = (ServiceDetailsProps) => {
   const { id } = useParams();
-  const { auth, service, users } = useSelector((state) => state);
+  const { auth, service, users, review } = useSelector((state) => state);
   const [walker, setWalker] = useState();
   const [view, setView] = useState(false);
   const navigate = useNavigate();
@@ -41,12 +41,12 @@ const ServiceDetails = (ServiceDetailsProps) => {
     );
   }
 
-  let reviews = []
-  if(walker.services[0].serviceevents[0]){
-    reviews = walker.services[0].serviceevents[0].reviews;
-  }
+  let reviews = review?.filter(ele => ele.walkerId === id);
+  // if(walker.services[0].serviceevents[0]){
+  //   reviews = walker.services[0].serviceevents[0].reviews;
+  // }
     
-  // console.log(reviews)
+  console.log(review)
   const showContact = () => {
     if(auth.id){
       setView(!view);
@@ -140,7 +140,7 @@ const ServiceDetails = (ServiceDetailsProps) => {
             </Typography>
             <Typography variant="h4">
               <ul>
-                {reviews.map((review) => {
+                {reviews?.map((review) => {
                   if (!!review) {
                     return (
                       <li key={review.id}>

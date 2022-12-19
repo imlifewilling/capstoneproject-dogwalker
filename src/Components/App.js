@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchUsers, loginWithToken } from '../store';
+import { fetchUsers, loginWithToken, fetchReview } from '../store';
 import { fetchDogs } from '../store/dogs';
 import { Routes, Route } from 'react-router-dom';
 import services, { fetchServices } from '../store/service';
@@ -27,7 +27,7 @@ import AddReview from './AddReview';
 const App = () => {
   const { auth } = useSelector((state) => state);
   const { services } = useSelector(state=>state);
-  console.log('services:', services)
+  // console.log('services:', services)
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -35,6 +35,7 @@ const App = () => {
     dispatch(fetchServices());
     dispatch(fetchUsers());
     dispatch(fetchDogs());
+    dispatch(fetchReview());
   }, []);
 
   return (

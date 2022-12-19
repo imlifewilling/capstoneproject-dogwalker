@@ -348,45 +348,52 @@ const syncAndSeed = async()=> {
         star:  5,
         comment: 'good and very patient',
         userId: max.id,
-        serviceeventId: serviceevent1.id
+        serviceeventId: serviceevent1.id,
+        walkerId: jane.id
       }),
       Review.create({
         star:  4,
         comment: 'keep everything clean',
         userId:  kendal.id,
-        serviceeventId: serviceevent3.id
+        serviceeventId: serviceevent3.id,
+        walkerId: cody.id
+
       }),
       Review.create({
         star:  4,
         comment: 'take care mocha in detail',
         userId:  han.id,
-        serviceeventId: serviceevent4.id
+        // serviceeventId: serviceevent4.id,
+        walkerId: alex.id
       }),
-      Review.create({
-        star:  4,
-        comment: 'take care barkley in detail',
-        userId:  han.id,
-        serviceeventId: serviceevent5.id
-      })
+      // Review.create({
+      //   star:  4,
+      //   comment: 'take care barkley in detail',
+      //   userId:  han.id,
+      //   serviceeventId: serviceevent5.id
+      // })
       ,
       Review.create({
         star:  4,
         comment: 'both max and benben are nice',
         userId:  jane.id,
-        serviceeventId: serviceevent1.id
+        serviceeventId: serviceevent1.id,
+        walkerId: jane.id
       }),
       Review.create({
         star:  4,
         comment: 'mocha is so active',
         userId:  alex.id,
-        serviceeventId: serviceevent4.id
+        serviceeventId: serviceevent4.id,
+        walkerId: alex.id
+
       }),
-      Review.create({
-        star:  4,
-        comment: 'barkley is very quite',
-        userId:  alex.id,
-        serviceeventId: serviceevent5.id
-      })
+      // Review.create({
+      //   star:  4,
+      //   comment: 'barkley is very quite',
+      //   userId:  alex.id,
+      //   serviceeventId: serviceevent5.id
+      // })
     ]
   )
 };
