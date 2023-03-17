@@ -2,6 +2,8 @@
 
 Goji is a mock dog walking app built using JavaScript, React/Redux, Express, Sequelize, PostgreSQL, RESTful APIs, CSS, HTML5, Material UI and the Google Maps API. 
 
+The app was deployed on Render and can be viewed at: https://goji-rnfn.onrender.com/. 
+
 It was built by Kendal Enz, Max Li, Luca Liu and Han Lu during their time at Fullstack Academy. 
 
 ## Features
